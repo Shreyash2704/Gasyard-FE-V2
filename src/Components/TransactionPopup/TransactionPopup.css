@@ -1,0 +1,186 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21.6px;
+    text-align: left;
+    color: #31353C;
+
+}
+.header img{
+    margin-left: auto;
+    cursor: poPoppins;
+}
+
+.loaderDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 10px;
+    padding: 20px;
+}
+.transaction_details{
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 21.6px;
+    letter-spacing: -0.015em;
+    text-align: center;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.transaction_details .chain_name{
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 21.6px;
+    letter-spacing: -0.015em;
+    text-align: center;
+    color:#12AAFF;
+}
+.spinner {
+    width: 64px;
+    height: 64px;
+    border: 6px solid grey;
+    border-top: 6px solid blue;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    /* margin: 0px auto; */
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+.confirm_text{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 5px;
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    letter-spacing: -0.015em;
+    text-align: center;
+    color: #878794;
+}
+
+.clock{
+    width: 16px;
+    height: 16px;
+}
+
+.reviewChains{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 24px;
+    padding-bottom: 40px;
+}
+
+.reviewChains .chain{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 20px;
+}
+.reviewChains .chain .chainCoinDiv{
+    position: relative;
+}
+.reviewChains .chain .chainCoinDiv .chainCoin{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+.reviewChains .chain .chainCoinDiv .chainlogo{
+    position: absolute;
+    bottom: -4px;
+    right: -6px;
+}
+.reviewChains .chain .chainInfo{
+    display: flex;
+    flex-direction: column;
+}
+.token_amount{
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: #31353C;
+}
+.chain_network{
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color:#878794;
+}
+.darrow{
+    width: 20px;
+    height: 20px;
+}
+
+.redirectSection{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 5px;
+    justify-content: center;
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: #1557E2;
+    padding-bottom: 20px;
+    cursor: pointer;
+}
+.redirectSection img{
+    width: 16px;
+    height: 16px;
+    padding: 2px;
+    cursor: pointer;
+}
+.hideDiv{
+    display: none;
+}
+.rejection_text{
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: #213147;
+}
+.retry{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: #1557E2;
+    cursor: pointer;
+}

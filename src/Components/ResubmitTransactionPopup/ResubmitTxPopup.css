@@ -1,0 +1,54 @@
+.header{
+    font-family: Inter;
+    font-size: 26.59px;
+    font-weight: 400;
+    line-height: 46.31px;
+    text-align: left;
+    color:#878789;
+}
+.modal-cont{
+    display:flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding-bottom: 24px;
+}
+.modal-cont input,
+.modal-cont input:focus{
+    border:none;
+    outline: none;
+    border: 1px solid #E4E7EC;
+    border-radius: 24px;
+    padding: 10px 19px 40px 19px;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: left;
+    color: #878794;
+}
+.modal-cont input::placeholder{
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #878794;
+}
+.modal-cont .chakra-menu__menu-button:hover,
+.modal-cont .chakra-menu__menu-button[data-active]{
+    background-color: #727272;
+}
+.modal-cont .resubmit-btn{
+    background-color: #1557E2;
+    padding: 16px 0px;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 16px;
+    text-align: left;
+    color: #fff;
+    text-align: center;
+   border-radius: 26px;
+}
+.resubmit-btn:disabled{
+    opacity: 0.4;
+}

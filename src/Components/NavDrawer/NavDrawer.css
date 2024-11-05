@@ -1,0 +1,23 @@
+.navigation{
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    padding: 60px 0px;
+}
+
+.navigation a{
+    text-decoration: none;
+    font-weight: 700;
+    color:#000000;
+    font-family: Poppins;
+    font-size: 22px;
+    font-weight: 500;
+    /* line-height: 20px; */
+    cursor: pointer;
+    padding: 10px;
+    /* text-align: center; */
+}
+.navigation a:hover{
+    background-color: #f2f2f2;
+
+}

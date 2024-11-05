@@ -1,0 +1,221 @@
+.BodyWrap,
+.amountDisplay,
+.chainInfo,
+.QuoteDisplay{
+    display: flex;
+    flex-direction: column;
+}
+.amountDisplay,
+.chainDisplay,
+.percentDisplay,
+.QuoteDisplay,
+.amountDisplayWithdrawWrap{
+    border-bottom: 1px solid #F1F2F4;
+}
+.amountDisplay{
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0px;
+}
+.amountDisplay .nativeAmount{
+    font-family: Inter;
+    font-size: 70px;
+    font-weight: 500;
+    line-height: 84.72px;
+    text-align: left;
+    color: #35456F;
+    max-width: 100%;
+    display: inline-block;
+}
+.amountDisplay .nativeAmount input{
+    /* width: 3.5ch; */
+    max-width: 70%;
+    outline: none;
+    border: none;
+    text-align: right;
+}
+.amountDisplay .nativeAmount:focus-within input {
+    /* width: 4ch; example width for input expansion */
+  }
+.amountDisplay .nativeAmount .nativeToken{
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19.36px;
+    text-align: left;
+    color: #35456F;
+}
+.amountDisplay .amountInUSD{
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24.2px;
+    text-align: center;
+    color:#9299A6;
+}
+.chainDisplay{
+    display: flex;
+    column-gap: 10px;
+    padding: 8px 16px;
+    max-width: 100%;
+}
+.chainDisplay .chainImg{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.chainDisplay .chaiInfo{
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 16px;
+    text-align: left;
+    color: #000000;
+}
+.chainDisplay .chainInfo span.balance{
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+    text-align: left;
+    color: #9299A6;
+}
+.percentDisplay{
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0px;
+}
+.percentDisplay button{
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 16px;
+    text-align: left;
+    color: #000000;
+    padding: 8px 20px 8px 20px;
+    border-radius: 4px;
+    background-color: #F6F8FA;
+}
+.QuoteDisplay{
+    padding: 16px;
+    row-gap: 16px;
+}
+.SubmitBtn{
+    padding: 8px 16px;
+}
+.SubmitBtn button{
+    /* width: 386px; */
+    width: 100%;
+    /* height: 52px; */
+    padding: 17.75px 0px 18.25px 0px;
+    border-radius: 26px;
+    background-color: #1557E2;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 16px;
+    text-align: left;
+    color:#FFFFFF;
+    text-align: center;
+}
+.SubmitBtn button:disabled{
+    background-color: #929292;
+}
+.amountDisplayWithdrawWrap{
+    padding: 16px;
+}
+.amountDisplayWithdraw{
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(132.8deg, #8EA0FF -22.56%, #0011AA 108.38%);
+    border: 1px solid #F6F8FA;
+    border-radius:16px;
+    padding: 24px 16px;
+}
+.chain-token-display{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+}
+.chain-token-display .displayImage{
+    position: relative;
+}
+.chain-token-display .displayImage img.chain{
+    width: 51px;
+    height: 50px;
+    border-radius: 50%;
+}
+.chain-token-display .displayImage img.token{
+    width: 21px;
+    height: 21px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    box-shadow: 0px 1.84px 3.68px 0px #00000033;
+    border-radius: 50%;
+}
+
+.chain-token-display .displayName{
+    font-family: Inter;
+    font-size: 26.63px;
+    font-weight: 600;
+    line-height: 32.22px;
+    text-align: left;
+    color: #FFFFFF;
+}
+.liquidityInfo{
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    width: 100%;
+}
+.liquidityInfoRow{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.liquidityInfo .liquidityInfoRow .label{
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: #fff;
+}
+.liquidityInfo .liquidityInfoRow .value{
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    margin-left: auto;
+    color: #fff;
+}
+.liquidityInfo .liquidityInfoRow .value span{
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    text-align: right;
+
+}
+.chainDisplay .inputAmount{
+    margin-left: auto;
+    text-align: right;
+    outline: none;
+    border: none;
+    font-family: Inter;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 48px;
+    color:#929292;
+    margin-right: 20px;
+    width: 50%;
+}

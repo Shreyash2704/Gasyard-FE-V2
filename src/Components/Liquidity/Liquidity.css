@@ -1,0 +1,201 @@
+.liquidity-table-container{
+    width: 1216px;
+    border-radius: 12px;
+    border: 1px solid #E4E7EC;
+    box-shadow: 0px 1px 2px 0px #1018280D;
+    margin: 20px auto;
+    margin-top: 60px;
+}
+.liquidity-table-container table{
+    width: 100%;
+    border: none;
+    /* margin-bottom: 20px; */
+    font-family: sans-serif;
+    border-radius: 12px;
+    overflow: hidden;
+    
+}
+.liquidity-table-container table thead{
+    border-radius: 12px 12px 0px 0px;
+}
+.liquidity-table-container table tbody{
+    border-radius: 0px 0px 12px 12px;
+}
+.liquidity-table-container table tbody tr:last-child{
+    border-radius: 0px 0px 12px 12px;
+}
+.liquidity-table-container table thead tr th:nth-child(1){
+    border-radius: 12px 0px 0px 0px;
+}
+.liquidity-table-container table thead tr th:nth-child(6){
+    border-radius: 0px 12px 0px 0px;
+}
+.liquidity-table-container table tbody tr:last-child td:nth-child(1){
+    border-radius: 0px 0px 0px 12px;
+}
+.liquidity-table-container table tbody tr:last-child td:nth-child(6){
+    border-radius: 0px 0px 12px 0px;
+}
+.liquidity-table-container table thead tr{
+    background-color:rgb(255, 255, 255);
+    color:#000;
+    font-size: 12px;
+}
+.liquidity-table-container table thead tr th{
+    padding: 12px 24px;
+    text-align: start;
+    padding: 12px 24px 12px 24px;
+    border-bottom: 1px solid #E4E7EC;   
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    text-align: left;
+    color: #475467;
+    
+}
+.liquidity-table-container table tbody tr td{
+    padding: 12px 24px 12px 24px;
+    text-align: start;
+}
+.liquidity-table-container table tbody tr:nth-child(odd){
+    background-color: #F9FAFB;
+    ;
+}
+.liquidity-table-container table tbody tr td:nth-child(1),
+.liquidity-table-container table thead tr th:nth-child(1){
+    width:240px;
+}
+.liquidity-table-container table tbody tr td:nth-child(2),
+.liquidity-table-container table thead tr th:nth-child(2){
+    /* width:121px; */
+}
+.liquidity-table-container table tbody tr td:nth-child(3),
+.liquidity-table-container table thead tr th:nth-child(3){
+    width:180px;
+}
+.liquidity-table-container table tbody tr td:nth-child(4),
+.liquidity-table-container table thead tr th:nth-child(4),
+.liquidity-table-container table tbody tr td:nth-child(5),
+.liquidity-table-container table thead tr th:nth-child(5){
+    /* width:266px; */
+}
+.liquidity-table-container table tbody tr td:nth-child(5),
+.liquidity-table-container table thead tr th:nth-child(5){
+    width:180px;
+}
+
+.liquidity-table-container table thead tr th:nth-child(6),
+.liquidity-table-container table tbody tr td:nth-child(6){
+    width: 125px;
+}
+.liquidity-table-container table tbody tr td:nth-child(6){
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+}
+
+.liquidity-table-container table tbody tr:last-child td .table-footer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.liquidity-table-container table tbody tr:last-child .btns{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* column-gap: 10px; */
+    border: 1px solid #D0D5DD;
+    box-shadow: 0px 1px 2px 0px #1018280D;
+    padding: 8px 12px 8px 12px;
+    border-radius: 8px;
+    background: #FFFFFF;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: left;
+    color: #344054;
+    min-width:84px;
+    height:36px;
+    width: fit-content;
+    justify-content: space-around;
+}
+
+.liquidity-table-container table tbody tr{
+    background-color: #fff;
+    border-bottom: 1px solid #E2E8F0;
+    font-size: 14px;
+    color: #444;
+}
+.liquidity-table-container table{
+    border-collapse: collapse;
+}
+.action_btn{
+    display: flex;
+    column-gap: 10px;
+}
+.action_btn button{
+    padding: 18px 34px 18px 34px;
+    border-radius: 26px;
+    border: 1px;
+    border: 1px solid #1557E2;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 16px;
+    text-align: left;
+}
+.action_btn button:disabled{
+    opacity: 0.6;
+    pointer-events: none;
+}
+.action_btn .deposit-btn{
+    background-color: #1557E2;
+    color: #fff;
+}
+.action_btn .withdraw-btn{
+    color:#1557E2
+}
+.chain{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+.chain .chain-logo{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.liquidity-table-container table thead tr th.liquidity-table-title{
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 28px;
+    text-align: left;
+    color: #101828;
+}
+.liquidity-table-container table thead tr th.liquidity-table-title span.TVL_text{
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: center;
+    color: #6941C6;
+    padding: 2px 8px 2px 8px;
+    border-radius: 16px;
+    border: 1px solid #E4E7EC;
+    background-color: #F9F5FF;
+}
+
+@media screen and (max-width:768px) {
+    .liquidity-table-container{
+        max-width: 100%;
+        overflow-x: scroll;
+        padding: 20px;
+        margin-top: 20px;
+    }
+}
