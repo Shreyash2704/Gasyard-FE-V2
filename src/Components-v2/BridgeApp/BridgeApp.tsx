@@ -43,8 +43,9 @@ const BridgeApp = (props: Props) => {
           val_token1={"1"}
           val_token2={"33.23"}
         />
+        <button className='submit-btn'>Bridge</button>
       </div>
-      <button className='submit-btn'>Bridge</button>
+      
       <SelectChainModal
         isOpen={isOpen}
         onClose={onClose}

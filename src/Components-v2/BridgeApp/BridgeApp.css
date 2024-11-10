@@ -31,7 +31,7 @@
 }
 .CurrencySwitcher{
     position: absolute;
-    top:32%;
+    top:28%;
     left: calc(50% - 32px);
     width: 64px;
     height: 64px;

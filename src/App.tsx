@@ -18,6 +18,8 @@ import FormStore from "./Config/Store/FormStore";
 import BridgeApp from "./Components-v2/BridgeApp/BridgeApp";
 import widgetLogo from './assets/v2/bridge/widgets.svg'
 import operationalLogo from './assets/v2/bridge/operational.svg'
+import ConnectWallet from "./Components-v2/ConnectWallet/ConnectWallet";
+import AppstoreV2 from "./Config/Store/AppstoreV2";
 
 const App = observer(() => {
 
@@ -52,6 +54,7 @@ const App = observer(() => {
                 <>
                   <Header />
                   <BridgeApp />
+                  {AppstoreV2.showWalletModal && <ConnectWallet />}
                   
                   {/* <BridgeNew /> */}
                 </>

@@ -1,3 +1,6 @@
+.select-chain-wrap{
+  min-height: 500px;
+}
 .header {
   display: flex;
   flex-direction: row;
@@ -57,6 +60,8 @@
   width: 100%;
   min-width: 100%;
   justify-content: start;
+  height: 100%;
+  min-height: 400px;
 }
 .network-wrap .label{
   font-family: SF Pro Display;
@@ -68,11 +73,12 @@
   color: #878794;
 }
 .networks{
-  width: 30%;
+  width: 40%;
   border-right: 1px solid #222729;
   padding: 10px;
   row-gap: 6px;
   justify-content: start;
+  min-height: 100%;
 }
 .network{
   justify-content: start;
@@ -86,8 +92,16 @@
   align-items: center;
   column-gap: 10px;
 }
+.network:hover{
+  background-color: #222729;
+}
+.network img,.asset img{
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
 .assets{
-  width: 70%;
+  width: 60%;
   padding: 10px;
   justify-content: start;
    row-gap: 10px;

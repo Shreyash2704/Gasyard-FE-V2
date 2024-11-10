@@ -1,0 +1,59 @@
+.ConnectWalletRoot{
+    position: absolute;
+    right: 30px;
+    top:10%;
+    background-color: #0D1116;
+    padding: 24px;
+    border-radius: 20px;
+    border: 1px solid #222729;
+    width: 400px;
+}
+.ConnectWalletRoot .title{
+    font-family: SF Pro Display;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 21.48px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #FFFFFF;
+    margin-bottom: 24px;
+}
+.wallet-conector-wrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+}
+.wallet-conector-wrap button,
+.wallet-conector-wrap button:hover{
+    background-color: #5a5a5a;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0px 1px 2px 0px #E56A125C, 0px 1px 0px 0px #FFFFFF2B inset;
+    border-radius: 16px;
+    font-family: SF Pro Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: -0.01em;
+    text-align: center;
+    padding: 10px 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 284px;
+    width: 284px;
+
+}
+.wallet-conector-wrap .wkit-disconnect-button{
+    background-color: #b4b3b3;
+}
+/* .wallet-conector-wrap .wkit-button{
+    background-color: aqua;
+}
+.wallet-conector-wrap .evm-wallet{
+    width: 100%;
+    background-color: aqua;
+} */
