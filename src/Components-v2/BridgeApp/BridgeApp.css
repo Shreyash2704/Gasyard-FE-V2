@@ -111,7 +111,14 @@
     color:#fff;
     margin-left: 5px;
 }
-
+.TokenWrapRoot input.receive-token{
+    pointer-events: none;
+}
+.TokenWrapRoot .right-sec img{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
 .showQuote{
     padding: 16px;
     background-color: #121719;

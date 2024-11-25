@@ -19,6 +19,12 @@ type Props = {
     isOpen?:any
     onOpen?:any
      onClose?:any
+     setModal:any
+     open?:boolean
+     chain_1?:any
+     chain_2:any
+     toSelectChain:any
+     portfolio:any
 }
 type nativeCurrencyType = {
   decimals: any
@@ -26,14 +32,15 @@ type nativeCurrencyType = {
   symbol:any
 }
 
-const SelectChainModal = observer(({isOpen,onOpen, onClose}: Props) => {
+const SelectChainModal = observer(({isOpen,onOpen, onClose,setModal,open,chain_1,chain_2,toSelectChain,portfolio}: Props) => {
     // const { isOpen, onOpen, onClose } = useDisclosure()
     const Chains = useChains()
     console.log("chain",Chains)
     const [chainList, setchainList] = useState<readonly chainType[]>(Chains)
     const [nativetokens, setnativetokens] = useState<nativeCurrencyType | null>(null)
     const onChainSelect = (chain:any) =>{
-        // setModal(false,chain)
+        console.log("chian clicked",chain.name)
+        setModal(false,chain)
         onClose()
     }
     const handleInputChange = (e:any) =>{
@@ -80,8 +87,11 @@ const SelectChainModal = observer(({isOpen,onOpen, onClose}: Props) => {
                   <div className="networks d-flex-col">
                     <div className="label">Networks</div>
                     {chainList && chainList.map((chain) =>{
+                      if(toSelectChain === 2 && chain.id === chain_1.id){
+                          return("")
+                      }
                       return(<>
-                      <div className="network d-flex-row" onClick={() => setnativetokens(chain.nativeCurrency)}>
+                      <div className="network d-flex-row" onClick={() => onChainSelect(chain)}>
                         <img src={chain.iconUrl} alt="" />
                         {chain.name}
                     </div>
