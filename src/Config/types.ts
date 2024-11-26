@@ -37,6 +37,10 @@ interface ImageMapType {
   [key: string]: string | any;
 }
 
+interface SymbolsMapType {
+  [key: number]: string | any;
+}
+
 interface ImageMapType2 {
   [key: number]: string;
 }
@@ -55,6 +59,7 @@ interface PortfolioObjectReturnType {
   balance: string;
   networkName: string
   decimals: number
+  balanceinusd:number | "N/A" | string
 }
 
 interface TotalChainVolume {
@@ -130,5 +135,7 @@ export type {
   LiquidityPoolBalance,
   PortfolioListReturnType,
   TotalChainVolume,
-  rewardsType
+  rewardsType,
+  PortfolioObjectReturnType,
+  SymbolsMapType
 };

@@ -14,6 +14,7 @@ import { useAccount, useChains } from 'wagmi'
 import { chainType, PortfolioListReturnType } from '../../Config/types'
 import { GetBalanceReturnType } from 'viem'
 import { formatEther, parseEther } from 'ethers'
+import { portfolioStore } from '../../Config/Store/Portfolio'
 
 
 type Props = {}

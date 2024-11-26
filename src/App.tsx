@@ -83,10 +83,10 @@ const App = observer(() => {
             <Route path="*" element={<>Page Not Found!</>} />
           </Routes>
         </Router>
-        <div className="toolkits">
+        {/* <div className="toolkits">
             <img src={widgetLogo} alt="" />
             <img src={operationalLogo} alt="" />
-          </div>
+          </div> */}
       </div>
     </ChakraProvider>
   );

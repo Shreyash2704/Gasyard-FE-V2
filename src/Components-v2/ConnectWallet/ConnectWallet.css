@@ -57,3 +57,71 @@
     width: 100%;
     background-color: aqua;
 } */
+ .balanceWrap{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    justify-content: flex-start;
+    margin-top: 10px;
+ }
+ .balanceWrap .balanceWraptitle{
+    font-family: SF Pro Display;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 16.5px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color:#878794;
+ }
+ .chain{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 10px;
+    max-width: 100%;
+ }
+ .chain img{
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+ }
+ .chain .chainInfo{
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+ }
+.chain .chain-name{
+    font-family: SF Pro Display;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color:#FFFFFF;
+}
+.chain .balance{
+    font-family: SF Pro Display;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14.4px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color:#878794;
+}
+.chain .balanceInUSD{
+    font-family: SF Pro Display;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    letter-spacing: -0.02em;
+    text-align: right;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color:#fff;
+    margin-left: auto;
+}

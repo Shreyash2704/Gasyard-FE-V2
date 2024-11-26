@@ -79,13 +79,13 @@ if (process.env.REACT_APP_SERVER == "testnet") {
       explorer: ChainJsonData["84532"].explorer,
       liquidityPool: ChainJsonData["84532"].liquidityPool,
     },
-    {
-      ...arbitrumSepolia,
-      iconUrl: arbitumlogo,
-      contractAddress: ChainJsonData["421614"].routerContract,
-      explorer: ChainJsonData["421614"].explorer,
-      liquidityPool: ChainJsonData["421614"].liquidityPool,
-    },
+    // {
+    //   ...arbitrumSepolia,
+    //   iconUrl: arbitumlogo,
+    //   contractAddress: ChainJsonData["421614"].routerContract,
+    //   explorer: ChainJsonData["421614"].explorer,
+    //   liquidityPool: ChainJsonData["421614"].liquidityPool,
+    // },
     {
       ...MorphHolesky,
       iconUrl: morphlogo,
@@ -134,20 +134,20 @@ if (process.env.REACT_APP_SERVER == "testnet") {
     //   explorer:ChainJsonData["11124"].explorer,
     //   liquidityPool:ChainJsonData["11124"].liquidityPool
     // },
-    {
-      ...SoneiumTestnet,
-      iconUrl: sonieumlogo,
-      contractAddress: ChainJsonData["1946"].routerContract,
-      explorer: ChainJsonData["1946"].explorer,
-      liquidityPool: ChainJsonData["1946"].liquidityPool,
-    },
-    {
-      ...UnichainTestnet,
-      iconUrl: Uniswaplogo,
-      contractAddress: ChainJsonData["1301"].routerContract,
-      explorer: ChainJsonData["1301"].explorer,
-      liquidityPool: ChainJsonData["1301"].liquidityPool,
-    },
+    // {
+    //   ...SoneiumTestnet,
+    //   iconUrl: sonieumlogo,
+    //   contractAddress: ChainJsonData["1946"].routerContract,
+    //   explorer: ChainJsonData["1946"].explorer,
+    //   liquidityPool: ChainJsonData["1946"].liquidityPool,
+    // },
+    // {
+    //   ...UnichainTestnet,
+    //   iconUrl: Uniswaplogo,
+    //   contractAddress: ChainJsonData["1301"].routerContract,
+    //   explorer: ChainJsonData["1301"].explorer,
+    //   liquidityPool: ChainJsonData["1301"].liquidityPool,
+    // },
     {
       ...mainnet,
       iconUrl: ethereumlogo,

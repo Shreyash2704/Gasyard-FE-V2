@@ -14,7 +14,7 @@ import movementLogo from "../assets/chains/movement-testnet-token.svg";
 import abstractLogo from "../assets/chains/abstract.png";
 import sonieumLogo from "../assets/chains/soneium.jpg";
 import Uniswaplogo from "../assets/chains/uniswap.jpg";
-import { ImageMapType, Networks } from "./types";
+import { ImageMapType, Networks, SymbolsMapType } from "./types";
 
 const iconMap: ImageMapType = {
   "42161": arbitumlogo,
@@ -39,6 +39,15 @@ const iconMap: ImageMapType = {
   "1946": sonieumLogo,
   "1301": Uniswaplogo,
 };
+const SymbolsMap:SymbolsMapType = {
+  1:"ETH",
+  11155111:"ETH",
+  84532:"ETH",
+  2810:"ETH",
+  30732:"MOVE",
+  80084:"BERA",
+  920637907288165:"ETH"
+}
 const ChainJsonData: Networks = {
   "1": {
     networkName: "ethereum",
@@ -304,4 +313,4 @@ const ChainJsonData: Networks = {
   },
 };
 
-export { iconMap, ChainJsonData };
+export { iconMap, ChainJsonData,SymbolsMap };
