@@ -11,3 +11,5 @@
       url("./fonts/SF-Pro-Display-Regular.otf") format("opentype");
     font-weight: normal;
   }
+
+/* @import "@aptos-labs/wallet-adapter-ant-design/dist/index.css"; */

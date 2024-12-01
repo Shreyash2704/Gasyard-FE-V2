@@ -54,12 +54,16 @@ import {
   kakarotSepolia
 } from "./Config/config";
 import Uniswaplogo from "./assets/chains/uniswap.jpg";
+// import { PetraWallet } from "petra-plugin-wallet-adapter";
+// import { AptosWalletAdapterProvider } from "@aptos-labs/wallet-adapter-react";
 
 // 0. Setup queryClient
 const queryClient = new QueryClient();
 
 // 1. Get projectId at https://cloud.walletconnect.com
 const projectId = "b46e700f99389f8e96d969c863bfd0e8";
+
+// const wallets = [new PetraWallet()];
 
 const metadata = {
   name: "Web3Modal",
@@ -236,7 +240,9 @@ root.render(
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <AptosWalletProvider>
-          <App />
+          {/* <AptosWalletAdapterProvider plugins={wallets} autoConnect={true}> */}
+            <App />
+          {/* </AptosWalletAdapterProvider> */}
         </AptosWalletProvider>
       </QueryClientProvider>
     </WagmiProvider>

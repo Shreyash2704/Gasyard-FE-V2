@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './ConnectWallet.css'
 import { AptosConnectButton, useAptosWallet } from '@razorlabs/wallet-kit';
 import { Observer, observer } from 'mobx-react';
@@ -9,9 +9,9 @@ import { useAccount } from 'wagmi';
 import RazorWallet from './razorWallet';
 import { portfolioStore } from '../../Config/Store/Portfolio';
 import { iconMap, SymbolsMap } from '../../Config/data';
-import { getUSDAmount, roundDecimal } from '../../Config/utils';
+import { getUSDAmount, roundDecimal, shortenAddress } from '../../Config/utils';
 import FormStore from '../../Config/Store/FormStore';
-
+import logoutIcon from '../../assets/v2/header/logout.svg'
 
 
 const ConnectWallet = observer(() => {
@@ -24,7 +24,13 @@ const ConnectWallet = observer(() => {
 
   const { portfolio } = portfolioStore;
   console.log(JSON.stringify(portfolioStore.portfolio, null, 2))
-
+  
+  useEffect(() => {
+    if(isDisconnected){
+      portfolioStore.clearPortfolio()
+    }
+  }, [isDisconnected])
+  
 
   return (
     <div className="ConnectWalletRoot">
@@ -32,12 +38,32 @@ const ConnectWallet = observer(() => {
       <div className="wallet-conector-wrap">
         {/* <AptosConnectButton label="Connect Your Aptos Wallet" /> */}
         {/* <RazorWallet /> */}
-        <AptosConnectButton>Connect Your Aptos Wallet</AptosConnectButton>
-        <button className='evm-wallet' onClick={() => open()}>{address ? address : "Connect Your EVM Wallet" }</button>
+        
+        {wallet.account ?
+        <div className='evm-address' >
+        <div className="lables">
+          <div className="lable">aptos</div>
+          <div className="address">${shortenAddress(wallet.account.address) }</div>
+        </div>
+        <img src={logoutIcon} onClick={() => wallet.disconnect()} />
+      </div>
+      :<AptosConnectButton>Connect Your Aptos Wallet</AptosConnectButton>
+        }
+        {address ?
+          <div className='evm-address' >
+            <div className="lables">
+              <div className="lable">eth</div>
+              <div className="address"> ${shortenAddress(address) }</div>
+            </div>
+            <img src={logoutIcon} onClick={() => open()} />
+          </div>
 
+          : <button className='evm-wallet' onClick={() => open()}>{address ? address : "Connect Your EVM Wallet" }</button>
+        }
         
         
       </div>
+
       <div className="balanceWrap">
           <div className="balanceWraptitle">Your Balance</div>
           

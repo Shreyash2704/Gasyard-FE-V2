@@ -17,6 +17,10 @@ class PortfolioStore {
     removePortfolio(id: number) {
       delete this.portfolio[id];
     }
+
+    clearPortfolio() {
+      this.portfolio = {};
+    }
   }
   
   export const portfolioStore = new PortfolioStore();

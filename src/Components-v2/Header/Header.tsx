@@ -49,6 +49,8 @@ const Header = observer((props: Props) => {
         </div>
       </div>
       <ConnectWalletModal />
+    
+
     </div>
   )
 })

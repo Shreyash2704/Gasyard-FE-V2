@@ -27,7 +27,9 @@ const Quote = ({token1,token2,val_token1,val_token2}:Props) => {
             </div>
             
         </div>
-        <div className="detailedQuote"></div>
+        <div className="detailedQuote">
+          
+        </div>
     </div>
   )
 }

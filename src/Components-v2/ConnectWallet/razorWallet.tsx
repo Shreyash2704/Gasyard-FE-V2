@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 type Props = {}
 
 function RazorWallet({}: Props) {
-    const {connected} = useSuiWallet()
+    const {connected,account} = useAptosWallet()
     const [showModal, setShowModal] = useState(false)
     const wallet = useAptosWallet();
     console.log('wallet status', wallet.status);
