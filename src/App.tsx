@@ -35,7 +35,7 @@ const App = observer(() => {
   }
 
   useLayoutEffect(() => {
-   // getAllUSDValues(token)
+    getAllUSDValues(token)
   }, [])
   useEffect(() => {
       

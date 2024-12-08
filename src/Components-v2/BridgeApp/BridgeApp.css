@@ -137,6 +137,7 @@
 .showQuote .left-sec img{
     width: 12px;
     height: 12px;
+    border-radius: 50%;
 }
 .showQuote .right-sec{
     margin-left: auto;

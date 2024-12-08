@@ -13,14 +13,18 @@ import AppstoreV2 from '../../Config/Store/AppstoreV2'
 import { useAccount, useChains } from 'wagmi'
 import { chainType, PortfolioListReturnType } from '../../Config/types'
 import { GetBalanceReturnType } from 'viem'
-import { formatEther, parseEther } from 'ethers'
+import { ethers, formatEther, parseEther } from 'ethers'
 import { portfolioStore } from '../../Config/Store/Portfolio'
+import { fetchQuote } from '../../Config/API/apiV2'
+import { customChainId } from '../../Config/data'
+import FormStore from '../../Config/Store/FormStore'
 
 
 type Props = {}
 
 const BridgeApp = observer((props: Props) => {
   const [input1, setinput1] = useState()
+  const [input2, setinput2] = useState()
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [toSelectChain, settoSelectChain] = useState<0 | 1 | 2>(0);
   const Chains = useChains();
@@ -31,6 +35,7 @@ const BridgeApp = observer((props: Props) => {
   const [portfolio, setportfolio] = useState<PortfolioListReturnType | null>(null);
   const [accBalance1, setaccBalance1] = useState("");
   const [accBalance2, setaccBalance2] = useState("");
+  const [debouncedValue, setDebouncedValue] = useState(input1);
   const { address, isConnecting, isDisconnected, chain } = useAccount();
 
   const handleInputChange1 = async(e: any) => {
@@ -44,8 +49,8 @@ const BridgeApp = observer((props: Props) => {
     }
 
     setinput1(value);
-    const val = await getUSDAmount(chain1?.nativeCurrency.symbol)
-    AppstoreV2.settokenVal1inUSD(val * parseFloat(value))
+    // const val = await getUSDAmount(chain1?.nativeCurrency.symbol)
+    // AppstoreV2.settokenVal1inUSD(val * parseFloat(value))
 
   };
 
@@ -117,6 +122,18 @@ const BridgeApp = observer((props: Props) => {
     setportfolio(result);
     setAccountBalance(result);
   };
+  const fetctQuoteAPi = async() =>{
+    if(chain1 && chain2 && debouncedValue){
+      const res = await fetchQuote(customChainId[chain1.id.toString()],customChainId[chain2.id.toString()],debouncedValue)
+      console.log("fetch quote =>",res)
+      //@ts-ignore
+      setinput2(formatEther(res.outputTokenAmount))
+       
+      
+    
+      AppstoreV2.settokenVal2inUSD(res.outputValueInUSD)
+    }
+  }
 
   //@ts-ignore
   const ReturnBalance = ({id}) => {
@@ -144,9 +161,36 @@ const BridgeApp = observer((props: Props) => {
     
   }, [address])
   useEffect(() => {
-    
     setAccountBalance(portfolio);
   }, [chain1, chain2]);
+  useEffect(() => {
+    fetctQuoteAPi()
+  }, [chain1,chain2,debouncedValue])
+  useEffect(() => {
+    //@ts-ignore
+    setinput2("0")
+    AppstoreV2.settokenVal2inUSD("0")
+
+    const handler = setTimeout(async() => {
+      var value = input1
+      setDebouncedValue(value);
+      setinput1(value)
+     
+      if (chain1) {
+        const usdRate = FormStore.getTokenRateKey(chain1.nativeCurrency.symbol);
+        var val = value !== "" ? value : "0";
+        //@ts-ignore
+        AppstoreV2.settokenVal1inUSD(usdRate ? usdRate * parseFloat(val):"n/a")
+      }
+    }, 1000); // 0.5 seconds
+
+    // Cleanup timeout if the effect is called again before the timeout completes
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [input1]);
+  
+  
   
   return (
     <div className='BridgeAppRoot'>
@@ -169,7 +213,7 @@ const BridgeApp = observer((props: Props) => {
         <TokenWrap 
           id={2}
           label="You receive"
-          inputVal={"0.0"}
+          inputVal={input2}
           inputInDollars={AppstoreV2.tokenVal2inUSD}
           token={chain2?.nativeCurrency?.symbol}
           //@ts-ignore
@@ -180,10 +224,10 @@ const BridgeApp = observer((props: Props) => {
           className="receive-token"
         />
         <Quote 
-          token1={"BTC"}
-          token2={"ETH"}
-          val_token1={"1"}
-          val_token2={"33.23"}
+          token1={chain1 && chain1}
+          token2={chain2 && chain2}
+          val_token1={input1}
+          val_token2={input2}
         />
         <button className='submit-btn'>Bridge</button>
       </div>

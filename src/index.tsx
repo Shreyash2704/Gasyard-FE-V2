@@ -81,7 +81,7 @@ if (process.env.REACT_APP_SERVER == "testnet") {
       iconUrl: baselogo,
       contractAddress: ChainJsonData["84532"].routerContract,
       explorer: ChainJsonData["84532"].explorer,
-      liquidityPool: ChainJsonData["84532"].liquidityPool,
+      liquidityPool: ChainJsonData["84532"].liquidityPool
     },
     // {
     //   ...arbitrumSepolia,
@@ -239,7 +239,7 @@ root.render(
   <React.StrictMode>
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <AptosWalletProvider>
+        <AptosWalletProvider autoConnect={false}>
           {/* <AptosWalletAdapterProvider plugins={wallets} autoConnect={true}> */}
             <App />
           {/* </AptosWalletAdapterProvider> */}

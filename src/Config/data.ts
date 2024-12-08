@@ -14,7 +14,7 @@ import movementLogo from "../assets/chains/movement-testnet-token.svg";
 import abstractLogo from "../assets/chains/abstract.png";
 import sonieumLogo from "../assets/chains/soneium.jpg";
 import Uniswaplogo from "../assets/chains/uniswap.jpg";
-import { ImageMapType, Networks, SymbolsMapType } from "./types";
+import { CustomChainIdType, ImageMapType, Networks, SymbolsMapType } from "./types";
 
 const iconMap: ImageMapType = {
   "42161": arbitumlogo,
@@ -312,5 +312,17 @@ const ChainJsonData: Networks = {
     explorer: "sepolia.uniscan.xyz",
   },
 };
+const customChainId:CustomChainIdType = {
+  11155111 : 901,
+  84532 :902,
+  421614 :903,
+  2810: 904,
+  30732: 905,
+  920637907288165: 906,
+  80084 : 907,
+  11124 : 908,
+  1946 : 909,
+  1301 : 910
+}
 
-export { iconMap, ChainJsonData,SymbolsMap };
+export { iconMap, ChainJsonData,SymbolsMap,customChainId };

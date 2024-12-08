@@ -121,6 +121,10 @@ interface rewardsType {
   reward: number;
   rewardInUsd: Number;
 }
+
+interface CustomChainIdType {
+    [key: string]: number;
+  }
 export type {
   chainType,
   Network,
@@ -137,5 +141,6 @@ export type {
   TotalChainVolume,
   rewardsType,
   PortfolioObjectReturnType,
-  SymbolsMapType
+  SymbolsMapType,
+  CustomChainIdType
 };
