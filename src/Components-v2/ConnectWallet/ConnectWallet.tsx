@@ -33,13 +33,14 @@ const ConnectWallet = observer(() => {
   
 
   return (
+    
     <div className="ConnectWalletRoot">
       <div className="title">Wallet Sync</div>
       <div className="wallet-conector-wrap">
         {/* <AptosConnectButton label="Connect Your Aptos Wallet" /> */}
         {/* <RazorWallet /> */}
         
-        {wallet.account ?
+        {/* {wallet.account ?
         <div className='evm-address' >
         <div className="lables">
           <div className="lable">aptos</div>
@@ -48,7 +49,7 @@ const ConnectWallet = observer(() => {
         <img src={logoutIcon} onClick={() => wallet.disconnect()} />
       </div>
       :<AptosConnectButton>Connect Your Aptos Wallet</AptosConnectButton>
-        }
+        } */}
         {address ?
           <div className='evm-address' >
             <div className="lables">

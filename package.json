@@ -25,6 +25,7 @@
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.2",
     "bignumber": "^1.1.0",
+    "bs58": "^6.0.0",
     "ethers": "^6.13.2",
     "framer-motion": "^11.2.12",
     "lottie-react": "^2.4.0",

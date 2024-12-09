@@ -8,16 +8,22 @@ import switchTokenLogo from '../../assets/v2/bridge/CurrencySwitcher.svg'
 import { Spinner, useDisclosure } from '@chakra-ui/react'
 import SelectChainModal from '../SelectChainModal/SelectChainModal'
 import { observer } from 'mobx-react'
-import { FetchPortfolioBalance, getUSDAmount } from '../../Config/utils'
+import { CompareValues, FetchPortfolioBalance, getUSDAmount } from '../../Config/utils'
 import AppstoreV2 from '../../Config/Store/AppstoreV2'
-import { useAccount, useChains } from 'wagmi'
+import { useAccount, useChains, useSwitchChain, useTransactionReceipt, useWriteContract } from 'wagmi'
 import { chainType, PortfolioListReturnType } from '../../Config/types'
 import { GetBalanceReturnType } from 'viem'
-import { ethers, formatEther, parseEther } from 'ethers'
+import { ethers, formatEther, parseEther, BigNumberish, toBigInt } from 'ethers'
 import { portfolioStore } from '../../Config/Store/Portfolio'
 import { fetchQuote } from '../../Config/API/apiV2'
 import { customChainId } from '../../Config/data'
 import FormStore from '../../Config/Store/FormStore'
+import { abiV2 } from '../../Config/abi'
+import { evmAddressToBytes32 } from '../../Config/addressHandlers'
+import { useWeb3Modal } from '@web3modal/wagmi/react'
+import ReviewSwap from '../ReviewSwap/ReviewSwap'
+import ReviewQuote from './ReviewQuote'
+import CloseIcon from '../../assets/CloseIcon.svg'
 
 
 type Props = {}
@@ -36,8 +42,14 @@ const BridgeApp = observer((props: Props) => {
   const [accBalance1, setaccBalance1] = useState("");
   const [accBalance2, setaccBalance2] = useState("");
   const [debouncedValue, setDebouncedValue] = useState(input1);
+  const [showReview, setshowReview] = useState(true)
   const { address, isConnecting, isDisconnected, chain } = useAccount();
-
+  const { chains, switchChain } = useSwitchChain();
+  const {writeContract,data, isPending, isSuccess, status,error} = useWriteContract()
+  const { data: txReceiptData } = useTransactionReceipt({
+    hash: data
+  })
+  const { open, close } = useWeb3Modal();
   const handleInputChange1 = async(e: any) => {
     var value = e.target.value;
 
@@ -126,8 +138,9 @@ const BridgeApp = observer((props: Props) => {
     if(chain1 && chain2 && debouncedValue){
       const res = await fetchQuote(customChainId[chain1.id.toString()],customChainId[chain2.id.toString()],debouncedValue)
       console.log("fetch quote =>",res)
-      //@ts-ignore
-      setinput2(formatEther(res.outputTokenAmount))
+      const ether = formatEther(res.outputTokenAmount.toString());
+       //@ts-ignore
+      setinput2(ether)
        
       
     
@@ -153,6 +166,47 @@ const BridgeApp = observer((props: Props) => {
     } else {
       return "NA"
     }
+  };
+
+  const onSubmit = async () => {
+    if (
+      chain1 &&
+      chain2 &&
+      chain &&
+      address &&
+      debouncedValue &&
+      debouncedValue !== "" &&
+      CompareValues(
+        roundDecimal(debouncedValue),
+        portfolioStore.portfolio[chain1.id].balance
+      )
+    ) {
+      try {
+        console.log("heello", chain1.contractAddress,customChainId[chain2.id],
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          debouncedValue,
+          evmAddressToBytes32(address),
+          "0x0000000000000000000000000000000000000000000000000000000000000000", parseEther(debouncedValue))
+        const result = await writeContract({
+          abi:abiV2,
+          address: chain1.contractAddress,
+          functionName: "bridge",
+          args: [
+            customChainId[chain2.id],
+            "0x0000000000000000000000000000000000000000000000000000000000000000",
+            parseEther(debouncedValue),
+            evmAddressToBytes32(address),
+            "0x0000000000000000000000000000000000000000000000000000000000000000",
+          ],
+          //@ts-ignore
+          value: parseEther(debouncedValue),
+        });
+       // setopenTransactionPopup(true);
+      } catch (err) {
+        console.log("err", err);
+      }
+    }
+    console.log(chain1,chain2,address,debouncedValue,portfolioStore.portfolio)
   };
   useEffect(() => {
     if(address){
@@ -189,13 +243,42 @@ const BridgeApp = observer((props: Props) => {
       clearTimeout(handler);
     };
   }, [input1]);
+  useEffect(() => {
+    if(txReceiptData){
+      console.log("txReceiptData",txReceiptData)
+    }
+  }, [txReceiptData])
+  
+  
+  useEffect(() => {
+    if (chain1) {
+      const usdRate = FormStore.getTokenRateKey(chain1.nativeCurrency.symbol);
+      var val = input1 !== "" ? input1 : "0";
+      //@ts-ignore
+      AppstoreV2.settokenVal1inUSD(usdRate ? usdRate * parseFloat(val):"n/a")
+    }
+    
+  }, [chain1])
+
+  useEffect(() => {
+    console.log("contract->",isPending, isSuccess, status,error)
+  }, [isPending, isSuccess, status,error])
   
   
   
   return (
-    <div className='BridgeAppRoot'>
-      <div className="bridgeTitle">Bridge</div>
-      <div className="bridgeApp d-flex-col">
+    <div className={`BridgeAppRoot ${showReview && "showReview"}`}>
+
+      {
+        showReview ? 
+        <div className="reviewTitle">
+          Review Swap
+          <img src={CloseIcon} onClick={() => setshowReview(false)}/>
+        </div> :<div className="bridgeTitle">Bridge</div>
+      }
+      
+      {
+        !showReview ? <div className="bridgeApp d-flex-col">
         <img className='CurrencySwitcher' src={switchTokenLogo} alt="" />
         <TokenWrap 
           id={1}
@@ -229,9 +312,51 @@ const BridgeApp = observer((props: Props) => {
           val_token1={input1}
           val_token2={input2}
         />
-        <button className='submit-btn'>Bridge</button>
+        {/* {
+          address ? 
+           chain && chain1 && chain.id !== chain1.id ? (
+            <button className='submit-btn' onClick={() =>{
+              switchChain({
+                chainId:chain1.id
+              })
+            }}>Switch Chain</button>
+           
+          ):(
+            <button className='submit-btn' onClick={onSubmit}>Bridge</button>
+          )
+          :
+          (<button className='submit-btn' onClick={() => open()}>Connect Wallet</button>)
+          
+        } */}
+        <button className='submit-btn' onClick={() => setshowReview(true)}>Review</button>
+      </div>  :
+        <div className="ReviewSwapWrap d-flex-col">
+        <ReviewSwap token={"1.2333"} label={"You Send"} chain={chain1} usd={"1232"} />
+        <ReviewSwap token={"1.1223"} label={"You Receive"} chain={chain2} usd={"1220"} />
+        {
+          address ? 
+           chain && chain1 && chain.id !== chain1.id ? (
+            <button className='submit-btn' onClick={() =>{
+              switchChain({
+                chainId:chain1.id
+              })
+            }}>Switch Chain</button>
+           
+          ):(
+            <button className='submit-btn' onClick={onSubmit}>Bridge</button>
+          )
+          :
+          (<button className='submit-btn' onClick={() => open()}>Connect Wallet</button>)
+          
+        } 
+        <ReviewQuote />
+        
       </div>
+      }
       
+      
+      
+
       <SelectChainModal
         isOpen={isOpen}
         onClose={onClose}

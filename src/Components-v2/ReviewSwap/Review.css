@@ -1,0 +1,36 @@
+.tokenReview{
+    row-gap: 8px;
+}
+.tokenReview span{
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color:#878794;
+}
+.tokenReview .token{
+    font-family: Inter;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 42px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color:#FFFFFF;
+}
+.tokenReviewWrap{
+    /* padding: 16px; */
+    align-items: center;
+    background-color: #020202;
+    border-radius: 16px;
+}
+.tokenReviewWrap img{
+    width:32px;
+    height: 32px;
+    border-radius: 50%;
+} 

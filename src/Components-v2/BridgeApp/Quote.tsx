@@ -1,6 +1,7 @@
 import React from 'react'
 import token from '../../assets/v2/bridge/eth.svg'
 import { iconMap } from '../../Config/data'
+import { ethers } from 'ethers'
 
 type Props = {
     token1:any,
@@ -9,17 +10,18 @@ type Props = {
     val_token2:any
 }
 const Quote = ({token1,token2,val_token1,val_token2}:Props) => {
+  //ethers.util
   return (
     <div className='QuoteRoot'>
         <div className="showQuote d-flex-row">
             <div className="left-sec d-flex-row">
                 
                     {val_token1} 
-                    <img src={iconMap[token1.id]} alt="" />
+                    <img src={token1 && iconMap[token1.id]} alt="" />
                     {token1.nativeCurrency.symbol}
                     <span>~</span>
                     {val_token2} 
-                    <img src={iconMap[token2.id]} alt="" />
+                    <img src={token2 && iconMap[token2.id]} alt="" />
                     {token2.nativeCurrency.symbol}
                 
             </div>
