@@ -24,13 +24,14 @@ import { useWeb3Modal } from '@web3modal/wagmi/react'
 import ReviewSwap from '../ReviewSwap/ReviewSwap'
 import ReviewQuote from './ReviewQuote'
 import CloseIcon from '../../assets/CloseIcon.svg'
+import TransactionPopup from '../TransactionPopup/TransactionPopup'
 
 
 type Props = {}
 
 const BridgeApp = observer((props: Props) => {
-  const [input1, setinput1] = useState()
-  const [input2, setinput2] = useState()
+  const [input1, setinput1] = useState<string | null>(null)
+  const [input2, setinput2] = useState<string | null>(null)
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [toSelectChain, settoSelectChain] = useState<0 | 1 | 2>(0);
   const Chains = useChains();
@@ -42,7 +43,7 @@ const BridgeApp = observer((props: Props) => {
   const [accBalance1, setaccBalance1] = useState("");
   const [accBalance2, setaccBalance2] = useState("");
   const [debouncedValue, setDebouncedValue] = useState(input1);
-  const [showReview, setshowReview] = useState(true)
+  const [showReview, setshowReview] = useState(false)
   const { address, isConnecting, isDisconnected, chain } = useAccount();
   const { chains, switchChain } = useSwitchChain();
   const {writeContract,data, isPending, isSuccess, status,error} = useWriteContract()
@@ -50,6 +51,8 @@ const BridgeApp = observer((props: Props) => {
     hash: data
   })
   const { open, close } = useWeb3Modal();
+  const [openTransactionPopup, setopenTransactionPopup] = useState(false);
+  const [outputTxHash, setoutputTxHash] = useState<string | null>(null)
   const handleInputChange1 = async(e: any) => {
     var value = e.target.value;
 
@@ -65,7 +68,15 @@ const BridgeApp = observer((props: Props) => {
     // AppstoreV2.settokenVal1inUSD(val * parseFloat(value))
 
   };
+  const ClearState = () => {
+    setinput1("")
+    setinput2("")
+    setshowReview(false)
+  }
 
+  const setTransactionModal = (value: boolean) => {
+    setopenTransactionPopup(value);
+  };
   const changeModal = (value: boolean, chain: chainType | null = null) => {
     console.log(value);
     if (toSelectChain !== 0 && chain) {
@@ -147,6 +158,13 @@ const BridgeApp = observer((props: Props) => {
       AppstoreV2.settokenVal2inUSD(res.outputValueInUSD)
     }
   }
+  const reverseChain = async () => {
+    const temp = chain1;
+    setchain1(chain2);
+    // await FormStore.setChain1(chain2)
+    setchain2(temp);
+    // await FormStore.setChain2(temp)
+  };
 
   //@ts-ignore
   const ReturnBalance = ({id}) => {
@@ -182,11 +200,7 @@ const BridgeApp = observer((props: Props) => {
       )
     ) {
       try {
-        console.log("heello", chain1.contractAddress,customChainId[chain2.id],
-          "0x0000000000000000000000000000000000000000000000000000000000000000",
-          debouncedValue,
-          evmAddressToBytes32(address),
-          "0x0000000000000000000000000000000000000000000000000000000000000000", parseEther(debouncedValue))
+        
         const result = await writeContract({
           abi:abiV2,
           address: chain1.contractAddress,
@@ -201,7 +215,8 @@ const BridgeApp = observer((props: Props) => {
           //@ts-ignore
           value: parseEther(debouncedValue),
         });
-       // setopenTransactionPopup(true);
+       
+       setopenTransactionPopup(true)
       } catch (err) {
         console.log("err", err);
       }
@@ -259,6 +274,7 @@ const BridgeApp = observer((props: Props) => {
     }
     
   }, [chain1])
+  console.log("debouncedValue",debouncedValue)
 
   useEffect(() => {
     console.log("contract->",isPending, isSuccess, status,error)
@@ -279,7 +295,7 @@ const BridgeApp = observer((props: Props) => {
       
       {
         !showReview ? <div className="bridgeApp d-flex-col">
-        <img className='CurrencySwitcher' src={switchTokenLogo} alt="" />
+        <img className='CurrencySwitcher' src={switchTokenLogo} alt="" onClick={reverseChain} />
         <TokenWrap 
           id={1}
           label="You send"
@@ -328,11 +344,12 @@ const BridgeApp = observer((props: Props) => {
           (<button className='submit-btn' onClick={() => open()}>Connect Wallet</button>)
           
         } */}
-        <button className='submit-btn' onClick={() => setshowReview(true)}>Review</button>
+        
+        <button className='submit-btn' onClick={() => setshowReview(true)} disabled={debouncedValue === undefined || debouncedValue === "" || debouncedValue === null || input2 === null}>Review</button>
       </div>  :
         <div className="ReviewSwapWrap d-flex-col">
-        <ReviewSwap token={"1.2333"} label={"You Send"} chain={chain1} usd={"1232"} />
-        <ReviewSwap token={"1.1223"} label={"You Receive"} chain={chain2} usd={"1220"} />
+        <ReviewSwap token={input1 ? input1 : "NA"} label={"You Send"} chain={chain1} usd={AppstoreV2.tokenVal1inUSD} />
+        <ReviewSwap token={input2 ? input2 : "NA"} label={"You Receive"} chain={chain2} usd={AppstoreV2.tokenVal2inUSD} />
         {
           address ? 
            chain && chain1 && chain.id !== chain1.id ? (
@@ -350,6 +367,23 @@ const BridgeApp = observer((props: Props) => {
           
         } 
         <ReviewQuote />
+
+        <TransactionPopup 
+        chain1={chain1} 
+        chain2={chain2} 
+        input1={input1} 
+        input2={input2} 
+        isOpen={openTransactionPopup}
+        onOpen={onOpen}
+        onClose={onClose}
+        setModal={setTransactionModal}
+        rejected={status === "error"}
+        success={status === "success"}
+        pending={status === "pending"}
+        txHash={outputTxHash}
+        
+        ClearState={ClearState}
+        />
         
       </div>
       }

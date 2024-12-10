@@ -90,33 +90,33 @@ if (process.env.REACT_APP_SERVER == "testnet") {
     //   explorer: ChainJsonData["421614"].explorer,
     //   liquidityPool: ChainJsonData["421614"].liquidityPool,
     // },
-    {
-      ...MorphHolesky,
-      iconUrl: morphlogo,
-      contractAddress: ChainJsonData["2810"].routerContract,
-      explorer: ChainJsonData["2810"].explorer,
-      liquidityPool: ChainJsonData["2810"].liquidityPool,
-    },
-    {
-      ...kakarotSepolia,
-      iconUrl: karakotlogo,
-      contractAddress: ChainJsonData["920637907288165"].routerContract,
-      explorer: ChainJsonData["920637907288165"].explorer,
-      liquidityPool: ChainJsonData["920637907288165"].liquidityPool,
-    },
+    // {
+    //   ...MorphHolesky,
+    //   iconUrl: morphlogo,
+    //   contractAddress: ChainJsonData["2810"].routerContract,
+    //   explorer: ChainJsonData["2810"].explorer,
+    //   liquidityPool: ChainJsonData["2810"].liquidityPool,
+    // },
+    // {
+    //   ...kakarotSepolia,
+    //   iconUrl: karakotlogo,
+    //   contractAddress: ChainJsonData["920637907288165"].routerContract,
+    //   explorer: ChainJsonData["920637907288165"].explorer,
+    //   liquidityPool: ChainJsonData["920637907288165"].liquidityPool,
+    // },
     // {
     //   ...berachainTestnet,
     //   iconUrl: berachianlogo,
     //   contractAddress: ChainJsonData["80085"].routerContract,
     //   explorer:ChainJsonData["80085"].explorer
     // }
-    {
-      ...MovementTestnet,
-      iconUrl: movementtestnetlogo,
-      contractAddress: ChainJsonData["30732"].routerContract,
-      explorer: ChainJsonData["30732"].explorer,
-      liquidityPool: ChainJsonData["30732"].liquidityPool,
-    },
+    // {
+    //   ...MovementTestnet,
+    //   iconUrl: movementtestnetlogo,
+    //   contractAddress: ChainJsonData["30732"].routerContract,
+    //   explorer: ChainJsonData["30732"].explorer,
+    //   liquidityPool: ChainJsonData["30732"].liquidityPool,
+    // },
     {
       ...BerachainTestnet,
       iconUrl: berachianlogo,

@@ -4,10 +4,12 @@ import { Button, IconButton, Input, InputGroup, InputLeftElement, Menu, MenuButt
 type Props = {
     onClose:any,
     isOpen:any,
-    children:any
+    children:any,
+    size?:string,
+    header?:string
 }
 
-const CommonModal = ({onClose,isOpen,children}: Props) => {
+const CommonModal = ({onClose,isOpen,children,size,header}: Props) => {
   return (
     <>
     <Modal
@@ -15,7 +17,7 @@ const CommonModal = ({onClose,isOpen,children}: Props) => {
           onClose={onClose}
           isOpen={isOpen}
           motionPreset='slideInBottom'
-          size={"xl"}
+          size={size ? size : "xl"}
           
         >
           <ModalOverlay backgroundColor={"rgba(0,0,0,0.7)"} zIndex={"5"}/>
@@ -26,8 +28,12 @@ const CommonModal = ({onClose,isOpen,children}: Props) => {
               border: "1px solid #222729",
               zIndex:"5"
             }}>
-            <ModalHeader>
+              {header != "" && 
+              <ModalHeader>
+              {header}
             </ModalHeader>
+              }
+            
             <ModalBody zIndex={"5"}>
                 {children}
             </ModalBody>

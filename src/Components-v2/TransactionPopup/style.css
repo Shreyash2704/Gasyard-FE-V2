@@ -1,0 +1,77 @@
+.TransactionWrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 20px;
+}
+.TransactionWrapParent{
+    color: #fff;
+    padding: 20px;
+}
+.TransactionWrapParent .header{
+    color: #fff;
+    margin-top: -10px;
+}
+.TransactionWrap .message{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 8px;
+    font-family: SF Pro Display;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    letter-spacing: -0.015em;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #878794;
+}
+.txStatus{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 30px;
+    padding-bottom: 20px;
+}
+.txStatus .txWrap{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    column-gap: 10px;
+}
+.txWrap .tokenDetails{
+    display: flex;
+    flex-direction: column;
+    row-gap: 6px;
+    align-items: start;
+    justify-content: center;
+}
+.txWrap img{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+.tokenDetails .txWraptoken{
+    font-family: SF Pro Display;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #FFFFFF;
+}
+.tokenDetails .txWrapnetwork{
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color:#878794;
+}

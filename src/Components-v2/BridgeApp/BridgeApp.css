@@ -192,6 +192,9 @@
     width: 100%;
 
 }
+.submit-btn:disabled{
+    background: #878794;
+}
 .ReviewSwapWrap{
     padding: 16px;
     row-gap: 20px;

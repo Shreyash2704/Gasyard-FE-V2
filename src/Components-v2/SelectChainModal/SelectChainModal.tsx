@@ -87,9 +87,11 @@ const SelectChainModal = observer(({isOpen,onOpen, onClose,setModal,open,chain_1
                   <div className="networks d-flex-col">
                     <div className="label">Networks</div>
                     {chainList && chainList.map((chain) =>{
+                      if(chain.id === 1) return("")
                       if(toSelectChain === 2 && chain.id === chain_1.id){
                           return("")
                       }
+                      
                       return(<>
                       <div className="network d-flex-row" onClick={() => onChainSelect(chain)}>
                         <img src={chain.iconUrl} alt="" />
