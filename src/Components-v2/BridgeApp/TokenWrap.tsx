@@ -71,7 +71,7 @@ const TokenWrap = observer(({id,label,inputVal,inputInDollars,token,balance,toke
                 <img src={downArrow} className="down-arrow" alt="" />
             </div>
             <div className="balance-sec">
-                Balance:<span>{balance}</span>
+                Balance:<span>{balance ? balance : "N/A"}</span>
             </div>
         </div>
     </div>

@@ -75,3 +75,26 @@
     text-decoration-skip-ink: none;
     color:#878794;
 }
+
+.redirectSection{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 5px;
+    justify-content: center;
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: #fff;
+    padding-bottom: 20px;
+    cursor: pointer;
+}
+.redirectSection img{
+    width: 16px;
+    height: 16px;
+    padding: 2px;
+    cursor: pointer;
+}

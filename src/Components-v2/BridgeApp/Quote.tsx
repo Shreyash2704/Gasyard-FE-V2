@@ -17,12 +17,12 @@ const Quote = ({token1,token2,val_token1,val_token2}:Props) => {
             <div className="left-sec d-flex-row">
                 
                     {val_token1} 
-                    <img src={token1 && iconMap[token1.id]} alt="" />
-                    {token1.nativeCurrency.symbol}
+                    <img src={token1 && iconMap[token1?.id]} alt="" />
+                    {token1?.nativeCurrency?.symbol}
                     <span>~</span>
                     {val_token2} 
-                    <img src={token2 && iconMap[token2.id]} alt="" />
-                    {token2.nativeCurrency.symbol}
+                    <img src={token2 && iconMap[token2?.id]} alt="" />
+                    {token2?.nativeCurrency?.symbol}
                 
             </div>
             <div className="right-sec">

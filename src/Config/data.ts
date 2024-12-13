@@ -9,7 +9,7 @@ import sepolialogo from "../assets/coins/sepolia.png";
 import selectLogo from "../assets/chains/select.png";
 import morphlogo from "../assets/chains/Morph.png";
 import karakotlogo from "../assets/chains/kakarot_logo_mini.svg";
-import berachianlogo from "../assets/chains/Berachain.svg";
+import berachianlogo from "../assets/chains/bera.png";
 import movementLogo from "../assets/chains/movement-testnet-token.svg";
 import abstractLogo from "../assets/chains/abstract.png";
 import sonieumLogo from "../assets/chains/soneium.jpg";

@@ -11,6 +11,7 @@ import { iconMap } from '../../Config/data';
 import doubleArrow from '../../assets/v2/doubleArrow.svg'
 import CloseBtn from "../../assets/CloseIcon.svg";
 import rejected_animation from "../../assets/animations/rejected-animation.json";
+import redirectLogo from "../../assets/redirect.svg";
 
 type Props = {
     chain1:any,
@@ -37,6 +38,13 @@ const TransactionPopup = ({chain1,chain2,input1,input2,onOpen,onClose,isOpen,set
     setModal(false)
     ClearState()
   };
+  const redirectApp = () =>{
+      if(txHash){
+        const url = chain1.explorer+txHash
+        window.open(url, '_blank');
+      }
+      
+    }
   useEffect(() => {
     console.log("txHash",txHash)
   }, [txHash])
@@ -99,6 +107,11 @@ const TransactionPopup = ({chain1,chain2,input1,input2,onOpen,onClose,isOpen,set
                     </div>
                 </div>
             </div>
+
+            {success ? <div className="redirectSection" onClick={redirectApp}>
+                View on Explorer
+                <img src={redirectLogo} />
+              </div> : ("")}
             </div>
         </CommonModal>
     </div>

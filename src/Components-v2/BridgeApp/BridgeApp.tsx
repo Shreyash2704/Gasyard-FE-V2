@@ -53,6 +53,7 @@ const BridgeApp = observer((props: Props) => {
   const { open, close } = useWeb3Modal();
   const [openTransactionPopup, setopenTransactionPopup] = useState(false);
   const [outputTxHash, setoutputTxHash] = useState<string | null>(null)
+  const [btnText, setbtnText] = useState("Bridge")
   const handleInputChange1 = async(e: any) => {
     var value = e.target.value;
 
@@ -137,6 +138,12 @@ const BridgeApp = observer((props: Props) => {
       const amount = formatEther(gweiValue);
       setaccBalance2(roundDecimal(amount));
     }
+    if(chain1 === null || chain1 === undefined){
+      setaccBalance1("")
+    }
+    if(chain2 === null || chain2 === undefined){
+      setaccBalance2("")
+    }
   };
   const fetchPortfolio = async (address: any) => {
     // const result = await PortfolioAPI(address);
@@ -152,6 +159,9 @@ const BridgeApp = observer((props: Props) => {
       const ether = formatEther(res.outputTokenAmount.toString());
        //@ts-ignore
       setinput2(ether)
+      if(!CompareValues(roundDecimal(debouncedValue),portfolioStore.portfolio[chain1.id].balance)){
+        setbtnText("Low Liquidity!")
+      }
        
       
     
@@ -172,12 +182,14 @@ const BridgeApp = observer((props: Props) => {
     if (address) {
       if(id === 1) {
         return (
-          <>{accBalance1 != "" ? accBalance1 + ` ${chain1 && chain1.nativeCurrency.symbol}` : <Spinner size="xs" />}</>
+          <>{accBalance1 != "" && chain1 ? accBalance1 + ` ${chain1 && chain1.nativeCurrency.symbol}` 
+          : chain1 === null ? "" : <Spinner size="xs" />}</>
         );
       }
       if(id === 2){
         return (
-          <>{accBalance2 != "" ? accBalance2 + ` ${chain2 && chain2.nativeCurrency.symbol}` : <Spinner size="xs" />}</>
+          <>{accBalance2 != "" && chain2 ? accBalance2 + ` ${chain2 && chain2.nativeCurrency.symbol}` :
+          chain2 === null ? "" : <Spinner size="xs" />}</>
         );
       }
       
@@ -199,6 +211,7 @@ const BridgeApp = observer((props: Props) => {
         portfolioStore.portfolio[chain1.id].balance
       )
     ) {
+      
       try {
         
         const result = await writeContract({
@@ -221,6 +234,8 @@ const BridgeApp = observer((props: Props) => {
         console.log("err", err);
       }
     }
+    //@ts-ignore
+    
     console.log(chain1,chain2,address,debouncedValue,portfolioStore.portfolio)
   };
   useEffect(() => {
@@ -234,10 +249,14 @@ const BridgeApp = observer((props: Props) => {
   }, [chain1, chain2]);
   useEffect(() => {
     fetctQuoteAPi()
+    setbtnText("Bridge")
+    // if(chain2){
+    //   setaccBalance2()
+    // }
   }, [chain1,chain2,debouncedValue])
   useEffect(() => {
     //@ts-ignore
-    setinput2("0")
+    setinput2("")
     AppstoreV2.settokenVal2inUSD("0")
 
     const handler = setTimeout(async() => {
@@ -279,6 +298,10 @@ const BridgeApp = observer((props: Props) => {
   useEffect(() => {
     console.log("contract->",isPending, isSuccess, status,error)
   }, [isPending, isSuccess, status,error])
+  
+  useEffect(() => {
+    console.log("debugg ",debouncedValue === undefined || debouncedValue === "" || debouncedValue === null || input2 === null || input2 === "",debouncedValue,input2)
+  }, [debouncedValue,input2])
   
   
   
@@ -345,7 +368,7 @@ const BridgeApp = observer((props: Props) => {
           
         } */}
         
-        <button className='submit-btn' onClick={() => setshowReview(true)} disabled={debouncedValue === undefined || debouncedValue === "" || debouncedValue === null || input2 === null}>Review</button>
+        <button className='submit-btn' onClick={() => setshowReview(true)} disabled={debouncedValue === undefined || debouncedValue === "" || debouncedValue === null || input2 === null || input2 === ""}>Review</button>
       </div>  :
         <div className="ReviewSwapWrap d-flex-col">
         <ReviewSwap token={input1 ? input1 : "NA"} label={"You Send"} chain={chain1} usd={AppstoreV2.tokenVal1inUSD} />
@@ -360,13 +383,13 @@ const BridgeApp = observer((props: Props) => {
             }}>Switch Chain</button>
            
           ):(
-            <button className='submit-btn' onClick={onSubmit}>Bridge</button>
+            <button className='submit-btn' onClick={onSubmit}>{btnText}</button>
           )
           :
           (<button className='submit-btn' onClick={() => open()}>Connect Wallet</button>)
           
         } 
-        <ReviewQuote />
+        <ReviewQuote outputToken={input2 ? input2 : " "} network={chain1 ? chain1.name : " "} />
 
         <TransactionPopup 
         chain1={chain1} 
@@ -380,7 +403,7 @@ const BridgeApp = observer((props: Props) => {
         rejected={status === "error"}
         success={status === "success"}
         pending={status === "pending"}
-        txHash={outputTxHash}
+        txHash={data}
         
         ClearState={ClearState}
         />

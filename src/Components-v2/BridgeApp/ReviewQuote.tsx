@@ -1,22 +1,22 @@
 import React from 'react'
 import './BridgeApp.css'
 
-type Props = {}
+type Props = {
+    outputToken:string,
+    network:string
+}
 
-const ReviewQuote = (props: Props) => {
+const ReviewQuote = ({outputToken,network}: Props) => {
   return (
     <div className='ReviewQuoteWrap'>
-        <div className="reviewLabels">
-            <span>Rate</span>
-            <div className="value">1 BTC = 63.45 ETH</div>
-        </div>
+        
         <div className="reviewLabels">
             <span>Network</span>
-            <div className="value">BTC</div>
+            <div className="value">{network}</div>
         </div>
         <div className="reviewLabels">
             <span>Min. Receive</span>
-            <div className="value">7853ETH</div>
+            <div className="value">{outputToken}</div>
         </div>
         <div className="reviewLabels">
             <span>Network Fee</span>
