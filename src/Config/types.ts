@@ -114,6 +114,26 @@ interface TxObjectType {
   "updatedAt": string,
   "id": string
 }
+interface TxObjectV2Type {
+  "inputTxHash": `0x${string}`,
+  "outputTxHash": `0x${string}` | null,
+  "managerHash": null,
+  "status": string,
+  "inputChainID": number,
+  "outputChainID": number,
+  "inputChainAmount": bigint,
+  "outputChainAmount": bigint,
+  "inputAddress": `0x${string}` | null,
+  "outputAddress": `0x${string}` | null,
+  "bridgeHash": `0x${string}` | null,
+  "fees": number | any,
+  "createdAt": string,
+  "updatedAt": string,
+  "id": string,
+  "collateral": string | null,
+  "inputToken": `0x${string}`,
+  "outputToken": `0x${string}`,
+}
 
 interface rewardsType {
   holderAddress: string;
@@ -142,5 +162,6 @@ export type {
   rewardsType,
   PortfolioObjectReturnType,
   SymbolsMapType,
-  CustomChainIdType
+  CustomChainIdType,
+  TxObjectV2Type
 };

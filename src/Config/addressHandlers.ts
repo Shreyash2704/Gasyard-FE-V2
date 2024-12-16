@@ -41,4 +41,14 @@ export function handleAddress(addressString:any, chainID:any) {
       }
     }
   }
-
+  export function bytes32ToEvmAddress(bytes32Address:string) {
+    if (typeof bytes32Address !== 'string' || !bytes32Address.startsWith('0x') || bytes32Address.length !== 66) {
+      throw new Error('Invalid 32-byte address format.');
+    }
+  
+    // Remove the leading '0x' and slice the last 40 characters (20 bytes).
+    const cleanAddress = bytes32Address.slice(-40);
+  
+    // Return the address in EVM format with '0x'.
+    return `0x${cleanAddress}`;
+  }

@@ -8,14 +8,18 @@ import avatarLogo from '../../assets/v2/header/avatar.svg'
 import ConnectWalletModal from '../Modal/ConnectWalletModal';
 import { observer } from 'mobx-react';
 import AppstoreV2 from '../../Config/Store/AppstoreV2';
+import { useAccount } from 'wagmi';
+import { useWeb3Modal } from '@web3modal/wagmi/react';
 
 type Props = {}
 
 const Header = observer((props: Props) => {
   const [selected, setselected] = useState("")
   const [closeNotification, setcloseNotification] = useState(true)
-
+  const {address} = useAccount()
+  const {open} = useWeb3Modal()
   const handleClick = () =>{
+    console.log("Clicked!")
     AppstoreV2.setWalletModal(!AppstoreV2.showWalletModal)
   }
   return (
@@ -36,11 +40,15 @@ const Header = observer((props: Props) => {
 
         <div className='right-section'>
           <div className="notification-sec flex flex-row col-span-7 justify-center align-middle">
-            <img src={notifyLogo} />
-            <span>123</span>
+            {/* <img src={notifyLogo} />
+            <span>123</span> */}
+            <a href="/explorer">Explorer</a>
           </div>
-          <button className='wallet-sync' onClick={handleClick} >Wallet Sync</button>
-          <div className="avatar-sec">
+
+          
+          {address ? <></> : <button className='wallet-sync' onClick={() => open()} >Connect Wallet</button>}
+          
+          <div className="avatar-sec" onClick={handleClick}>
             <img src={avatarLogo} alt="" />
           </div>
           {/* <w3m-button balance='show'/> */}

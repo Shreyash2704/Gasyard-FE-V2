@@ -44,7 +44,8 @@ export const sendTransaction = async(hash:`0x${string}` | undefined,inputNetwork
             const url = `${domain}/api/submit-tx`
             const data = {
                     "transactionHash":hash,
-                    "inputNetwork":inputNetwork
+                    "inputChainID":inputNetwork,
+                    "requestSource":"web-app"
             }
             
             const res = await axios.post(url,data)
@@ -56,4 +57,35 @@ export const sendTransaction = async(hash:`0x${string}` | undefined,inputNetwork
         return {"status":400,"msg":err}
     }
     
+}
+export const getListTransactions = async(page:number,inputAddress:`0x${string}`| string | null=null,chain1:number | null=null,chain2:number | null=null) => {
+    try{
+        var url = ""
+        chain1 = chain1 === 920637907288165 ? 1802203764 : chain1
+        chain2 = chain2 === 920637907288165 ? 1802203764 : chain2
+        url = `${domain}/api/list-transactions?sortBy=updatedAt:desc&page=${page}&${inputAddress && `inputAddress=${inputAddress}`}&${chain1 && `inputChainID=${chain1}`}&${chain2 && `outputChainID=${chain2}`}`
+        url = url.replace(/&null/g, "").replace("null","")
+        const response = await axios.get(url)
+        if(response.status === 400){
+            console.log("400 error")
+        }
+        return response.data
+    }catch(err){
+        console.log("Unexpected Error!",err)
+        return null
+    }
+}
+export const getListTransactionById = async(id:string) => {
+    try{
+        var url = ""
+        url = `${domain}/api/list-transactions/${id}`
+        const response = await axios.get(url)
+        if(response.status === 400){
+            console.log("400 error")
+        }
+        return response.data
+    }catch(err){
+        console.log("Unexpected Error!",err)
+        return null
+    }
 }

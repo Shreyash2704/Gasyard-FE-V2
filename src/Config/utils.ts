@@ -165,10 +165,10 @@ const FetchRewards = async (networkConfigList: any, walletAddress: any) => {
 const getUSDAmount = async (token: string) => {
   console.log(token,"token")
   if(token === undefined) return 0 
-  if (token === "MOVE" || token === "BERA") return 50;
+  if (token === "MOVE" || token === "BERA" || token === "MATIC") return 50;
   const url = `https://api.bybit.com/v5/market/tickers?category=spot&symbol=${token.toUpperCase()}USDT`
   const res = await axios.get(url)
-  return res.data.result.list[0].usdIndexPrice
+  return res?.data?.result?.list[0]?.usdIndexPrice
 }
 
 function convertEthToUsd(ethBalanceWei: bigint, ethToUsdRate: number) {
@@ -211,6 +211,22 @@ const shortenAddress = (
   return "";
 };
 
+const getChainById = (chainConfig:any, chainId:number) => {
+  if (!Array.isArray(chainConfig)) {
+    throw new Error("chainConfig must be an array of chain objects.");
+  }
+
+  return chainConfig.find(chain => chain.id === chainId) || null;
+}
+const copyToClipboard = async(text:string) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    console.log('Text copied to clipboard:', text);
+  } catch (err) {
+    console.error('Failed to copy text to clipboard:', err);
+  }
+}
+
 export {
   convertEthToWeiAndBack,
   CompareValues,
@@ -221,5 +237,7 @@ export {
   convertEthToUsd,
   getUSDAmount,
   shortenAddress,
-  roundDecimal
+  roundDecimal,
+  getChainById,
+  copyToClipboard
 }

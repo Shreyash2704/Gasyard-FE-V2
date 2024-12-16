@@ -232,3 +232,17 @@
     text-decoration-skip-ink: none;
     color:#fff;
 }
+
+@media screen and (max-width:476px){
+    .BridgeAppRoot{
+        max-width: 100%;
+        width: 96%;
+    }
+    .TokenWrapRoot{
+        width: 100%;
+        max-width: 100%;
+    }
+    .left-sec{
+        width: 70%;
+    }
+}

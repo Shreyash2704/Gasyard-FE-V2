@@ -12,6 +12,7 @@ import { iconMap, SymbolsMap } from '../../Config/data';
 import { getUSDAmount, roundDecimal, shortenAddress } from '../../Config/utils';
 import FormStore from '../../Config/Store/FormStore';
 import logoutIcon from '../../assets/v2/header/logout.svg'
+import WalletEnsName from '../Explorer/WalletEnsName';
 
 
 const ConnectWallet = observer(() => {
@@ -54,7 +55,10 @@ const ConnectWallet = observer(() => {
           <div className='evm-address' >
             <div className="lables">
               <div className="lable">eth</div>
-              <div className="address"> ${shortenAddress(address) }</div>
+              <div className="address"> 
+                {/* {shortenAddress(address) } */}
+                <WalletEnsName address={address}/>
+                </div>
             </div>
             <img src={logoutIcon} onClick={() => open()} />
           </div>
@@ -69,7 +73,7 @@ const ConnectWallet = observer(() => {
           <div className="balanceWraptitle">Your Balance</div>
           
           {Object.entries(portfolio).map(([id, portfolioObject]) => {
-           
+           if(id === "1") return <></>
           return(
             <div className="chain">
               <Image src={iconMap[id]} className='chain-logo' width={32} height={32} alt='img' />

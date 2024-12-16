@@ -15,7 +15,7 @@ import { chainType, PortfolioListReturnType } from '../../Config/types'
 import { GetBalanceReturnType } from 'viem'
 import { ethers, formatEther, parseEther, BigNumberish, toBigInt } from 'ethers'
 import { portfolioStore } from '../../Config/Store/Portfolio'
-import { fetchQuote } from '../../Config/API/apiV2'
+import { fetchQuote, sendTransaction } from '../../Config/API/apiV2'
 import { customChainId } from '../../Config/data'
 import FormStore from '../../Config/Store/FormStore'
 import { abiV2 } from '../../Config/abi'
@@ -278,10 +278,10 @@ const BridgeApp = observer((props: Props) => {
     };
   }, [input1]);
   useEffect(() => {
-    if(txReceiptData){
-      console.log("txReceiptData",txReceiptData)
+    if (txReceiptData !== undefined && status === "success" && chain1 && chain1) {
+      sendTransaction(data,customChainId[chain1.id])
     }
-  }, [txReceiptData])
+  }, [data, status, txReceiptData])
   
   
   useEffect(() => {

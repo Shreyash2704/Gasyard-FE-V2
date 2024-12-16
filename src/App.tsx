@@ -10,20 +10,23 @@ import TransactionPopup from "./Components/TransactionPopup/TransactionPopup";
 // import PrivyDemo from './Components/PrivyDemo/PrivyDemo?';
 import { observer } from "mobx-react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Explorer from "./Components/Explorer/Explorer";
+import Explorer from "./Components-v2/Explorer/Explorer";
 import Liquidity from "./Components/Liquidity/Liquidity";
-import { useChains } from "wagmi";
-import { getUSDAmount } from "./Config/utils";
+import { useAccount, useChains } from "wagmi";
+import { FetchPortfolioBalance, getUSDAmount } from "./Config/utils";
 import FormStore from "./Config/Store/FormStore";
 import BridgeApp from "./Components-v2/BridgeApp/BridgeApp";
 import widgetLogo from './assets/v2/bridge/widgets.svg'
 import operationalLogo from './assets/v2/bridge/operational.svg'
 import ConnectWallet from "./Components-v2/ConnectWallet/ConnectWallet";
 import AppstoreV2 from "./Config/Store/AppstoreV2";
+import Transaction from "./Components-v2/Transaction/Transaction";
 
 const App = observer(() => {
 
-  const token = ['ETH','MATIC','MOVE','BERA']
+  const token = ['ETH','MOVE','BERA']
+  const Chains = useChains()
+  const {address} = useAccount()
 
   const getAllUSDValues = async(chain:any) =>{
     await Promise.all(
@@ -33,6 +36,13 @@ const App = observer(() => {
       FormStore.updateTokenRate(ele,res)
     }))
   }
+  const fetchPortfolio = async (address: any) => {
+    // const result = await PortfolioAPI(address);
+    const result = await FetchPortfolioBalance(Chains, address)
+    // console.log("portfolio", result);
+    // setportfolio(result);
+    // setAccountBalance(result);
+  };
 
   useLayoutEffect(() => {
     getAllUSDValues(token)
@@ -40,6 +50,10 @@ const App = observer(() => {
   useEffect(() => {
       
   }, [])
+  useEffect(() => {
+    fetchPortfolio(address)
+  }, [address])
+  
   
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -54,13 +68,13 @@ const App = observer(() => {
                 <>
                   <Header />
                   <BridgeApp />
-                  {AppstoreV2.showWalletModal && <ConnectWallet />}
+                  
                   
                   {/* <BridgeNew /> */}
                 </>
               }
             />
-            {/* <Route
+            <Route
               path="/explorer"
               element={
                 <>
@@ -70,7 +84,7 @@ const App = observer(() => {
               }
             />
 
-            <Route
+           {/*  <Route
               path="/liquidity"
               element={
                 <>
@@ -80,6 +94,16 @@ const App = observer(() => {
               }
             /> */}
 
+            <Route
+              path="/tx/:id"
+              element={
+                <>
+                  <Header />
+                  <Transaction />
+                </>
+              }
+            />
+
             <Route path="*" element={<>Page Not Found!</>} />
           </Routes>
         </Router>
@@ -87,6 +111,7 @@ const App = observer(() => {
             <img src={widgetLogo} alt="" />
             <img src={operationalLogo} alt="" />
           </div> */}
+          {AppstoreV2.showWalletModal && <ConnectWallet />}
       </div>
     </ChakraProvider>
   );

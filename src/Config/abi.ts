@@ -1042,7 +1042,7 @@ export const abiV2 = [
 		"inputs": [
 			{
 				"internalType": "uint32",
-				"name": "_sourceChainId",
+				"name": "_chainId",
 				"type": "uint32"
 			},
 			{
@@ -1052,18 +1052,18 @@ export const abiV2 = [
 			},
 			{
 				"internalType": "address",
-				"name": "_relayerAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_rebalancerAddress",
+				"name": "_solverAddress",
 				"type": "address"
 			},
 			{
 				"internalType": "address",
 				"name": "_treasury",
 				"type": "address"
+			},
+			{
+				"internalType": "uint32",
+				"name": "_initialFees",
+				"type": "uint32"
 			}
 		],
 		"stateMutability": "nonpayable",
@@ -1149,45 +1149,27 @@ export const abiV2 = [
 			{
 				"indexed": false,
 				"internalType": "uint32",
-				"name": "sourceChainId",
+				"name": "oldFee",
 				"type": "uint32"
 			},
 			{
 				"indexed": false,
-				"internalType": "bytes32",
-				"name": "recipient",
-				"type": "bytes32"
-			},
-			{
-				"indexed": false,
-				"internalType": "bytes32",
-				"name": "token",
-				"type": "bytes32"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "bytes32",
-				"name": "transferHash",
-				"type": "bytes32"
+				"internalType": "uint32",
+				"name": "newFee",
+				"type": "uint32"
 			}
 		],
-		"name": "BridgeCompleted",
+		"name": "DepositFeeUpdated",
 		"type": "event"
 	},
 	{
 		"anonymous": false,
 		"inputs": [
 			{
-				"indexed": false,
-				"internalType": "uint32",
-				"name": "sourceChainId",
-				"type": "uint32"
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "orderId",
+				"type": "bytes32"
 			},
 			{
 				"indexed": false,
@@ -1230,31 +1212,25 @@ export const abiV2 = [
 				"internalType": "uint256",
 				"name": "timestamp",
 				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "sequence",
-				"type": "uint256"
-			},
-			{
-				"indexed": true,
-				"internalType": "bytes32",
-				"name": "transferHash",
-				"type": "bytes32"
 			}
 		],
-		"name": "BridgeInitiated",
+		"name": "OrderCreated",
 		"type": "event"
 	},
 	{
 		"anonymous": false,
 		"inputs": [
 			{
-				"indexed": false,
-				"internalType": "uint32",
-				"name": "sourceChainId",
-				"type": "uint32"
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "orderId",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "solver",
+				"type": "address"
 			},
 			{
 				"indexed": false,
@@ -1264,8 +1240,27 @@ export const abiV2 = [
 			},
 			{
 				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "OrderExecuted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
 				"internalType": "bytes32",
-				"name": "token",
+				"name": "orderId",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"internalType": "bytes32",
+				"name": "recipient",
 				"type": "bytes32"
 			},
 			{
@@ -1279,15 +1274,34 @@ export const abiV2 = [
 				"internalType": "uint256",
 				"name": "feeAmount",
 				"type": "uint256"
+			}
+		],
+		"name": "OrderRefunded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "orderId",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "solver",
+				"type": "address"
 			},
 			{
 				"indexed": false,
-				"internalType": "bytes32",
-				"name": "transferHash",
-				"type": "bytes32"
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
 			}
 		],
-		"name": "BridgeRefunded",
+		"name": "OrderUnlocked",
 		"type": "event"
 	},
 	{
@@ -1309,100 +1323,7 @@ export const abiV2 = [
 			{
 				"indexed": false,
 				"internalType": "uint32",
-				"name": "sourceChainId",
-				"type": "uint32"
-			},
-			{
-				"indexed": true,
-				"internalType": "bytes32",
-				"name": "pool",
-				"type": "bytes32"
-			},
-			{
-				"indexed": false,
-				"internalType": "bytes32",
-				"name": "token",
-				"type": "bytes32"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "PoolDepositExecuted",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "uint32",
-				"name": "sourceChainId",
-				"type": "uint32"
-			},
-			{
-				"indexed": true,
-				"internalType": "bytes32",
-				"name": "token",
-				"type": "bytes32"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "bytes32",
-				"name": "recipient",
-				"type": "bytes32"
-			}
-		],
-		"name": "PoolForceWithdrawExecuted",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "uint32",
-				"name": "sourceChainId",
-				"type": "uint32"
-			},
-			{
-				"indexed": true,
-				"internalType": "bytes32",
-				"name": "pool",
-				"type": "bytes32"
-			},
-			{
-				"indexed": false,
-				"internalType": "bytes32",
-				"name": "token",
-				"type": "bytes32"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "PoolWithdrawExecuted",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "uint32",
-				"name": "sourceChainId",
+				"name": "chainId",
 				"type": "uint32"
 			},
 			{
@@ -1413,93 +1334,6 @@ export const abiV2 = [
 			}
 		],
 		"name": "QuorumUpdated",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "uint32",
-				"name": "sourceChainId",
-				"type": "uint32"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "oldlimit",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "newlimit",
-				"type": "uint256"
-			}
-		],
-		"name": "RebalanceCooldownUpdated",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "uint32",
-				"name": "sourceChainId",
-				"type": "uint32"
-			},
-			{
-				"indexed": true,
-				"internalType": "bytes32",
-				"name": "rebalancer",
-				"type": "bytes32"
-			},
-			{
-				"indexed": false,
-				"internalType": "bytes32",
-				"name": "token",
-				"type": "bytes32"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "lastRebalanceTime",
-				"type": "uint256"
-			}
-		],
-		"name": "RebalanceExecuted",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "uint32",
-				"name": "sourceChainId",
-				"type": "uint32"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "oldlimit",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "newlimit",
-				"type": "uint256"
-			}
-		],
-		"name": "RebalanceLimitUpdated",
 		"type": "event"
 	},
 	{
@@ -1582,8 +1416,27 @@ export const abiV2 = [
 		"inputs": [
 			{
 				"indexed": false,
+				"internalType": "bytes32",
+				"name": "token",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "isWhitelisted",
+				"type": "bool"
+			}
+		],
+		"name": "TokenWhitelistUpdated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
 				"internalType": "uint32",
-				"name": "sourceChainId",
+				"name": "chainId",
 				"type": "uint32"
 			},
 			{
@@ -1630,12 +1483,51 @@ export const abiV2 = [
 	},
 	{
 		"inputs": [],
-		"name": "EXTERNAL_POOL",
+		"name": "FEES",
 		"outputs": [
 			{
-				"internalType": "bytes32",
+				"internalType": "uint32",
 				"name": "",
-				"type": "bytes32"
+				"type": "uint32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "MAX_DEPOSIT_FEE",
+		"outputs": [
+			{
+				"internalType": "uint32",
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "MAX_QUORUM",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "MAX_REFUND_FEE",
+		"outputs": [
+			{
+				"internalType": "uint32",
+				"name": "",
+				"type": "uint32"
 			}
 		],
 		"stateMutability": "view",
@@ -1656,46 +1548,7 @@ export const abiV2 = [
 	},
 	{
 		"inputs": [],
-		"name": "REBALANCER_ROLE",
-		"outputs": [
-			{
-				"internalType": "bytes32",
-				"name": "",
-				"type": "bytes32"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "REBALANCE_COOLDOWN",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "REBALANCE_LIMIT_DENOMINATOR",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "RELAYER_ROLE",
+		"name": "SOLVER_ROLE",
 		"outputs": [
 			{
 				"internalType": "bytes32",
@@ -1748,6 +1601,24 @@ export const abiV2 = [
 	{
 		"inputs": [
 			{
+				"internalType": "bytes32[]",
+				"name": "orderIds",
+				"type": "bytes32[]"
+			},
+			{
+				"internalType": "bytes[][]",
+				"name": "verifierSignatures",
+				"type": "bytes[][]"
+			}
+		],
+		"name": "batchUnlockOrders",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint32",
 				"name": "destinationChainId",
 				"type": "uint32"
@@ -1779,6 +1650,19 @@ export const abiV2 = [
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "chainId",
+		"outputs": [
+			{
+				"internalType": "uint32",
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "bytes32",
@@ -1800,43 +1684,6 @@ export const abiV2 = [
 			}
 		],
 		"stateMutability": "pure",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "bytes32",
-				"name": "",
-				"type": "bytes32"
-			}
-		],
-		"name": "completedRequests",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "bytes32",
-				"name": "token",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "depositPool",
-		"outputs": [],
-		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -1869,138 +1716,38 @@ export const abiV2 = [
 		"inputs": [
 			{
 				"internalType": "bytes32",
+				"name": "orderId",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
 				"name": "recipient",
 				"type": "bytes32"
 			},
 			{
 				"internalType": "bytes32",
-				"name": "token",
+				"name": "outputToken",
 				"type": "bytes32"
 			},
 			{
 				"internalType": "uint256",
 				"name": "amount",
 				"type": "uint256"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "transferHash",
-				"type": "bytes32"
 			}
 		],
-		"name": "executeBridgeRequest",
+		"name": "executeOrder",
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "bytes32",
-				"name": "recipient",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "token",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "transferHash",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "bytes[]",
-				"name": "signatures",
-				"type": "bytes[]"
-			}
-		],
-		"name": "executeBridgeRequestWithQuorum",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "bytes32",
-				"name": "recipient",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "token",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint32",
-				"name": "refundFee",
-				"type": "uint32"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "transferHash",
-				"type": "bytes32"
-			}
-		],
-		"name": "executeRefund",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "bytes32",
-				"name": "token",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "poolAddress",
-				"type": "bytes32"
-			}
-		],
-		"name": "forceWithdrawPool",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "token",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "pool",
-				"type": "address"
-			}
-		],
-		"name": "getPoolBalance",
+		"inputs": [],
+		"name": "getCurrentFees",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"internalType": "uint32",
 				"name": "",
-				"type": "uint256"
+				"type": "uint32"
 			}
 		],
 		"stateMutability": "view",
@@ -2010,21 +1757,58 @@ export const abiV2 = [
 		"inputs": [
 			{
 				"internalType": "bytes32",
-				"name": "token",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "pool",
+				"name": "orderId",
 				"type": "bytes32"
 			}
 		],
-		"name": "getPoolBalanceBytes32",
+		"name": "getOrder",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"components": [
+					{
+						"internalType": "bytes32",
+						"name": "inputToken",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "initiator",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "destinationAddress",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "destinationChainId",
+						"type": "uint32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "outputToken",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "enum GasyardGateway.OrderStatus",
+						"name": "status",
+						"type": "uint8"
+					}
+				],
+				"internalType": "struct GasyardGateway.Order",
 				"name": "",
-				"type": "uint256"
+				"type": "tuple"
 			}
 		],
 		"stateMutability": "view",
@@ -2108,25 +1892,6 @@ export const abiV2 = [
 		"inputs": [
 			{
 				"internalType": "bytes32",
-				"name": "transferHash",
-				"type": "bytes32"
-			}
-		],
-		"name": "isCompletedRequest",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "bytes32",
 				"name": "token",
 				"type": "bytes32"
 			}
@@ -2162,13 +1927,54 @@ export const abiV2 = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "lastRebalanceTime",
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"name": "orders",
 		"outputs": [
 			{
+				"internalType": "bytes32",
+				"name": "inputToken",
+				"type": "bytes32"
+			},
+			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "amount",
 				"type": "uint256"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "initiator",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "destinationAddress",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint32",
+				"name": "destinationChainId",
+				"type": "uint32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "outputToken",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "enum GasyardGateway.OrderStatus",
+				"name": "status",
+				"type": "uint8"
 			}
 		],
 		"stateMutability": "view",
@@ -2198,53 +2004,6 @@ export const abiV2 = [
 		"inputs": [
 			{
 				"internalType": "bytes32",
-				"name": "",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "",
-				"type": "bytes32"
-			}
-		],
-		"name": "poolBalances",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "bytes32",
-				"name": "token",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "recipient",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "rebalance",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "bytes32",
 				"name": "token",
 				"type": "bytes32"
 			},
@@ -2255,6 +2014,24 @@ export const abiV2 = [
 			}
 		],
 		"name": "recoverTokens",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "orderId",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint32",
+				"name": "refundFee",
+				"type": "uint32"
+			}
+		],
+		"name": "refundOrder",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -2322,19 +2099,6 @@ export const abiV2 = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "sourceChainId",
-		"outputs": [
-			{
-				"internalType": "uint32",
-				"name": "",
-				"type": "uint32"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "bytes4",
@@ -2367,8 +2131,39 @@ export const abiV2 = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "orderId",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes[]",
+				"name": "verifierSignatures",
+				"type": "bytes[]"
+			}
+		],
+		"name": "unlockOrder",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "unpause",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint32",
+				"name": "_newFee",
+				"type": "uint32"
+			}
+		],
+		"name": "updateDepositFee",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -2382,32 +2177,6 @@ export const abiV2 = [
 			}
 		],
 		"name": "updateQuorum",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "newCooldown",
-				"type": "uint256"
-			}
-		],
-		"name": "updateRebalanceCooldown",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "newLimit",
-				"type": "uint256"
-			}
-		],
-		"name": "updateRebalanceLimit",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -2445,248 +2214,7 @@ export const abiV2 = [
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "bytes32",
-				"name": "token",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "withdrawPool",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"stateMutability": "payable",
 		"type": "receive"
 	}
-]
-
-export const abiErc20 = [
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "name",
-        "outputs": [
-            {
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "name": "_spender",
-                "type": "address"
-            },
-            {
-                "name": "_value",
-                "type": "uint256"
-            }
-        ],
-        "name": "approve",
-        "outputs": [
-            {
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "totalSupply",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "name": "_from",
-                "type": "address"
-            },
-            {
-                "name": "_to",
-                "type": "address"
-            },
-            {
-                "name": "_value",
-                "type": "uint256"
-            }
-        ],
-        "name": "transferFrom",
-        "outputs": [
-            {
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "decimals",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint8"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "name": "_owner",
-                "type": "address"
-            }
-        ],
-        "name": "balanceOf",
-        "outputs": [
-            {
-                "name": "balance",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "symbol",
-        "outputs": [
-            {
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "name": "_to",
-                "type": "address"
-            },
-            {
-                "name": "_value",
-                "type": "uint256"
-            }
-        ],
-        "name": "transfer",
-        "outputs": [
-            {
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "name": "_owner",
-                "type": "address"
-            },
-            {
-                "name": "_spender",
-                "type": "address"
-            }
-        ],
-        "name": "allowance",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "payable": true,
-        "stateMutability": "payable",
-        "type": "fallback"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": true,
-                "name": "owner",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "name": "spender",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "name": "value",
-                "type": "uint256"
-            }
-        ],
-        "name": "Approval",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": true,
-                "name": "from",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "name": "to",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "name": "value",
-                "type": "uint256"
-            }
-        ],
-        "name": "Transfer",
-        "type": "event"
-    }
 ]
