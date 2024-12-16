@@ -2,6 +2,7 @@ import React from 'react'
 import  "./BridgeApp.css"
 import downArrow from '../../assets/v2/bridge/down-arrow.svg'
 import { observer } from 'mobx-react'
+import { roundDecimal } from '../../Config/utils'
 
 type Props = {
     label:any,
@@ -55,7 +56,7 @@ const TokenWrap = observer(({id,label,inputVal,inputInDollars,token,balance,toke
                     placeholder='0.001' />
             )}
             
-            <div className="input-in-dollars">${inputInDollars}</div>
+            <div className="input-in-dollars">${roundDecimal(String(inputInDollars))}</div>
         </div>
         <div className="right-sec d-flex-col">
             <div className="select-token d-flex-row" onClick={() => onClick(id)}>

@@ -69,7 +69,7 @@ const ChainJsonData: Networks = {
     feedaddress: "0x0000000000000000000000000000000000000000",
     // routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
     // liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
-    routerContract: "0x7406F477745A59C5C3d609dE695FED68729681D8",
+    routerContract: "0x5E699116348a24a5BA924da897B0FEe184b11912",
     liquidityPool:"0xA20891c658E4051097aa2B393BB8d57B75235bD7",
     priceProvider:
       "https://api.bybit.com/v5/market/tickers?category=spot&symbol=ETHUSDT",
@@ -163,7 +163,7 @@ const ChainJsonData: Networks = {
     feedaddress: "0x0000000000000000000000000000000000000000",
     // routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
     // liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
-    routerContract:"0x5E699116348a24a5BA924da897B0FEe184b11912",
+    routerContract:"0x01961aB3c0B799176B4463B3AD685856aDA434E7",
     liquidityPool:"0x7406F477745A59C5C3d609dE695FED68729681D8",
     priceProvider:
       "https://api.bybit.com/v5/market/tickers?category=spot&symbol=ETHUSDT",
@@ -219,7 +219,7 @@ const ChainJsonData: Networks = {
     feedaddress: "0x0000000000000000000000000000000000000000",
     priceProvider:
       "https://api.bybit.com/v5/market/tickers?category=spot&symbol=MNTUSDT",
-    routerContract: "0x72785ac450A9Eaa8fa3Af70BFD7DD3F8e440F588",
+    routerContract: "0xD8F0a2cBea81B7b2D9BC92BF01Eb139af5a69fa5",
     liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
     platformFeePercentage: 1,
     gweiLimit: 400000,
@@ -258,7 +258,7 @@ const ChainJsonData: Networks = {
       "https://api.bybit.com/v5/market/tickers?category=spot&symbol=MNTUSDT",
     // routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
     // liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
-    routerContract:"0x374Bd3814FdCa700c9b6B720EDCC9E9326067f56",
+    routerContract:"0x7406F477745A59C5C3d609dE695FED68729681D8",
     liquidityPool:"0x58bD1a65777D3FdF866071d95517B8Cf74bbc7Bc",
     platformFeePercentage: 1,
     gweiLimit: 400000,

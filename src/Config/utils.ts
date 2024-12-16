@@ -27,16 +27,16 @@ const convertEthToWeiAndBack = (ethString: string) => {
   }
 };
 const roundDecimal = (numStr: string,max=4) => {
-  const num = parseFloat(numStr);
-  const decimalPlaces = numStr.split('.')[1]?.length || 0;
+    console.log("numstr",numStr,typeof(numStr))
+    const num = parseFloat(numStr);
+    const decimalPlaces = numStr.split('.')[1]?.length || 0;
 
-  if (decimalPlaces > max) {
-    return num.toFixed(max);
-  } else {
-    return num.toFixed(decimalPlaces);
-  }
-
-
+    if (decimalPlaces > max) {
+      return num.toFixed(max);
+    } else {
+      return num.toFixed(decimalPlaces);
+    }
+ 
 };
 const CompareValues = (input: string, balance: string) => {
   //console.log("bigint ",parseEther(balance),parseEther(input).valueOf())

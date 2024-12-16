@@ -12,6 +12,7 @@ import doubleArrow from '../../assets/v2/doubleArrow.svg'
 import CloseBtn from "../../assets/CloseIcon.svg";
 import rejected_animation from "../../assets/animations/rejected-animation.json";
 import redirectLogo from "../../assets/redirect.svg";
+import quoteLoader_animation from '../../assets/animations/quoteLoader.json'
 
 type Props = {
     chain1:any,
@@ -40,7 +41,7 @@ const TransactionPopup = ({chain1,chain2,input1,input2,onOpen,onClose,isOpen,set
   };
   const redirectApp = () =>{
       if(txHash){
-        const url = chain1.explorer+txHash
+        const url = window.location.origin+`/txHash/${txHash}`
         window.open(url, '_blank');
       }
       
@@ -54,7 +55,7 @@ const TransactionPopup = ({chain1,chain2,input1,input2,onOpen,onClose,isOpen,set
         <CommonModal isOpen={isOpen} onClose={onClose} size={"md"} header=''>
             <div className='header'>
                 {
-                    pending ? <>Transaction Submitted</> : rejected ? <>Transaction Rejected</> : <>Transaction Successful</>
+                    pending ? <>Transaction Submitted</> : rejected ? <>Transaction Rejected</> : <>Transaction In Progress</>
                 }
                 
 
@@ -78,7 +79,7 @@ const TransactionPopup = ({chain1,chain2,input1,input2,onOpen,onClose,isOpen,set
             />
             ) : (
                 <Lottie
-                animationData={success_animation}
+                animationData={quoteLoader_animation}
                 loop={true}
                 style={{ height: "150px", width: "150px" }}
             />

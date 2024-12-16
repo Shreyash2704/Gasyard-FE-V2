@@ -103,6 +103,15 @@ const App = observer(() => {
                 </>
               }
             />
+            <Route
+              path="/txHash/:txHash"
+              element={
+                <>
+                  <Header />
+                  <Transaction />
+                </>
+              }
+            />
 
             <Route path="*" element={<>Page Not Found!</>} />
           </Routes>

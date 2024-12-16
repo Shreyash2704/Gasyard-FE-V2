@@ -6,7 +6,7 @@ import CopyText from "../../assets/v2/copyText_2.svg";
 import redirect from "../../assets/v2/redirect2.svg";
 import arrow from "../../assets/v2/arrow.svg";
 import { useParams } from "react-router-dom";
-import { getListTransactionById } from "../../Config/API/apiV2";
+import { getListTransactionById, getListTransactions } from "../../Config/API/apiV2";
 import { chainType, TxObjectV2Type } from "../../Config/types";
 import { formatEther } from "viem";
 import {
@@ -124,10 +124,21 @@ const Transaction = (props: Props) => {
       const res = await getListTransactionById(id);
       setdata(res.results[0]);
     };
+    const gethashData = async (id: string) => {
+      const res = await getListTransactions(0,
+        TxId.txHash,
+        null,
+        null);
+      setdata(res.results[0]);
+      console.log("res",res)
+    };
     if (TxId.id) {
       getData(TxId.id);
     }
-  }, [TxId.id]);
+    if(TxId.txHash){
+      gethashData(TxId.txHash)
+    }
+  }, [TxId]);
 
   const Chains = useChains();
   return (
@@ -135,8 +146,8 @@ const Transaction = (props: Props) => {
       {data && (
         <>
           <div className="txStatus">
-            Status for
-            0xef1aa8da1374d19e96932a9fcceab4da377c67955c547594a6c87eb621202e93
+            Status for {" "}
+            {data.inputTxHash}
           </div>
           <div className="TransactionBlockWrap">
             <TxBlock

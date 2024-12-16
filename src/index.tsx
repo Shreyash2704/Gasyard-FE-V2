@@ -110,13 +110,13 @@ if (process.env.REACT_APP_SERVER == "testnet") {
     //   contractAddress: ChainJsonData["80085"].routerContract,
     //   explorer:ChainJsonData["80085"].explorer
     // }
-    // {
-    //   ...MovementTestnet,
-    //   iconUrl: movementtestnetlogo,
-    //   contractAddress: ChainJsonData["30732"].routerContract,
-    //   explorer: ChainJsonData["30732"].explorer,
-    //   liquidityPool: ChainJsonData["30732"].liquidityPool,
-    // },
+    {
+      ...MovementTestnet,
+      iconUrl: movementtestnetlogo,
+      contractAddress: ChainJsonData["30732"].routerContract,
+      explorer: ChainJsonData["30732"].explorer,
+      liquidityPool: ChainJsonData["30732"].liquidityPool,
+    },
     {
       ...BerachainTestnet,
       iconUrl: berachianlogo,
