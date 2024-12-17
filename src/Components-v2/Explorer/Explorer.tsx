@@ -23,7 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useChains, useEnsName } from "wagmi";
-import { ChainJsonData, reverseChainId } from "../../Config/data";
+import { ChainJsonData, customChainId, reverseChainId } from "../../Config/data";
 import { iconMap } from "../../Config/data";
 import { copyToClipboard, getChainById, shortenAddress } from "../../Config/utils";
 import WalletEnsName from "./WalletEnsName";
@@ -72,7 +72,12 @@ const Explorer = observer((props: Props) => {
 
 
   const getFilteredData = async(page:number,inputAddress:`0x${string}`| "" | string,chain1:chains_type|null,chain2:chains_type|null) =>{
-    const response = await getListTransactions(page,inputAddress === "" ? null : inputAddress, chain1 && chain1.id ? chain1.id : null,chain2 && chain2.id ? chain2.id : null)
+    
+    const response = await getListTransactions(
+                          page,
+                          inputAddress === "" ? null : inputAddress, 
+                          chain1 && chain1.id ? customChainId[chain1.id] : null,
+                          chain2 && chain2.id ? customChainId[chain2.id] : null)
     console.log(response)
     if(response && response.results){
       settransactions(null)
@@ -113,6 +118,7 @@ const Explorer = observer((props: Props) => {
   };
 
   const onSelectChain = (chain_no:number,chain_obj:chains_type) =>{
+    console.log("debug",chain_no,chain_obj)
     if(chain_no === 1){
       setchain1(chain_obj)
       // initailTxns && settransactions(filterObjectsByChain(initailTxns,chain_obj.id,1))
@@ -178,7 +184,7 @@ const Explorer = observer((props: Props) => {
   useEffect(() => {
     console.log("debouncedValue",debouncedValue)
     if(debouncedValue || chain1 || chain2){
-      console.log("inside")
+      console.log("inside",debouncedValue,chain1,chain2)
       getFilteredData(0,inputAddress,chain1,chain2)
     }else{
       console.log("inside2",initailTxns)
@@ -216,9 +222,9 @@ const Explorer = observer((props: Props) => {
             </div>
         </div>
         </div> */}
-      {/* <div className="filter-container">
+      <div className="filter-container">
         <div className="input-search">
-          <img src={SearchIcon} />
+          {/* <img src={SearchIcon} /> */}
           <input
             type="text"
             placeholder="Search by transaction hash or address"
@@ -232,9 +238,8 @@ const Explorer = observer((props: Props) => {
             <Menu>
               <MenuButton
                 as={Button}
-                disabled
                 sx={{
-                  backgroundColor: "#fff",
+                  backgroundColor: "#020202",
                   borderRadius: "24px",
                   fontFamily: "Inter",
                   fontSize: "16px",
@@ -263,7 +268,7 @@ const Explorer = observer((props: Props) => {
                 as={Button} 
                 rightIcon={<ChevronDownIcon />}
                 sx={{
-                  backgroundColor: "#fff",
+                  backgroundColor: "#020202",
                   borderRadius: "24px",
                   fontFamily: "Inter",
                   fontSize: "16px",
@@ -272,7 +277,7 @@ const Explorer = observer((props: Props) => {
                   textAlign: "left",
                   color:"#878794"
                 }}
-                disabled={true}
+                
               >
                 {chain2 ? chain2.name :"All Chains"}
               </MenuButton>
@@ -286,7 +291,7 @@ const Explorer = observer((props: Props) => {
             </Menu>
           </div>
         </div>
-      </div> */}
+      </div>
       {/* <div className="find-tx" >
         <span onClick={onOpen}>Can’t find your transaction?</span>
       </div> */}

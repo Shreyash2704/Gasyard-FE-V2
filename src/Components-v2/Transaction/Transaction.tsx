@@ -60,6 +60,8 @@ const TxBlock = ({
         <div className="txHashLabel">{type} tx hash</div>
         <div className="txHashValue">
           {shortenAddress(hash, 14, 14)}
+          {hash !="NA" && 
+          <>
           <img src={redirect} alt={"redirect"} onClick={() => redirectToTxExplorer(reverseChainId[chain_id],hash)} />
           <Tooltip label="Copy address" bg="#161616">
             <img
@@ -68,6 +70,10 @@ const TxBlock = ({
               onClick={() => copyToClipboard(hash)}
             />
           </Tooltip>
+          </>
+          }
+          
+          
         </div>
       </div>
       <div className="txHashChain">
@@ -77,7 +83,7 @@ const TxBlock = ({
           </div>
           <div className="chainValue">
             <img src={chain ? iconMap[chain.id] : ""} alt="chain" />
-            {token}
+            {token}{" "}
             {chain && chain.nativeCurrency.symbol}
           </div>
         </div>
@@ -108,7 +114,7 @@ const TxBlock = ({
       </div>
       <div className="txHash">
         <div className="txHashLabel">Timestamp</div>
-        <div className="txHashValue">{timeStamp}</div>
+        <div className="txHashValue">{timeStamp.replace("T"," ").split(".")[0]}</div>
       </div>
     </div>
   );
@@ -147,7 +153,7 @@ const Transaction = (props: Props) => {
         <>
           <div className="txStatus">
             Status for {" "}
-            {data.inputTxHash}
+            {data.orderID}
           </div>
           <div className="TransactionBlockWrap">
             <TxBlock

@@ -59,6 +59,7 @@ export const sendTransaction = async(hash:`0x${string}` | undefined,inputNetwork
     
 }
 export const getListTransactions = async(page:number,inputAddress:`0x${string}`| string | null=null,chain1:number | null=null,chain2:number | null=null) => {
+    console.log("page",page,"inputAddress",inputAddress,"chain1",chain1,"chain2",chain2)
     try{
         var url = ""
         chain1 = chain1 === 920637907288165 ? 1802203764 : chain1

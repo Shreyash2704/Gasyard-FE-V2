@@ -26,7 +26,7 @@ const Quote = ({token1,token2,val_token1,val_token2}:Props) => {
                 
             </div>
             <div className="right-sec">
-                <button>Show More</button>
+                {/* <button>Show More</button> */}
             </div>
             
         </div>

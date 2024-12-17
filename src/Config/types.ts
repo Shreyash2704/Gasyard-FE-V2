@@ -133,6 +133,7 @@ interface TxObjectV2Type {
   "collateral": string | null,
   "inputToken": `0x${string}`,
   "outputToken": `0x${string}`,
+  "orderID": `0x${string}`
 }
 
 interface rewardsType {

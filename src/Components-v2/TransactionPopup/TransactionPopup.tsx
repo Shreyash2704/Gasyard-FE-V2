@@ -55,7 +55,7 @@ const TransactionPopup = ({chain1,chain2,input1,input2,onOpen,onClose,isOpen,set
         <CommonModal isOpen={isOpen} onClose={onClose} size={"md"} header=''>
             <div className='header'>
                 {
-                    pending ? <>Transaction Submitted</> : rejected ? <>Transaction Rejected</> : <>Transaction In Progress</>
+                    pending ? <>Transaction Pending</> : rejected ? <>Transaction Rejected</> : <>Transaction In Progress</>
                 }
                 
 
@@ -86,16 +86,16 @@ const TransactionPopup = ({chain1,chain2,input1,input2,onOpen,onClose,isOpen,set
             )
            }
             
-            <div className="message">
+            {/* <div className="message">
                 <img src={confirmTxLogo} width={10} height={10}/>
                 <span>Confirm in Wallet</span>
-            </div>
+            </div> */}
 
             <div className="txStatus">
                 <div className="txWrap">
                     <img src={iconMap[chain1.id]} alt="" />
                     <div className="tokenDetails">
-                        <div className="txWraptoken">{input1}{chain1.nativeCurrency.symbol}</div>
+                        <div className="txWraptoken">{input1}{" "}{chain1.nativeCurrency.symbol}</div>
                         <div className="txWrapnetwork">{chain1.name}</div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@ const TransactionPopup = ({chain1,chain2,input1,input2,onOpen,onClose,isOpen,set
                 <div className="txWrap">
                     <img src={iconMap[chain2.id]} alt="" />
                     <div className="tokenDetails">
-                        <div className="txWraptoken">{input2}{chain2.nativeCurrency.symbol}</div>
+                        <div className="txWraptoken">{input2}{" "}{chain2.nativeCurrency.symbol}</div>
                         <div className="txWrapnetwork">{chain2.name}</div>
                     </div>
                 </div>

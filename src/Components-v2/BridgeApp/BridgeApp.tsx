@@ -54,6 +54,7 @@ const BridgeApp = observer((props: Props) => {
   const [openTransactionPopup, setopenTransactionPopup] = useState(false);
   const [outputTxHash, setoutputTxHash] = useState<string | null>(null)
   const [btnText, setbtnText] = useState("Bridge")
+  const [txId, settxId] = useState("")
   const handleInputChange1 = async(e: any) => {
     var value = e.target.value;
 

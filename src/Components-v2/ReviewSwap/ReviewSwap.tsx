@@ -1,6 +1,7 @@
 import React from 'react'
 import { iconMap } from '../../Config/data'
 import './Review.css'
+import { roundDecimal } from '../../Config/utils'
 
 type Props = {
     label:string,
@@ -15,7 +16,7 @@ const ReviewSwap = ({label,chain,token,usd}: Props) => {
         <div className="tokenReview d-flex-column">
             <span>{label}</span>
             <div className="token">{token} {chain.nativeCurrency.symbol}</div>
-            <span>${usd}</span>
+            <span>${roundDecimal(String(usd))}</span>
         </div>
         <img src={iconMap[chain.id]} className='ml-auto' alt="token" />
     </div>

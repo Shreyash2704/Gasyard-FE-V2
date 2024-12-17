@@ -40,7 +40,7 @@
     column-gap: 10px;
     padding: 10px 20px;
     Width:799px;
-    background-color: #fff;
+    background-color: #020202;
     border-radius:24px;
 }
 .filter-container .input-search input{
@@ -52,6 +52,7 @@
     line-height: 20px;
     text-align: left;    
     width: 80%;
+    background-color: transparent;
 }
 .input-search input:active,.input-search input:focus{
     outline: none;

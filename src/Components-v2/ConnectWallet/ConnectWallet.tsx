@@ -36,7 +36,7 @@ const ConnectWallet = observer(() => {
   return (
     
     <div className="ConnectWalletRoot">
-      <div className="title">Wallet Sync</div>
+      <div className="title">Your Account</div>
       <div className="wallet-conector-wrap">
         {/* <AptosConnectButton label="Connect Your Aptos Wallet" /> */}
         {/* <RazorWallet /> */}
