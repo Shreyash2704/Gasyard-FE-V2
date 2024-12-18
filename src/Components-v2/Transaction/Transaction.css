@@ -113,3 +113,42 @@
     height: 20px;
     border-radius: 50%;
 }
+
+.SettlementWrap{
+    display: flex;
+    justify-content: center;
+}
+.settlementHashBlock{
+    background-color: #0D1116;
+    border: 1px solid #222729;
+    font-family: Inter;
+    font-size: 15.13px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color:#E6E8EB;
+    padding: 18px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    column-gap: 32px;
+    border-radius: 24px;
+}
+.settlementHashBlock span{
+    font-family: Inter;
+    font-size: 15.13px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #C1D4FF;
+}
+.settlementHashBlock .helpers{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}

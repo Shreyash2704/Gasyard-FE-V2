@@ -16,6 +16,7 @@ import {
 } from "../../Config/utils";
 import { bytes32ToEvmAddress } from "../../Config/addressHandlers";
 import { Tooltip } from "@chakra-ui/react";
+import CompletedIcon from '../../assets/v2/completedImg.svg'
 
 type Props = {};
 type TxProps = {
@@ -125,6 +126,12 @@ const Transaction = (props: Props) => {
   const [data, setdata] = useState<TxObjectV2Type | null>(null);
   console.log(TxId.id);
 
+  const redirectToTxExplorer = (id:number,hash:any) =>{
+    console.log(id)
+    const url = ChainJsonData[id].explorer+hash
+    window.open(url, '_blank');
+  }
+
   useEffect(() => {
     const getData = async (id: string) => {
       const res = await getListTransactionById(id);
@@ -158,7 +165,7 @@ const Transaction = (props: Props) => {
           <div className="TransactionBlockWrap">
             <TxBlock
               type={"Source"}
-              status={data.status}
+              status={"success"}
               hash={data.inputTxHash}
               chain_id={data.inputChainID}
               token={formatEther(data.inputChainAmount)}
@@ -176,6 +183,34 @@ const Transaction = (props: Props) => {
               address={data.outputAddress ?? "NA"}
             />
           </div>
+
+          <div className="SettlementWrap">
+          <div className="settlementHashBlock">
+            <div>
+            Settlement Hash :
+            {data.managerHash ? <span>{data.managerHash}</span> : "NA"}
+            </div>
+              
+              {
+                
+                data.managerHash &&
+                <div className="helpers">
+                <Tooltip label="Copy address" bg="#161616">
+                  <img
+                    src={CopyText}
+                    alt="copy"
+                    //@ts-ignore
+                    onClick={() => copyToClipboard(data.managerHash)}
+                  />
+                </Tooltip>
+                <img src={redirect} alt={"redirect"} onClick={() => redirectToTxExplorer(reverseChainId[data.inputChainID],data.managerHash)} />
+                
+                </div>
+              }
+              {data.managerHash && <img src={CompletedIcon} />}
+          </div>
+          </div>
+          
         </>
       )}
     </div>

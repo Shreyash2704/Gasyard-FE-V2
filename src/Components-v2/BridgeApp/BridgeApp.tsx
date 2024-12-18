@@ -54,7 +54,7 @@ const BridgeApp = observer((props: Props) => {
   const [openTransactionPopup, setopenTransactionPopup] = useState(false);
   const [outputTxHash, setoutputTxHash] = useState<string | null>(null)
   const [btnText, setbtnText] = useState("Bridge")
-  const [txId, settxId] = useState("")
+  const [txId, settxId] = useState<null | string>(null)
   const handleInputChange1 = async(e: any) => {
     var value = e.target.value;
 
@@ -239,6 +239,29 @@ const BridgeApp = observer((props: Props) => {
     
     console.log(chain1,chain2,address,debouncedValue,portfolioStore.portfolio)
   };
+  const getTransactionObjectId = async (data: any, id: any) => {
+      if (chain1) {
+        try {
+          const objId = await sendTransaction(data, id);
+          if (objId.status && objId.status !== 200) {
+            console.log(objId.msg.response.data.message)
+            // toast({
+            //   title: 'Unexpected Error Occured!.',
+            //   description: "There seems to be issue with your request please reachout to support on Live Chat",
+            //   status: 'error',
+            //   duration: 9000,
+            //   isClosable: true,
+            // })
+          } else {
+            settxId(objId.uniqueID)
+          }
+  
+  
+        } catch (error) {
+          console.error('Error making POST request', error);
+        }
+      }
+    }
   useEffect(() => {
     if(address){
       fetchPortfolio(address)
@@ -280,7 +303,7 @@ const BridgeApp = observer((props: Props) => {
   }, [input1]);
   useEffect(() => {
     if (txReceiptData !== undefined && status === "success" && chain1 && chain1) {
-      sendTransaction(data,customChainId[chain1.id])
+      getTransactionObjectId(data,customChainId[chain1.id])
     }
   }, [data, status, txReceiptData])
   
@@ -405,7 +428,8 @@ const BridgeApp = observer((props: Props) => {
         success={status === "success"}
         pending={status === "pending"}
         txHash={data}
-        
+        txId={txId}
+        txReceipt={txReceiptData}
         ClearState={ClearState}
         />
         

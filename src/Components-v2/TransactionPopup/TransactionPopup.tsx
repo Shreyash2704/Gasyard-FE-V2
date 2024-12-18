@@ -29,9 +29,11 @@ type Props = {
     onSubmit?:any
     txHash?:string | null
     ClearState?:any
+    txId?:any
+    txReceipt?:any
 }
 
-const TransactionPopup = ({chain1,chain2,input1,input2,onOpen,onClose,isOpen,setModal,pending,success,rejected,txHash,ClearState}: Props) => {
+const TransactionPopup = ({chain1,chain2,input1,input2,onOpen,onClose,isOpen,setModal,pending,success,rejected,txHash,ClearState,txId,txReceipt}: Props) => {
     // const {onOpen,onClose,isOpen} = useDisclosure()
     
   const onCloseModal = () => {
@@ -55,7 +57,7 @@ const TransactionPopup = ({chain1,chain2,input1,input2,onOpen,onClose,isOpen,set
         <CommonModal isOpen={isOpen} onClose={onClose} size={"md"} header=''>
             <div className='header'>
                 {
-                    pending ? <>Transaction Pending</> : rejected ? <>Transaction Rejected</> : <>Transaction In Progress</>
+                    pending ? <>Transaction Pending</> : rejected ? <>Transaction Rejected</> : txId && txReceipt ? <>Transaction Successful </> : <>Transaction In Progress</>
                 }
                 
 
@@ -77,13 +79,19 @@ const TransactionPopup = ({chain1,chain2,input1,input2,onOpen,onClose,isOpen,set
                 loop={true}
                 style={{ height: "150px", width: "150px" }}
             />
-            ) : (
+            ) : txId && txReceipt ? (
+                <Lottie
+                animationData={success_animation}
+                loop={true}
+                style={{ height: "150px", width: "150px" }}
+            />): (
                 <Lottie
                 animationData={quoteLoader_animation}
                 loop={true}
                 style={{ height: "150px", width: "150px" }}
-            />
+                />
             )
+            
            }
             
             {/* <div className="message">
