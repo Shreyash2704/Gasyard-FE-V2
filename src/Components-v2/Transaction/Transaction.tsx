@@ -128,7 +128,7 @@ const Transaction = (props: Props) => {
 
   const redirectToTxExplorer = (id:number,hash:any) =>{
     console.log(id)
-    const url = ChainJsonData[id].explorer+hash
+    const url = "https://sepolia.basescan.org/tx/"+hash
     window.open(url, '_blank');
   }
 
