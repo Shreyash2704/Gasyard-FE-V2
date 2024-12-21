@@ -241,7 +241,7 @@ const Explorer = observer((props: Props) => {
                 sx={{
                   backgroundColor: "#020202",
                   borderRadius: "24px",
-                  fontFamily: "Inter",
+                  fontFamily: "SF Pro Display",
                   fontSize: "16px",
                   fontWeight: "400",
                   lineHeight: "20px",
@@ -270,7 +270,7 @@ const Explorer = observer((props: Props) => {
                 sx={{
                   backgroundColor: "#020202",
                   borderRadius: "24px",
-                  fontFamily: "Inter",
+                  fontFamily: "SF Pro Display",
                   fontSize: "16px",
                   fontWeight: "400",
                   lineHeight: "20px",
@@ -393,7 +393,7 @@ const Explorer = observer((props: Props) => {
                       {reverseChainId[item.outputChainID] ? ChainJsonData[reverseChainId[item.outputChainID]].baseToken : ChainJsonData[item.outputChainID] ? ChainJsonData[item.outputChainID].baseToken : "N/A"} </>
                       : "N/A"}  
                       
-                      <img src={redirect_logo} className="redirect" onClick={() => redirectToTxExplorer(reverseChainId[item.outputChainID],item.outputTxHash)}/>
+                      {/* <img src={redirect_logo} className="redirect" onClick={() => redirectToTxExplorer(reverseChainId[item.outputChainID],item.outputTxHash)}/> */}
                     </div>
                     <div className="dflex-row chainEx">
                       Chain:{" "}
@@ -405,12 +405,9 @@ const Explorer = observer((props: Props) => {
                         reverseChainId[item.outputChainID] ? getChainById(Chains,reverseChainId[item.outputChainID]).name : "NA"
 
                       }
-                      {/* {item.outputChainAmount ? 
-                      <>{formatToken(formatEther(item.outputChainAmount))} {" "} 
-                      {reverseChainId[item.outputChainID] ? ChainJsonData[reverseChainId[item.outputChainID]].baseToken : ChainJsonData[item.outputChainID] ? ChainJsonData[item.outputChainID].baseToken : "N/A"} </>
-                      : "N/A"}   */}
-                      
-                      <img src={redirect_logo} className="redirect" onClick={() => redirectToTxExplorer(reverseChainId[item.outputChainID],item.outputTxHash)}/>
+                     
+                     {item.outputChainAmount && 
+                      <img src={redirect_logo} className="redirect" onClick={() => redirectToTxExplorer(reverseChainId[item.outputChainID],item.outputTxHash)}/>}
                     </div>
                   </div>
                     

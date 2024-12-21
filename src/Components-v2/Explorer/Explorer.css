@@ -46,7 +46,7 @@
 .filter-container .input-search input{
     outline: none;
     border:none;
-    font-family: Inter;
+    font-family: SF Pro Display;
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
@@ -59,7 +59,7 @@
     border: none;
 }
 .filter-container .input-search input::placeholder{
-    font-family: Inter;
+    font-family: SF Pro Display;
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
@@ -80,7 +80,7 @@
 .filter-container .filters{
     padding: 0px 20px;
     column-gap: 16px;
-    font-family: Inter;
+    font-family: SF Pro Display;
     font-size: 16px;
     font-weight: 500;
     line-height: 18px;
@@ -95,7 +95,7 @@
 }
 
 .find-tx{
-    font-family: Inter;
+    font-family: SF Pro Display;
     font-size: 16px;
     font-weight: 500;
     line-height: 18px;
@@ -154,7 +154,7 @@
     text-align: start;
     padding: 12px 24px 12px 24px;
     border-bottom: 1px solid #222729;   
-    font-family: Inter;
+    font-family: SF Pro Display;
     font-size: 12px;
     font-weight: 500;
     line-height: 18px;
@@ -193,7 +193,7 @@
     
 }
 .table-container table tbody tr td:nth-child(6){
-    font-family: Inter;
+    font-family: SF Pro Display;
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
@@ -216,7 +216,7 @@
     padding: 8px 12px 8px 12px;
     border-radius: 8px;
     background: #FFFFFF;
-    font-family: Inter;
+    font-family: SF Pro Display;
     font-size: 14px;
     font-weight: 600;
     line-height: 20px;
@@ -270,7 +270,7 @@
 }
 table .hash,
 table .address{
-    font-family: Inter;
+    font-family: SF Pro Display;
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
@@ -286,7 +286,7 @@ table .hash img{
 }
 table .token,
 table .chainEx{
-    font-family: Inter;
+    font-family: SF Pro Display;
     font-size: 14px;
     font-weight: 500;
     line-height: 20px;
@@ -295,7 +295,7 @@ table .chainEx{
     white-space: nowrap;
 }
 table .time{
-    font-family: Inter;
+    font-family: SF Pro Display;
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;

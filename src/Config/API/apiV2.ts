@@ -22,12 +22,16 @@ export const fetchQuote = async(c1:number,c2:number,value:string) =>{
         };
        
         const response = await fetch(url, options);
-    
-        if (response.status === 200) {
-            const data = await response.json(); // Extracts the JSON data
-            return data; // Return the parsed data
-        }
-        return null;
+        const data = await response.json()
+        // if (response.status === 200) {
+        //     const data = await response.json(); // Extracts the JSON data
+        //     return data; // Return the parsed data
+        // }
+
+        return {
+            data:data,
+            status:response.status
+        };
     }
     catch(err){
         console.error("Error fetching quote",err)

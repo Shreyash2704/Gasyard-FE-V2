@@ -6,6 +6,7 @@
   min-height: 100vh;
   color: #FFFFFF;
   position: relative;
+  font-family: SF Pro Display !important;
 }
 :root {
   --bg_light: rgba(249, 250, 251,1);

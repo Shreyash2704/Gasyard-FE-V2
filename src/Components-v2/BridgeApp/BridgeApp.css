@@ -69,6 +69,7 @@
     row-gap: 10px;
     align-items: end;
 }
+
 .TokenWrapRoot .left-sec{
     row-gap: 10px;
 }
@@ -164,6 +165,31 @@
 .showQuote .right-sec{
     margin-left: auto;
 }
+.showQuote .right-sec .loader {
+  width: 25px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid #0000;
+  border-right-color: #ffa50097;
+  position: relative;
+  animation: l24 1s infinite linear;
+}
+.showQuote .right-sec .loader:before,
+.showQuote .right-sec .loader:after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: inherit;
+  animation: inherit;
+  animation-duration: 2s;
+}
+.showQuote .right-sec .loader:after {
+  animation-duration: 4s;
+}
+@keyframes l24 {
+  100% {transform: rotate(1turn)}
+}
 .showQuote .right-sec button{
     background-color: #020202;
     border: 1px solid #1E1E21;
@@ -210,7 +236,7 @@
     align-items: center;
 }
 .reviewLabels span{
-    font-family: Inter;
+    font-family: SF Pro Display;
     font-size: 12px;
     font-weight: 400;
     line-height: 18px;
@@ -222,7 +248,7 @@
 }
 .reviewLabels .value{
     margin-left: auto;
-    font-family: Inter;
+    font-family: SF Pro Display;
     font-size: 12px;
     font-weight: 600;
     line-height: 18px;
@@ -232,6 +258,7 @@
     text-decoration-skip-ink: none;
     color:#fff;
 }
+/* HTML: <div class="loader"></div> */
 
 @media screen and (max-width:476px){
     .BridgeAppRoot{

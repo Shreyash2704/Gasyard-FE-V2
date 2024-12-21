@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import CommonModal from '../Modal/CommonModal'
 import { useDisclosure } from '@chakra-ui/react'
 import success_animation from "../../assets/animations/success-animation.json";
@@ -13,6 +13,11 @@ import CloseBtn from "../../assets/CloseIcon.svg";
 import rejected_animation from "../../assets/animations/rejected-animation.json";
 import redirectLogo from "../../assets/redirect.svg";
 import quoteLoader_animation from '../../assets/animations/quoteLoader.json'
+import ReviewQuote from '../BridgeApp/ReviewQuote';
+import { observer } from 'mobx-react';
+import AppstoreV2 from '../../Config/Store/AppstoreV2';
+import { useAccount } from 'wagmi';
+import { shortenAddress } from '../../Config/utils';
 
 type Props = {
     chain1:any,
@@ -31,13 +36,30 @@ type Props = {
     ClearState?:any
     txId?:any
     txReceipt?:any
+    outputTxHash?:string | null
+}
+type Props1={
+    label:string,
+    value:string
 }
 
-const TransactionPopup = ({chain1,chain2,input1,input2,onOpen,onClose,isOpen,setModal,pending,success,rejected,txHash,ClearState,txId,txReceipt}: Props) => {
+const QuoteRow = ({label,value}:Props1) =>{
+    return(
+        <div className="reviewLabels">
+            <span>{label}</span>
+            <div className="value">{value}</div>
+        </div>
+    )
+}
+
+const TransactionPopup = observer(({chain1,chain2,input1,input2,onOpen,onClose,isOpen,setModal,pending,success,rejected,txHash,ClearState,txId,txReceipt,onSubmit,outputTxHash}: Props) => {
     // const {onOpen,onClose,isOpen} = useDisclosure()
+    const [review, setreview] = useState(true)
+    const {address} = useAccount()
     
   const onCloseModal = () => {
     onClose();
+    setreview(true)
     setModal(false)
     ClearState()
   };
@@ -57,42 +79,88 @@ const TransactionPopup = ({chain1,chain2,input1,input2,onOpen,onClose,isOpen,set
         <CommonModal isOpen={isOpen} onClose={onClose} size={"md"} header=''>
             <div className='header'>
                 {
-                    pending ? <>Transaction Pending</> : rejected ? <>Transaction Rejected</> : txId && txReceipt ? <>Transaction Successful </> : <>Transaction In Progress</>
+                    review ? "Review Swap" :pending ? <>Transaction Pending</> : rejected ? <>Transaction Rejected</> : outputTxHash ? outputTxHash === "None" ? <>Somethings went wrong!</>: <>Transaction Successful </> : <>Transaction In Progress</>
                 }
                 
 
             <img src={CloseBtn} onClick={onCloseModal} />
             </div>
-            <div className="TransactionWrap">
-           {
-            pending ? (
-                <>
-                <Lottie
-                animationData={pending_animation}
-                loop={true}
-                style={{ height: "150px", width: "150px" }}
-            />
-                </>
-            ) : rejected ? (
-                <Lottie
-                animationData={rejected_animation}
-                loop={true}
-                style={{ height: "150px", width: "150px" }}
-            />
-            ) : txId && txReceipt ? (
-                <Lottie
-                animationData={success_animation}
-                loop={true}
-                style={{ height: "150px", width: "150px" }}
-            />): (
-                <Lottie
-                animationData={quoteLoader_animation}
-                loop={true}
-                style={{ height: "150px", width: "150px" }}
-                />
-            )
             
-           }
+            <div className="ReviewWrap">
+                <div className="txStatus">
+                    <div className="txWrap">
+                        <img src={iconMap[chain1.id]} alt="" />
+                        <div className="tokenDetails">
+                            <div className="txWraptoken">{input1}{" "}{chain1.nativeCurrency.symbol}</div>
+                            <div className="txWrapnetwork">${AppstoreV2.tokenVal1inUSD}</div>
+                        </div>
+                    </div>
+                    <img src={doubleArrow} width={20} height={20} alt={"icon"} />
+                    <div className="txWrap">
+                        <img src={iconMap[chain2.id]} alt="" />
+                        <div className="tokenDetails">
+                            <div className="txWraptoken">{input2}{" "}{chain2.nativeCurrency.symbol}</div>
+                            <div className="txWrapnetwork">${AppstoreV2.tokenVal2inUSD}</div>
+                        </div>
+                    </div>
+                </div>
+                {!review ? 
+                <>
+                {
+                    pending ? (
+                        <>
+                        <Lottie
+                        animationData={pending_animation}
+                        loop={true}
+                        style={{ height: "150px", width: "150px" }}
+                    />
+                        </>
+                    ) : rejected ? (
+                        <Lottie
+                        animationData={rejected_animation}
+                        loop={true}
+                        style={{ height: "150px", width: "150px" }}
+                    />
+                    ) : outputTxHash && outputTxHash !== "None" ? (
+                        <Lottie
+                        animationData={success_animation}
+                        loop={true}
+                        style={{ height: "150px", width: "150px" }}
+                    />): (
+                        <Lottie
+                        animationData={quoteLoader_animation}
+                        loop={true}
+                        style={{ height: "150px", width: "150px" }}
+                        />
+                    )
+                    
+                }
+                {outputTxHash === "None" && <div className='contact-text'>Please contact administrator</div>}
+                {success && outputTxHash &&outputTxHash !== "None" ? <div className="redirectSection" onClick={redirectApp}>
+                    View on Explorer
+                    <img src={redirectLogo} />
+                </div> : ("")}
+                </>
+                :
+               <>
+               <div className='ReviewQuoteWrap'>
+                    <QuoteRow label={"Rate"} value={"1 ETH = 0.99 ETH"}/>
+                    <QuoteRow label={"Network Fee"} value={"$0.12 USD"}/>
+                    <QuoteRow label={"Min. Received"} value={`${input2} ${chain2.nativeCurrency.symbol}`}/>
+                    <QuoteRow label={"From Address"} value={shortenAddress(address ?? "")}/>
+                    <QuoteRow label={"To Address"} value={shortenAddress(address ?? "")}/>
+                </div>
+                    <button className='submit-btn' onClick={()=>{
+                        onSubmit()
+                        setreview(false)
+                    }}>Confirm</button>
+               </>
+        }
+                
+                </div>
+            
+            <div className="TransactionWrap">
+           
             
             {/* <div className="message">
                 <img src={confirmTxLogo} width={10} height={10}/>
@@ -125,6 +193,6 @@ const TransactionPopup = ({chain1,chain2,input1,input2,onOpen,onClose,isOpen,set
         </CommonModal>
     </div>
   )
-}
+})
 
 export default TransactionPopup

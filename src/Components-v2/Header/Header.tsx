@@ -22,6 +22,7 @@ const Header = observer((props: Props) => {
     console.log("Clicked!")
     AppstoreV2.setWalletModal(!AppstoreV2.showWalletModal)
   }
+  
   return (
     <div className="nav-root">
       <div className='nav-section'>
@@ -31,18 +32,18 @@ const Header = observer((props: Props) => {
             Gasyard
           </a>
 
-          {/* <a className="nav-transfer" href="/explorer">
+          <a className="nav-transfer" href="/explorer">
             Explorer
           </a>
 
-          <a className="nav-history" href="/liquidity"> Liquidity</a> */}
+          {/* <a className="nav-history" href="/liquidity"> Liquidity</a> */}
         </div>
 
         <div className='right-section'>
           <div className="notification-sec flex flex-row col-span-7 justify-center align-middle">
             {/* <img src={notifyLogo} />
             <span>123</span> */}
-            <a href="/explorer">Explorer</a>
+            {/* <a href="/explorer">Explorer</a> */}
           </div>
 
           

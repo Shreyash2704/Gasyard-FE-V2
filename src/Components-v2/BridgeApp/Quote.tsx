@@ -7,9 +7,10 @@ type Props = {
     token1:any,
     token2:any,
     val_token1:any,
-    val_token2:any
+    val_token2:any,
+    loading:boolean
 }
-const Quote = ({token1,token2,val_token1,val_token2}:Props) => {
+const Quote = ({token1,token2,val_token1,val_token2,loading}:Props) => {
   //ethers.util
   return (
     <div className='QuoteRoot'>
@@ -27,6 +28,7 @@ const Quote = ({token1,token2,val_token1,val_token2}:Props) => {
             </div>
             <div className="right-sec">
                 {/* <button>Show More</button> */}
+                {loading && <div className="loader"></div>}
             </div>
             
         </div>

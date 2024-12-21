@@ -24,7 +24,7 @@ type TxProps = {
   status: string;
   hash: string;
   chain_id: number;
-  token: string;
+  token: bigint | null;
   timeStamp: string;
   address: string;
 };
@@ -84,7 +84,7 @@ const TxBlock = ({
           </div>
           <div className="chainValue">
             <img src={chain ? iconMap[chain.id] : ""} alt="chain" />
-            {token}{" "}
+            {token ? formatEther(token) : "NA"}{" "}
             {chain && chain.nativeCurrency.symbol}
           </div>
         </div>
@@ -159,7 +159,7 @@ const Transaction = (props: Props) => {
       {data && (
         <>
           <div className="txStatus">
-            Status for {" "}
+            Status for Order {" "}
             {data.orderID}
           </div>
           <div className="TransactionBlockWrap">
@@ -168,7 +168,7 @@ const Transaction = (props: Props) => {
               status={"success"}
               hash={data.inputTxHash}
               chain_id={data.inputChainID}
-              token={formatEther(data.inputChainAmount)}
+              token={data.inputChainAmount}
               timeStamp={data.createdAt}
               address={data.inputAddress ?? "NA"}
             />
@@ -178,7 +178,7 @@ const Transaction = (props: Props) => {
               status={data.status}
               hash={data.outputTxHash ?? "NA"}
               chain_id={data.outputChainID}
-              token={formatEther(data.outputChainAmount)}
+              token={data.outputChainAmount}
               timeStamp={data.updatedAt}
               address={data.outputAddress ?? "NA"}
             />
