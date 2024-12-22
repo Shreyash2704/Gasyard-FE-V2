@@ -8,7 +8,7 @@ import avatarLogo from '../../assets/v2/header/avatar.svg'
 import ConnectWalletModal from '../Modal/ConnectWalletModal';
 import { observer } from 'mobx-react';
 import AppstoreV2 from '../../Config/Store/AppstoreV2';
-import { useAccount } from 'wagmi';
+import { useAccount, useDisconnect } from 'wagmi';
 import { useWeb3Modal } from '@web3modal/wagmi/react';
 
 type Props = {}
@@ -17,7 +17,8 @@ const Header = observer((props: Props) => {
   const [selected, setselected] = useState("")
   const [closeNotification, setcloseNotification] = useState(true)
   const {address} = useAccount()
-  const {open} = useWeb3Modal()
+  const {open, } = useWeb3Modal()
+  const { disconnect } = useDisconnect()
   const handleClick = () =>{
     console.log("Clicked!")
     AppstoreV2.setWalletModal(!AppstoreV2.showWalletModal)
@@ -48,6 +49,9 @@ const Header = observer((props: Props) => {
 
           
           {address ? <></> : <button className='wallet-sync' onClick={() => open()} >Connect Wallet</button>}
+          <button onClick={() =>{
+            disconnect()
+          }}>disconnect</button>
           
           <div className="avatar-sec" onClick={handleClick}>
             <img src={avatarLogo} alt="" />
@@ -55,6 +59,7 @@ const Header = observer((props: Props) => {
           {/* <w3m-button balance='show'/> */}
           {/* <AptosConnectButton label="Connect Your Aptos Wallet"/> */}
           {/* <w3m-network-button /> */}
+          
         </div>
       </div>
       <ConnectWalletModal />
