@@ -64,7 +64,23 @@
     padding: 4px;
     height: fit-content;
 }
-.wallet-sync,.avatar-sec{
+.wallet-sync{
+
+    background: linear-gradient(0deg, #8081F9, #8081F9),linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+    border: 1px solid linear-gradient(180deg, rgba(255, 255, 255, 0.21) 0%, rgba(255, 255, 255, 0) 100%);
+    box-shadow: 0px 1px 2px 0px #E56A125C, 0px 1px 0px 0px #FFFFFF2B inset;
+    border-radius: 16px;
+    font-family: SF Pro Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: -0.01em;
+    text-align: center;
+    padding: 8px 16px;
+    /* padding: 10px; */
+    /* width: 100%; */
+}
+.avatar-sec{
     background-color: #161A1D;
     border-radius: 6px;
     padding: 8px 16px;
@@ -75,7 +91,6 @@
     letter-spacing: -0.01em;
     text-align: left;
 }
-
 .mobile-nav{
     display: none;
 }

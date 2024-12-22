@@ -202,7 +202,7 @@ const BridgeApp = observer((props: Props) => {
           portfolioStore.portfolio[chain1.id].balance
         )
       ) {
-        setbtnText("Low Liquidity!");
+        setbtnText("Insufficient balance!");
       }
       setfetchingQuote(false)
     }
@@ -415,6 +415,8 @@ const BridgeApp = observer((props: Props) => {
 
   useEffect(() => {
     // Update the disabled state whenever these dependencies change
+
+    
     setIsSubmitDisabled(
       !chain1 || !chain2 || !debouncedValue || !input2 || 
       debouncedValue.trim() === "" || input2.trim() === ""
@@ -495,7 +497,7 @@ const BridgeApp = observer((props: Props) => {
                 Switch Chain
               </button>
             ) : (
-              <button className="submit-btn" onClick={() => setopenTransactionPopup(true)} disabled={isSubmitDisabled}>
+              <button className="submit-btn" onClick={() => setopenTransactionPopup(true)} disabled={isSubmitDisabled || btnText !== "Bridge"}>
                 {btnText}
               </button>
             )

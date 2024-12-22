@@ -173,24 +173,24 @@ const Explorer = observer((props: Props) => {
 
 
   useEffect(() => {
-    if(inputAddress || chain1 || chain2){
-      getFilteredData(pageNo,inputAddress,chain1,chain2)
+    if(debouncedValue || chain1 || chain2){
+      getFilteredData(pageNo,debouncedValue,chain1,chain2)
     }
     else{
       getFilteredData(pageNo,"",null,null)
     }
-  }, [pageNo]);
+  }, [pageNo, debouncedValue, chain1, chain2]);
 
-  useEffect(() => {
-    console.log("debouncedValue",debouncedValue)
-    if(debouncedValue || chain1 || chain2){
-      console.log("inside",debouncedValue,chain1,chain2)
-      getFilteredData(0,inputAddress,chain1,chain2)
-    }else{
-      console.log("inside2",initailTxns)
-      getFilteredData(1,"",null,null)
-    }
-  }, [debouncedValue,chain1,chain2])
+  // useEffect(() => {
+  //   console.log("debouncedValue",debouncedValue)
+  //   if(debouncedValue || chain1 || chain2){
+  //     console.log("inside",debouncedValue,chain1,chain2)
+  //     getFilteredData(0,inputAddress,chain1,chain2)
+  //   }else{
+  //     console.log("inside2",initailTxns)
+  //     getFilteredData(1,"",null,null)
+  //   }
+  // }, [debouncedValue,chain1,chain2])
 
   useEffect(() => {
 

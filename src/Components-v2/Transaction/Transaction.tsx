@@ -17,6 +17,7 @@ import {
 import { bytes32ToEvmAddress } from "../../Config/addressHandlers";
 import { Tooltip } from "@chakra-ui/react";
 import CompletedIcon from '../../assets/v2/completedImg.svg'
+import inProgress from '../../assets/v2/inprogress.svg'
 
 type Props = {};
 type TxProps = {
@@ -55,7 +56,7 @@ const TxBlock = ({
   return (
     <div className="TxBlockWrap">
       <div className="TxType">
-        {type} transaction<div className="Txstatus">{status}</div>
+        {type} transaction<div className="Txstatus">{status === "success" ? <img src={CompletedIcon} /> : <img src={inProgress} />}</div>
       </div>
       <div className="txHash">
         <div className="txHashLabel">{type} tx hash</div>
@@ -175,7 +176,7 @@ const Transaction = (props: Props) => {
             <img src={arrow} alt={"arrow"} />
             <TxBlock
               type={"Destination"}
-              status={data.status}
+              status={data.status === "success" && data.outputChainAmount ? "success":"pending"}
               hash={data.outputTxHash ?? "NA"}
               chain_id={data.outputChainID}
               token={data.outputChainAmount}

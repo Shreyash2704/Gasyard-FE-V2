@@ -42,6 +42,17 @@
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     color: #039855;
+    
+}
+.txStatus{
+    background-color: #0D1116;
+    border: 1px solid #222729;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: fit-content;
+    border-radius: 5px;
 }
 .TxBlockWrap .txHash{
     display: flex;
