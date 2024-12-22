@@ -165,7 +165,7 @@
 .showQuote .right-sec{
     margin-left: auto;
 }
-.showQuote .right-sec .loader {
+.showQuote .right-se .loader {
   width: 25px;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -174,8 +174,8 @@
   position: relative;
   animation: l24 1s infinite linear;
 }
-.showQuote .right-sec .loader:before,
-.showQuote .right-sec .loader:after {
+.showQuote .right-se .loader:before,
+.showQuote .right-se .loader:after {
   content: "";
   position: absolute;
   inset: -8px;
@@ -184,9 +184,39 @@
   animation: inherit;
   animation-duration: 2s;
 }
-.showQuote .right-sec .loader:after {
+.showQuote .right-se .loader:after {
   animation-duration: 4s;
 }
+.showQuote .right-sec .loader {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+  .showQuote .right-sec .loader::after {
+    content: '';  
+    position: absolute;
+    box-sizing: border-box;
+    left: 7px;
+    top: 12px;
+    border: 5px solid transparent;
+    border-right-color: #FFF;
+    transform: rotate(-40deg);
+  }
+  
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  } 
 @keyframes l24 {
   100% {transform: rotate(1turn)}
 }

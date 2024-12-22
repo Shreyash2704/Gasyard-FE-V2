@@ -128,3 +128,50 @@
     color: #fff;
 
 }
+.pending-loader {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    position: relative;
+    animation: rotate 1s linear infinite
+  }
+
+  .pending-loader::before , .pending-loader::after {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0px;
+    border-radius: 50%;
+    border: 8px solid #FFF;
+    animation: prixClipFix 2s linear infinite ;
+  }
+  .pending-loader::after{
+    transform: rotate3d(90, 90, 0, 180deg );
+    border-color: #8081F9;
+  }
+
+  @keyframes rotate {
+    0%   {transform: rotate(0deg)}
+    100%   {transform: rotate(360deg)}
+  }
+
+  @keyframes prixClipFix {
+      0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+      50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+      75%, 100%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+  }
+  .miscText{
+    font-family: SF Pro Display;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    letter-spacing: -0.015em;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #878794;
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+    padding: 5px 0px;
+  }

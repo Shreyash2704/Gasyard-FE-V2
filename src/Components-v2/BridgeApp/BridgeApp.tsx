@@ -78,6 +78,7 @@ const BridgeApp = observer((props: Props) => {
   const [txObject, settxObject] = useState<TxObjectV2Type | null>(null)
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [fetchingQuote, setfetchingQuote] = useState(false)
+  const [activityTimeout, setActivityTimeout] = useState<NodeJS.Timeout | null>(null);
   // const [countTx, setcountTx] = useState(0)
   let countTx = 0;
   const handleInputChange1 = async (e: any) => {
@@ -344,6 +345,19 @@ const BridgeApp = observer((props: Props) => {
   useEffect(() => {
     setAccountBalance(portfolio);
   }, [chain1, chain2]);
+  useEffect(() => {
+    // Reset inactivity timer on state changes
+    if (activityTimeout) clearTimeout(activityTimeout);
+
+    const timeout = setTimeout(() => {
+      fetctQuoteAPi(); // Call API after 30 seconds of inactivity
+    }, 10000);
+
+    setActivityTimeout(timeout);
+
+    // Cleanup on unmount or when states change
+    return () => clearTimeout(timeout);
+  }, [chain1, chain2, debouncedValue]);
   useEffect(() => {
     fetctQuoteAPi();
     setbtnText("Bridge");

@@ -92,7 +92,7 @@ const TransactionPopup = observer(({chain1,chain2,input1,input2,onOpen,onClose,i
                         <img src={iconMap[chain1.id]} alt="" />
                         <div className="tokenDetails">
                             <div className="txWraptoken">{input1}{" "}{chain1.nativeCurrency.symbol}</div>
-                            <div className="txWrapnetwork">${AppstoreV2.tokenVal1inUSD}</div>
+                            <div className="txWrapnetwork">${AppstoreV2.tokenVal1inUSD ?? "NA"}</div>
                         </div>
                     </div>
                     <img src={doubleArrow} width={20} height={20} alt={"icon"} />
@@ -109,11 +109,12 @@ const TransactionPopup = observer(({chain1,chain2,input1,input2,onOpen,onClose,i
                 {
                     pending ? (
                         <>
-                        <Lottie
+                        {/* <Lottie
                         animationData={pending_animation}
                         loop={true}
                         style={{ height: "150px", width: "150px" }}
-                    />
+                        /> */}
+                        <div className="pending-loader"></div>
                         </>
                     ) : rejected ? (
                         <Lottie
@@ -135,6 +136,7 @@ const TransactionPopup = observer(({chain1,chain2,input1,input2,onOpen,onClose,i
                     )
                     
                 }
+                <div className="miscText"><img src={confirmTxLogo} width={14} height={14}/>Confirm in Wallet</div>
                 {outputTxHash === "None" && <div className='contact-text'>Please contact administrator</div>}
                 {success && outputTxHash &&outputTxHash !== "None" ? <div className="redirectSection" onClick={redirectApp}>
                     View on Explorer
