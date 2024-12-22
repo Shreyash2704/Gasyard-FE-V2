@@ -33,7 +33,9 @@ export const WalletConnect = observer(() => {
           <img src={avatarLogo} alt="" />
         </div>
       ) : isLoading ? <></> :(
-        <w3m-button balance='show'/>
+        <button className="wallet-sync" onClick={() => open()}>
+          Connect Wallet {isConnected}
+        </button>
       )}
     </>
   );
