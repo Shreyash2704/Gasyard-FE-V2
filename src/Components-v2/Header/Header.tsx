@@ -11,6 +11,7 @@ import AppstoreV2 from '../../Config/Store/AppstoreV2';
 import { useAccount, useDisconnect } from 'wagmi';
 import { useWeb3Modal } from '@web3modal/wagmi/react';
 import { WalletConnect } from './WalletConnect';
+import { useConnectWallet } from '@privy-io/react-auth';
 
 type Props = {}
 
@@ -19,6 +20,7 @@ const Header = observer((props: Props) => {
   const [closeNotification, setcloseNotification] = useState(true)
   const {address} = useAccount()
 
+  
   const { disconnect } = useDisconnect()
   const handleClick = () =>{
     console.log("Clicked!")

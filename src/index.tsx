@@ -5,8 +5,8 @@ import App from "./App";
 
 import { createWeb3Modal } from "@web3modal/wagmi/react";
 import { defaultWagmiConfig } from "@web3modal/wagmi/react/config";
-import { AptosWalletProvider } from '@razorlabs/wallet-kit';
-import '@razorlabs/wallet-kit/style.css';
+import { AptosWalletProvider } from "@razorlabs/wallet-kit";
+import "@razorlabs/wallet-kit/style.css";
 
 import { movementTestnet } from "./Config/chains";
 import { WagmiProvider } from "wagmi";
@@ -51,9 +51,10 @@ import {
   AbstractTestnet,
   SoneiumTestnet,
   UnichainTestnet,
-  kakarotSepolia
+  kakarotSepolia,
 } from "./Config/config";
 import Uniswaplogo from "./assets/chains/uniswap.jpg";
+import { PrivyProvider } from "@privy-io/react-auth";
 // import { PetraWallet } from "petra-plugin-wallet-adapter";
 // import { AptosWalletAdapterProvider } from "@aptos-labs/wallet-adapter-react";
 
@@ -61,15 +62,15 @@ import Uniswaplogo from "./assets/chains/uniswap.jpg";
 const queryClient = new QueryClient();
 
 // 1. Get projectId at https://cloud.walletconnect.com
-const projectId = "b46e700f99389f8e96d969c863bfd0e8";
+const projectId = "b83bf335646992f89618effa100dd365";
 
 // const wallets = [new PetraWallet()];
 
 const metadata = {
-  name: "Web3Modal",
-  description: "Web3Modal Example",
-  url: "https://web3modal.com", // origin must match your domain & subdomain
-  icons: ["https://avatars.githubusercontent.com/u/37784886"],
+  name: "Gasyard",
+  description: "AppKit Example",
+  url: "https://v2.gasyard.fi/appkit",
+  icons: ["https://assets.reown.com/reown-profile-pic.png"],
 };
 
 let config;
@@ -81,7 +82,7 @@ if (process.env.REACT_APP_SERVER == "testnet") {
       iconUrl: baselogo,
       contractAddress: ChainJsonData["84532"].routerContract,
       explorer: ChainJsonData["84532"].explorer,
-      liquidityPool: ChainJsonData["84532"].liquidityPool
+      liquidityPool: ChainJsonData["84532"].liquidityPool,
     },
     // {
     //   ...arbitrumSepolia,
@@ -128,8 +129,8 @@ if (process.env.REACT_APP_SERVER == "testnet") {
       ...sepolia,
       iconUrl: sepolialogo,
       contractAddress: ChainJsonData["11155111"].routerContract,
-      explorer:ChainJsonData["11155111"].explorer,
-      liquidityPool:ChainJsonData["11155111"].liquidityPool
+      explorer: ChainJsonData["11155111"].explorer,
+      liquidityPool: ChainJsonData["11155111"].liquidityPool,
     },
     // {
     //   ...AbstractTestnet,
@@ -239,11 +240,39 @@ root.render(
   <React.StrictMode>
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <AptosWalletProvider autoConnect={false}>
-          {/* <AptosWalletAdapterProvider plugins={wallets} autoConnect={true}> */}
-            <App />
-          {/* </AptosWalletAdapterProvider> */}
-        </AptosWalletProvider>
+        {/* <AptosWalletProvider autoConnect={false}> */}
+        {/* <AptosWalletAdapterProvider plugins={wallets} autoConnect={true}> */}
+
+        <PrivyProvider
+          appId="cm4zvwheh0a1g10ki19y9gjjg"
+          config={{
+            appearance: {
+              accentColor: "#6A6FF5",
+              theme: "#FFFFFF",
+              showWalletLoginFirst: false,
+              logo: "https://auth.privy.io/logos/privy-logo.png",
+              walletChainType: "ethereum-and-solana",
+            },
+            loginMethods: ["wallet"],
+            fundingMethodConfig: {
+              moonpay: {
+                useSandbox: true,
+              },
+            },
+            embeddedWallets: {
+              createOnLogin: "users-without-wallets",
+              requireUserPasswordOnCreate: false,
+            },
+            mfa: {
+              noPromptOnMfaRequired: false,
+            },
+          }}
+        >
+          <App />
+        </PrivyProvider>
+
+        {/* </AptosWalletAdapterProvider> */}
+        {/* </AptosWalletProvider> */}
       </QueryClientProvider>
     </WagmiProvider>
   </React.StrictMode>
