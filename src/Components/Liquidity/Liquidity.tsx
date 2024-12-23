@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import "./Liquidity.css";
 import { iconMap } from "../../Config/data";
 import LiquidityPopup from "../LiquidityPopup/LiquidityPopup";
@@ -130,7 +130,7 @@ const Liquidity = (props: Props) => {
       console.log(result);
     } else {
       const result = await response.json();
-      console.log(result);
+      console.log("totalChainVolume",result);
       settotalChainVolume(result);
     }
   };
@@ -161,11 +161,11 @@ const Liquidity = (props: Props) => {
 
   const CalculateTotalVolume = (liquidityPoolBalance:any) =>{
     const totalVolumeLocked =
-    liquidityPoolBalance && liquidityPoolBalance["30732"].balanceinusd
-    // Object.values(liquidityPoolBalance).reduce(
-    //   (acc:any, obj:any) => acc + parseInt(obj.balanceinusd),
-    //   10
-    // );
+    liquidityPoolBalance &&
+    Object.values(liquidityPoolBalance).reduce(
+      (acc:any, obj:any) => acc + parseInt(obj.balanceinusd),
+      10
+    );
     settotalVolumeLocked(totalVolumeLocked)
   }
 
@@ -274,8 +274,7 @@ const Liquidity = (props: Props) => {
             {Chains &&
               liquidityPoolBalance &&
               Chains.map((ele) => {
-                if(ele.id === 1) return(<></>)
-                if(ele.id !== 30732) return (<></>)
+                if(ele.id === 1 || ele.id === 11155111) return(<></>)
                 return (
                   <>
                     <tr>
@@ -309,7 +308,7 @@ const Liquidity = (props: Props) => {
                       </td>
                       {/* formatUnits(liquidityPoolBalance[ele.id].balance */}
                       <td>
-                        {totalChainVolume ?
+                        {totalChainVolume && totalChainVolume[ele.id] ?
                           `$${totalChainVolume[ele.id].totalVolume}` : "N/A"}
                       </td>
                       <td>

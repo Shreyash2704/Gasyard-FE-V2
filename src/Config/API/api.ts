@@ -57,7 +57,7 @@ export const getListTransactions = async(page:number,inputAddress:`0x${string}`|
         var url = ""
         chain1 = chain1 === 920637907288165 ? 1802203764 : chain1
         chain2 = chain2 === 920637907288165 ? 1802203764 : chain2
-        url = `${domain}/api/list-transactions?sortBy=updatedAt:desc&page=${page}&${inputAddress && `inputAddress=${inputAddress}`}&${chain1 && `inputChainID=${chain1}`}&outputChainID=30732`
+        url = `${domain}/api/list-transactions?sortBy=updatedAt:desc&page=${page}&${inputAddress && `inputAddress=${inputAddress}`}&${chain1 && `inputChainID=${chain1}`}&${chain2 && `outputChainID=${chain2}`}`
         url = url.replace(/&null/g, "").replace("null","")
         const response = await axios.get(url)
         if(response.status === 400){
@@ -88,7 +88,6 @@ export const notifyTransaction = async(chainid:number,trnx_hash:`0x${string}`) =
 }
 
 export const fetchRewards = async(walletId:any) =>{
-    return null
     console.log("fetchreward called")
     try{
         const url = `${domain}/api/show-rewards/${walletId}`

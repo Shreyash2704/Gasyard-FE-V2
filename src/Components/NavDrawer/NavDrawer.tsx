@@ -1,7 +1,7 @@
-import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, IconButton, Input, Menu, MenuButton, MenuItem, MenuList, useDisclosure } from '@chakra-ui/react'
+import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, IconButton, Input, MenuButton, useDisclosure } from '@chakra-ui/react'
 import React, { useRef } from 'react'
 import "./NavDrawer.css"
-import { ChevronDownIcon, HamburgerIcon } from '@chakra-ui/icons'
+import { HamburgerIcon } from '@chakra-ui/icons'
 
 type Props = {}
 
@@ -42,21 +42,6 @@ const NavDrawer = (props: Props) => {
                 {" "}
                 Liquidity
               </a>
-
-              <Menu>
-                <MenuButton as={Button} background={"none"} rightIcon={<ChevronDownIcon />}>
-                  Don’t have funds?
-                </MenuButton>
-                <MenuList background={"#EEEAE6"}>
-                  <MenuItem background={"#EEEAE6"} minH='48px'>
-                    <a href="https://faucet.movementlabs.xyz/" target="_blank">Movement Faucet</a>
-                  </MenuItem>
-                  <span className='divider'></span>
-                  <MenuItem background={"#EEEAE6"} minH='40px'>
-                    <a href="https://web.telegram.org/k/#@gasyardbot" target="_blank">TG bot Faucet</a>
-                  </MenuItem>
-                </MenuList>
-              </Menu>
               
               </div>
           </DrawerBody>

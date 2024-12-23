@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./BridgeNew.css";
-import downArrow from "../../assets/down-arrow-white.svg";
+import downArrow from "../../assets/SVG-black.svg";
 import { Spinner, Stat, StatNumber, useDisclosure, useToast } from "@chakra-ui/react";
 import QuoteSection from "../QuoteSection/QuoteSection";
 import { useAccount, useChains, useSwitchChain, useTransactionReceipt, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
@@ -34,10 +34,10 @@ const BridgeNew = observer((props: Props) => {
   const Chains = useChains();
   const toast = useToast()
   const [chain1, setchain1] = useState<chainType | null>(Chains[0]);
-  const [chain2, setchain2] = useState<chainType | null>(Chains[4]);
+  const [chain2, setchain2] = useState<chainType | null>(Chains[1]);
 
   FormStore.setChain1(Chains[0])
-  FormStore.setChain2(Chains[4])
+  FormStore.setChain2(Chains[1])
 
   const [inputToken, setinputToken] = useState("");
   const [outputToken, setoutputToken] = useState("");
@@ -287,7 +287,6 @@ const BridgeNew = observer((props: Props) => {
     FormHandler()
   };
   const reverseChain = async () => {
-    return;
     const temp = chain1;
     setchain1(chain2);
     // await FormStore.setChain1(chain2)
@@ -343,17 +342,17 @@ const BridgeNew = observer((props: Props) => {
   const ReturnBalance = () => {
     if (address) {
       return (
-        <>{accBalance != "" ? accBalance + ` ${chain1 && chain1.nativeCurrency.symbol}` : <Spinner size="xs" />}</>
+        <div>{accBalance != "" ? accBalance + ` ${chain1 && chain1.nativeCurrency.symbol}` : <Spinner size="xs" />}</div>
       );
     } else {
     }
   };
 
   const ReturnConvertedValue = () =>{
-    if(inputToken === "") return <>$0</>
+    if(inputToken === "") return <div>$0</div>
     const res = 70;
     const usdPrice = convertEthToUsd(parseEther(inputToken),res)
-    return <>{`$${usdPrice}`}</>
+    return <div>{`$${usdPrice}`}</div>
   }
   const calculateMaxValue = () => {
     console.log("max called")
@@ -364,15 +363,9 @@ const BridgeNew = observer((props: Props) => {
         String(portfolio[chain1.id].balance)
       );
       console.log("max gwei", gweiValue)
-
       if (gweiValue > parseEther("0.0001")) {
-        if(gweiValue > parseEther("0.051")){
-          setinputToken("0.05");
-        }else{
-          const max_amout = formatEther(gweiValue - parseEther("0.0001"));
-          setinputToken(roundDecimal(max_amout));
-        }
-        
+        const max_amout = formatEther(gweiValue - parseEther("0.0001"));
+        setinputToken(roundDecimal(max_amout));
       } else {
         const max_amout = formatEther(gweiValue);
         setinputToken(roundDecimal(max_amout));
@@ -547,7 +540,7 @@ const BridgeNew = observer((props: Props) => {
                 e.preventDefault();
               }
             }}
-          />
+          ></input>
           <div className="tokenInUSD">${inputInUSD}</div>
           </div>
           <button
@@ -590,12 +583,12 @@ const BridgeNew = observer((props: Props) => {
           <AddRecepient setrecepientAddress={setrecepientAddress} recepientAddress={recepientAddress} />
 
           {address === undefined ? (
-            <>
+            <div>
               <button className=" review-btn" onClick={() => open()}>
                 {" "}
                 Connect Wallet
               </button>
-            </>
+            </div>
           ) : chain1 && chain?.id !== chain1.id ? (
             <button
               className="review-btn"
@@ -609,9 +602,10 @@ const BridgeNew = observer((props: Props) => {
             </button>
           ) :
             (
-              <>
-               
+              <div>
+                
 
+                
                 <button
                   className="review-btn"
                   disabled={!allvalueFilled || disableSubmitBtn || isQuoteInProgress}
@@ -619,12 +613,14 @@ const BridgeNew = observer((props: Props) => {
                 >
                   {submitBtnText}
                 </button>
-              </>
+              </div>
             )}
         </div>
 
+        <div>
         {isQuoteInProgress ?
-          (<>
+          (<div>
+          
             <div className="loader">
               <Lottie
                 animationData={quoteLoader}
@@ -632,7 +628,7 @@ const BridgeNew = observer((props: Props) => {
                 style={{ height: "100px", width: "400px" }}
               />
             </div>
-          </>) : quoteData && (
+          </div>) : quoteData && (
             <QuoteSection
               address={recepientAddress}
               transactionTime={"1.2s"}
@@ -640,6 +636,7 @@ const BridgeNew = observer((props: Props) => {
               chain1={chain1?.name}
             />
           )}
+        </div>
       </div>
       <SelectChainModalNew
         open={openChainPopup}

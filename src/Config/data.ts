@@ -7,13 +7,14 @@ import scrolllogo from "../assets/chains/scroll.svg";
 import mantlelogo from "../assets/chains/mantle.svg";
 import sepolialogo from "../assets/coins/sepolia.png";
 import selectLogo from "../assets/chains/select.png";
-import morphlogo from '../assets/chains/Morph.png';
-import karakotlogo from '../assets/chains/karokat-logo.svg'
-import berachianlogo from '../assets/chains/Berachain.svg' 
-import movementLogo from '../assets/chains/movement-testnet-token.svg'
-import abstractLogo from '../assets/chains/abstract.png'
-import sonieumLogo from '../assets/chains/soneium.jpg'
-import { ImageMapType, Networks } from "./types";
+import morphlogo from "../assets/chains/Morph.png";
+import karakotlogo from "../assets/chains/kakarot_logo_mini.svg";
+import berachianlogo from "../assets/chains/bera.png";
+import movementLogo from "../assets/chains/movement-testnet-token.svg";
+import abstractLogo from "../assets/chains/abstract.png";
+import sonieumLogo from "../assets/chains/soneium.jpg";
+import Uniswaplogo from "../assets/chains/uniswap.jpg";
+import { CustomChainIdType, ImageMapType, Networks, SymbolsMapType } from "./types";
 
 const iconMap: ImageMapType = {
   "42161": arbitumlogo,
@@ -25,18 +26,32 @@ const iconMap: ImageMapType = {
   "5000": mantlelogo,
   "11155111": ethereumlogo,
   "421614": arbitumlogo,
-  "84532":baselogo,
-  "2810":morphlogo,
-  "920637907288165":karakotlogo,
-  "80084":berachianlogo,
-  "30732":movementLogo,
-  "11124":abstractLogo,
-  "MOVE":movementLogo,
-  "BERA":berachianlogo,
-  "ETH":ethereumlogo,
-  "MATIC":polygonlogo,
-  "1946":sonieumLogo
+  "84532": baselogo,
+  "2810": morphlogo,
+  "920637907288165": karakotlogo,
+  "80084": berachianlogo,
+  "30732": movementLogo,
+  "11124": abstractLogo,
+  MOVE: movementLogo,
+  BERA: berachianlogo,
+  ETH: ethereumlogo,
+  MATIC: polygonlogo,
+  "1946": sonieumLogo,
+  "1301": Uniswaplogo,
+  901:ethereumlogo,
+  902:baselogo,
+  903:movementLogo,
+  904:berachianlogo
 };
+const SymbolsMap:SymbolsMapType = {
+  1:"ETH",
+  11155111:"ETH",
+  84532:"ETH",
+  2810:"ETH",
+  30732:"MOVE",
+  80084:"BERA",
+  920637907288165:"ETH"
+}
 const ChainJsonData: Networks = {
   "1": {
     networkName: "ethereum",
@@ -46,21 +61,24 @@ const ChainJsonData: Networks = {
     routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
   },
   "11155111": {
-    "networkName": "ethsepolia",
-    "chainID":11155111,
-    "baseToken": "ETH",
-    "decimals":18,
-    "rpc": "https://ethereum-sepolia-rpc.publicnode.com",
-    "feedaddress": "0x0000000000000000000000000000000000000000",
-    "routerContract":"0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
-    "liquidityPool":"0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
-    "priceProvider":"https://api.bybit.com/v5/market/tickers?category=spot&symbol=ETHUSDT",
-    "platformFeePercentage":1,
-    "gweiLimit":100000,
-    "isGasByLifi":false,
-    "minimumGas":0.0001,
-    "explorer":"https://sepolia.etherscan.io/tx/",
-    "explorerAddress":"https://sepolia.etherscan.io/address/",
+    networkName: "ethsepolia",
+    chainID: 11155111,
+    baseToken: "ETH",
+    decimals: 18,
+    rpc: "https://ethereum-sepolia-rpc.publicnode.com",
+    feedaddress: "0x0000000000000000000000000000000000000000",
+    // routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
+    // liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
+    routerContract: "0x5E699116348a24a5BA924da897B0FEe184b11912",
+    liquidityPool:"0xA20891c658E4051097aa2B393BB8d57B75235bD7",
+    priceProvider:
+      "https://api.bybit.com/v5/market/tickers?category=spot&symbol=ETHUSDT",
+    platformFeePercentage: 1,
+    gweiLimit: 100000,
+    isGasByLifi: false,
+    minimumGas: 0.0001,
+    explorer: "https://sepolia.etherscan.io/tx/",
+    explorerAddress: "https://sepolia.etherscan.io/address/",
   },
   "8453": {
     networkName: "base",
@@ -74,7 +92,7 @@ const ChainJsonData: Networks = {
     gweiLimit: 1000000,
     isGasByLifi: true,
     explorer: "https://basescan.org/tx/",
-    explorerAddress:"https://basescan.org/address/"
+    explorerAddress: "https://basescan.org/address/",
   },
   "137": {
     networkName: "polygon",
@@ -95,7 +113,7 @@ const ChainJsonData: Networks = {
     gweiLimit: 1000000,
     isGasByLifi: true,
     explorer: "https://arbiscan.io/tx/",
-    explorerAddress:"https://arbiscan.io/address/"
+    explorerAddress: "https://arbiscan.io/address/",
   },
   "56": {
     networkName: "bsc",
@@ -143,8 +161,10 @@ const ChainJsonData: Networks = {
     decimals: 18,
     rpc: "https://base-sepolia-rpc.publicnode.com",
     feedaddress: "0x0000000000000000000000000000000000000000",
-    routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
-    liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
+    // routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
+    // liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
+    routerContract:"0x01961aB3c0B799176B4463B3AD685856aDA434E7",
+    liquidityPool:"0x7406F477745A59C5C3d609dE695FED68729681D8",
     priceProvider:
       "https://api.bybit.com/v5/market/tickers?category=spot&symbol=ETHUSDT",
     platformFeePercentage: 1,
@@ -188,7 +208,7 @@ const ChainJsonData: Networks = {
     isGasByLifi: false,
     minimumGas: 0.001,
     explorer: "https://explorer-holesky.morphl2.io/tx/",
-    explorerAddress: "https://explorer-holesky.morphl2.io/address/"
+    explorerAddress: "https://explorer-holesky.morphl2.io/address/",
   },
   30732: {
     networkName: "movetestnet",
@@ -199,14 +219,15 @@ const ChainJsonData: Networks = {
     feedaddress: "0x0000000000000000000000000000000000000000",
     priceProvider:
       "https://api.bybit.com/v5/market/tickers?category=spot&symbol=MNTUSDT",
-    routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
+    routerContract: "0xD8F0a2cBea81B7b2D9BC92BF01Eb139af5a69fa5",
     liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
     platformFeePercentage: 1,
     gweiLimit: 400000,
     isGasByLifi: false,
     minimumGas: 0.001,
     explorer: "https://explorer.devnet.imola.movementlabs.xyz/#/txn/",
-    explorerAddress: "https://explorer.devnet.imola.movementlabs.xyz/#/account/",
+    explorerAddress:
+      "https://explorer.devnet.imola.movementlabs.xyz/#/account/",
   },
   920637907288165: {
     networkName: "kakarottestnet",
@@ -235,8 +256,10 @@ const ChainJsonData: Networks = {
     feedaddress: "0x0000000000000000000000000000000000000000",
     priceProvider:
       "https://api.bybit.com/v5/market/tickers?category=spot&symbol=MNTUSDT",
-    routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
-    liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
+    // routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
+    // liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
+    routerContract:"0x7406F477745A59C5C3d609dE695FED68729681D8",
+    liquidityPool:"0x58bD1a65777D3FdF866071d95517B8Cf74bbc7Bc",
     platformFeePercentage: 1,
     gweiLimit: 400000,
     isGasByLifi: false,
@@ -244,41 +267,78 @@ const ChainJsonData: Networks = {
     explorer: "https://bartio.beratrail.io/tx/",
     explorerAddress: "https://bartio.beratrail.io/address/",
   },
-  11124:{
-    "networkName": "abstracttestnet",
-    "chainID":11124,
-    "baseToken": "ETH",
-    "decimals":18,
-    "rpc": "https://api.testnet.abs.xyz",
-    "feedaddress": "0x0000000000000000000000000000000000000000",
-    "routerContract":"0x4A582f484A028E5BFD1b550e034F9822523cE65C",
-    "liquidityPool":"0xF142c6e793A6673132DFceb7c3224A51adA5C792",
-    "priceProvider":"https://api.bybit.com/v5/market/tickers?category=spot&symbol=ETHUSDT",
-    "platformFeePercentage":1,
-    "gweiLimit":100000,
-    "isGasByLifi":false,
-    "minimumGas":0.0001,
-    "explorer":"https://explorer.testnet.abs.xyz/tx/",
+  11124: {
+    networkName: "abstracttestnet",
+    chainID: 11124,
+    baseToken: "ETH",
+    decimals: 18,
+    rpc: "https://api.testnet.abs.xyz",
+    feedaddress: "0x0000000000000000000000000000000000000000",
+    routerContract: "0x4A582f484A028E5BFD1b550e034F9822523cE65C",
+    liquidityPool: "0xF142c6e793A6673132DFceb7c3224A51adA5C792",
+    priceProvider:
+      "https://api.bybit.com/v5/market/tickers?category=spot&symbol=ETHUSDT",
+    platformFeePercentage: 1,
+    gweiLimit: 100000,
+    isGasByLifi: false,
+    minimumGas: 0.0001,
+    explorer: "https://explorer.testnet.abs.xyz/tx/",
     explorerAddress: "https://explorer.testnet.abs.xyz/address/",
- },
- 1946:{
-  "networkName": "soneiumTestnet",
-  "chainID":1946,
-  "baseToken": "ETH",
-  "decimals":18,
-  "rpc": "https://rpc.minato.soneium.org",
-  "feedaddress": "0x0000000000000000000000000000000000000000",
-  "routerContract":"0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
-  "liquidityPool":"0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
-  "priceProvider":"https://api.bybit.com/v5/market/tickers?category=spot&symbol=ETHUSDT",
-  "platformFeePercentage":1,
-  "gweiLimit":600000,
-  "isGasByLifi":false,
-  "minimumGas":0.0001,
-  "explorer":"https://explorer-testnet.soneium.org/tx/",
-  "explorerAddress":"https://explorer-testnet.soneium.org/address/"
- }
+  },
+  1946: {
+    networkName: "soneiumTestnet",
+    chainID: 1946,
+    baseToken: "ETH",
+    decimals: 18,
+    rpc: "https://rpc.minato.soneium.org",
+    feedaddress: "0x0000000000000000000000000000000000000000",
+    routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
+    liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
+    priceProvider:
+      "https://api.bybit.com/v5/market/tickers?category=spot&symbol=ETHUSDT",
+    platformFeePercentage: 1,
+    gweiLimit: 600000,
+    isGasByLifi: false,
+    minimumGas: 0.0001,
+    explorer: "https://explorer-testnet.soneium.org/tx/",
+    explorerAddress: "https://explorer-testnet.soneium.org/address/",
+  },
+  1301: {
+    networkName: "unichainTestnet",
+    chainID: 1301,
+    baseToken: "ETH",
+    decimals: 18,
+    rpc: "https://sepolia.unichain.org",
+    feedaddress: "0x0000000000000000000000000000000000000000",
+    routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
+    liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
+    priceProvider:
+      "https://api.bybit.com/v5/market/tickers?category=spot&symbol=ETHUSDT",
+    platformFeePercentage: 1,
+    gweiLimit: 600000,
+    isGasByLifi: false,
+
+    minimumGas: 0.0001,
+    explorer: "sepolia.uniscan.xyz",
+  },
 };
+const customChainId:CustomChainIdType = {
+  11155111 : 901,
+  84532 :902,
+  30732: 903,
+  80084 : 904,
+  // 11124 : 908,
+  // 1946 : 909,
+  // 1301 : 910,
+  // 421614 :903,
+  // 2810: 904,
+  // 920637907288165: 906,
+}
+const reverseChainId:CustomChainIdType = {
+  901:11155111,
+  902:84532,
+  903:30732,
+  904:80084
+}
 
-
-export { iconMap, ChainJsonData };
+export { iconMap, ChainJsonData,SymbolsMap,customChainId,reverseChainId };

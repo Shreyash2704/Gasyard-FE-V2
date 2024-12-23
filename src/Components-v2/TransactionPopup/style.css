@@ -1,0 +1,130 @@
+.TransactionWrap{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 20px;
+}
+.TransactionWrapParent{
+    color: #fff;
+    padding: 20px;
+}
+.TransactionWrapParent .header{
+    color: #fff;
+    margin-top: -10px;
+}
+.TransactionWrap .message{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 8px;
+    font-family: SF Pro Display;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    letter-spacing: -0.015em;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #878794;
+}
+.txStatus{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 30px;
+    padding-bottom: 20px;
+}
+.txStatus .txWrap{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    column-gap: 10px;
+}
+.txWrap .tokenDetails{
+    display: flex;
+    flex-direction: column;
+    row-gap: 6px;
+    align-items: start;
+    justify-content: center;
+}
+.txWrap img{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+.tokenDetails .txWraptoken{
+    font-family: SF Pro Display;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #FFFFFF;
+}
+.tokenDetails .txWrapnetwork{
+    font-family: SF Pro Display;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color:#878794;
+}
+
+.redirectSection,.contact-text{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 5px;
+    justify-content: center;
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: #8081F9;
+    /* padding-bottom: 20px; */
+    cursor: pointer;
+}
+.redirectSection img{
+    width: 16px;
+    height: 16px;
+    padding: 2px;
+    cursor: pointer;
+}
+.ReviewWrap{
+    padding: 30px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 20px;
+}
+.ReviewWrap .txStatus{
+    backdrop-filter: blur(19.799999237060547px);
+    box-shadow: 0px 0px 0px 1px #FFFFFF12 inset;
+    border: 1px solid #FFFFFF14;
+    background-color: #0D0D10;
+    border-radius: 12px;
+    justify-content: center;
+    padding: 16px;
+}
+.ReviewQuoteWrap{
+    padding: 20px 0px;
+    width: 100%;
+}
+.ReviewWrap .submit-btn{
+    font-family: SF Pro Display;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 32px;
+    letter-spacing: -0.01em;
+    color: #fff;
+
+}

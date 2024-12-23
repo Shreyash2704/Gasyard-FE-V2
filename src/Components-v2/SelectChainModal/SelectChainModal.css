@@ -1,0 +1,133 @@
+.select-chain-wrap{
+  min-height: 500px;
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: SF Pro Display;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 21.48px;
+  text-align: left;
+  color: #fff;
+  padding-top: 6px;
+}
+.header img {
+  margin-left: auto;
+  cursor: pointer;
+}
+.hideModal {
+  display: none;
+}
+
+.close-icon {
+  position: absolute;
+  right: -25px;
+  top: -25px;
+}
+.search-chain-parent{
+   padding: 0px 0px 20px 0px;
+}
+.search-chain {
+  width: 100%;
+  border: 1px solid #222729;
+  border-radius: 12px;
+  /* height: 44px; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding:10px 20px;
+}
+.search-chain input,.search-chain input::placeholder{
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-family: SF Pro Display;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: #6F707B;
+  background-color: transparent;
+}
+.search-chain input:active,
+.search-chain input:focus {
+  border: none;
+  outline: none;
+}
+.network-wrap{
+  width: 100%;
+  min-width: 100%;
+  justify-content: start;
+  height: 100%;
+  min-height: 400px;
+}
+.network-wrap .label{
+  font-family: SF Pro Display;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16.5px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: #878794;
+}
+.networks{
+  width: 100%;
+  /* border-right: 1px solid #222729; */
+  padding: 10px;
+  row-gap: 6px;
+  justify-content: start;
+  min-height: 100%;
+}
+.network{
+  justify-content: start;
+  font-family: SF Pro Display;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.8px;
+  text-align: left;
+  color: #fff;
+  padding: 8px 16px;
+  align-items: center;
+  column-gap: 10px;
+}
+.network:hover{
+  background-color: #222729;
+}
+.network img,.asset img{
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+.assets{
+  width: 60%;
+  padding: 10px;
+  justify-content: start;
+   row-gap: 10px;
+   display: none;
+}
+.asset{
+  justify-content: start;
+  font-family: SF Pro Display;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.8px;
+  text-align: left;
+  color:#FFFFFF;
+  column-gap: 10px;
+
+
+}
+.asset .token{
+  row-gap: 4px;
+}
+.asset .token span{
+  font-family: SF Pro Display;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14.4px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: #878794;
+}
