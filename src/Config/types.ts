@@ -37,10 +37,6 @@ interface ImageMapType {
   [key: string]: string | any;
 }
 
-interface SymbolsMapType {
-  [key: number]: string | any;
-}
-
 interface ImageMapType2 {
   [key: number]: string;
 }
@@ -59,7 +55,6 @@ interface PortfolioObjectReturnType {
   balance: string;
   networkName: string
   decimals: number
-  balanceinusd:number | "N/A" | string
 }
 
 interface TotalChainVolume {
@@ -114,27 +109,6 @@ interface TxObjectType {
   "updatedAt": string,
   "id": string
 }
-interface TxObjectV2Type {
-  "inputTxHash": `0x${string}`,
-  "outputTxHash": `0x${string}` | null,
-  "managerHash": null,
-  "status": string,
-  "inputChainID": number,
-  "outputChainID": number,
-  "inputChainAmount": bigint,
-  "outputChainAmount": bigint,
-  "inputAddress": `0x${string}` | null,
-  "outputAddress": `0x${string}` | null,
-  "bridgeHash": `0x${string}` | null,
-  "fees": number | any,
-  "createdAt": string,
-  "updatedAt": string,
-  "id": string,
-  "collateral": string | null,
-  "inputToken": `0x${string}`,
-  "outputToken": `0x${string}`,
-  "orderID": `0x${string}`
-}
 
 interface rewardsType {
   holderAddress: string;
@@ -142,10 +116,6 @@ interface rewardsType {
   reward: number;
   rewardInUsd: Number;
 }
-
-interface CustomChainIdType {
-    [key: string]: number;
-  }
 export type {
   chainType,
   Network,
@@ -160,9 +130,5 @@ export type {
   LiquidityPoolBalance,
   PortfolioListReturnType,
   TotalChainVolume,
-  rewardsType,
-  PortfolioObjectReturnType,
-  SymbolsMapType,
-  CustomChainIdType,
-  TxObjectV2Type
+  rewardsType
 };

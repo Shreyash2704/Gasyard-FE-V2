@@ -342,17 +342,17 @@ const BridgeNew = observer((props: Props) => {
   const ReturnBalance = () => {
     if (address) {
       return (
-        <div>{accBalance != "" ? accBalance + ` ${chain1 && chain1.nativeCurrency.symbol}` : <Spinner size="xs" />}</div>
+        <>{accBalance != "" ? accBalance + ` ${chain1 && chain1.nativeCurrency.symbol}` : <Spinner size="xs" />}</>
       );
     } else {
     }
   };
 
   const ReturnConvertedValue = () =>{
-    if(inputToken === "") return <div>$0</div>
+    if(inputToken === "") return <>$0</>
     const res = 70;
     const usdPrice = convertEthToUsd(parseEther(inputToken),res)
-    return <div>{`$${usdPrice}`}</div>
+    return <>{`$${usdPrice}`}</>
   }
   const calculateMaxValue = () => {
     console.log("max called")
@@ -540,7 +540,7 @@ const BridgeNew = observer((props: Props) => {
                 e.preventDefault();
               }
             }}
-          ></input>
+          />
           <div className="tokenInUSD">${inputInUSD}</div>
           </div>
           <button
@@ -583,12 +583,12 @@ const BridgeNew = observer((props: Props) => {
           <AddRecepient setrecepientAddress={setrecepientAddress} recepientAddress={recepientAddress} />
 
           {address === undefined ? (
-            <div>
+            <>
               <button className=" review-btn" onClick={() => open()}>
                 {" "}
                 Connect Wallet
               </button>
-            </div>
+            </>
           ) : chain1 && chain?.id !== chain1.id ? (
             <button
               className="review-btn"
@@ -602,10 +602,10 @@ const BridgeNew = observer((props: Props) => {
             </button>
           ) :
             (
-              <div>
-                
+              <>
+                {/* disabled={!allvalueFilled} */}
 
-                
+                {console.log(!allvalueFilled || disableSubmitBtn, allvalueFilled, disableSubmitBtn)}
                 <button
                   className="review-btn"
                   disabled={!allvalueFilled || disableSubmitBtn || isQuoteInProgress}
@@ -613,14 +613,13 @@ const BridgeNew = observer((props: Props) => {
                 >
                   {submitBtnText}
                 </button>
-              </div>
+              </>
             )}
         </div>
 
-        <div>
         {isQuoteInProgress ?
-          (<div>
-          
+          (<>
+            {console.log("inProgress")}
             <div className="loader">
               <Lottie
                 animationData={quoteLoader}
@@ -628,7 +627,7 @@ const BridgeNew = observer((props: Props) => {
                 style={{ height: "100px", width: "400px" }}
               />
             </div>
-          </div>) : quoteData && (
+          </>) : quoteData && (
             <QuoteSection
               address={recepientAddress}
               transactionTime={"1.2s"}
@@ -636,7 +635,6 @@ const BridgeNew = observer((props: Props) => {
               chain1={chain1?.name}
             />
           )}
-        </div>
       </div>
       <SelectChainModalNew
         open={openChainPopup}

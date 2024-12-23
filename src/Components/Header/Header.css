@@ -85,13 +85,7 @@
 .mobile-nav{
     display: none;
 }
-.wkit-button,.wkit-connected-button{
-    background-color: #1557E2;
-    color: #fff !important;
-}
-.wkit-connected-button span{
-    color: #fff;
-}
+
 @media screen and (max-width:720px){
     .nav-history,.nav-transfer{
         display: none;

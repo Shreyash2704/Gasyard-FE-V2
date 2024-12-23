@@ -9,12 +9,12 @@ import sepolialogo from "../assets/coins/sepolia.png";
 import selectLogo from "../assets/chains/select.png";
 import morphlogo from "../assets/chains/Morph.png";
 import karakotlogo from "../assets/chains/kakarot_logo_mini.svg";
-import berachianlogo from "../assets/chains/bera.png";
+import berachianlogo from "../assets/chains/Berachain.svg";
 import movementLogo from "../assets/chains/movement-testnet-token.svg";
 import abstractLogo from "../assets/chains/abstract.png";
 import sonieumLogo from "../assets/chains/soneium.jpg";
 import Uniswaplogo from "../assets/chains/uniswap.jpg";
-import { CustomChainIdType, ImageMapType, Networks, SymbolsMapType } from "./types";
+import { ImageMapType, Networks } from "./types";
 
 const iconMap: ImageMapType = {
   "42161": arbitumlogo,
@@ -38,20 +38,7 @@ const iconMap: ImageMapType = {
   MATIC: polygonlogo,
   "1946": sonieumLogo,
   "1301": Uniswaplogo,
-  901:ethereumlogo,
-  902:baselogo,
-  903:movementLogo,
-  904:berachianlogo
 };
-const SymbolsMap:SymbolsMapType = {
-  1:"ETH",
-  11155111:"ETH",
-  84532:"ETH",
-  2810:"ETH",
-  30732:"MOVE",
-  80084:"BERA",
-  920637907288165:"ETH"
-}
 const ChainJsonData: Networks = {
   "1": {
     networkName: "ethereum",
@@ -67,10 +54,8 @@ const ChainJsonData: Networks = {
     decimals: 18,
     rpc: "https://ethereum-sepolia-rpc.publicnode.com",
     feedaddress: "0x0000000000000000000000000000000000000000",
-    // routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
-    // liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
-    routerContract: "0x5E699116348a24a5BA924da897B0FEe184b11912",
-    liquidityPool:"0xA20891c658E4051097aa2B393BB8d57B75235bD7",
+    routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
+    liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
     priceProvider:
       "https://api.bybit.com/v5/market/tickers?category=spot&symbol=ETHUSDT",
     platformFeePercentage: 1,
@@ -161,10 +146,8 @@ const ChainJsonData: Networks = {
     decimals: 18,
     rpc: "https://base-sepolia-rpc.publicnode.com",
     feedaddress: "0x0000000000000000000000000000000000000000",
-    // routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
-    // liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
-    routerContract:"0x01961aB3c0B799176B4463B3AD685856aDA434E7",
-    liquidityPool:"0x7406F477745A59C5C3d609dE695FED68729681D8",
+    routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
+    liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
     priceProvider:
       "https://api.bybit.com/v5/market/tickers?category=spot&symbol=ETHUSDT",
     platformFeePercentage: 1,
@@ -219,7 +202,7 @@ const ChainJsonData: Networks = {
     feedaddress: "0x0000000000000000000000000000000000000000",
     priceProvider:
       "https://api.bybit.com/v5/market/tickers?category=spot&symbol=MNTUSDT",
-    routerContract: "0xD8F0a2cBea81B7b2D9BC92BF01Eb139af5a69fa5",
+    routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
     liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
     platformFeePercentage: 1,
     gweiLimit: 400000,
@@ -256,10 +239,8 @@ const ChainJsonData: Networks = {
     feedaddress: "0x0000000000000000000000000000000000000000",
     priceProvider:
       "https://api.bybit.com/v5/market/tickers?category=spot&symbol=MNTUSDT",
-    // routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
-    // liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
-    routerContract:"0x7406F477745A59C5C3d609dE695FED68729681D8",
-    liquidityPool:"0x58bD1a65777D3FdF866071d95517B8Cf74bbc7Bc",
+    routerContract: "0x7E9b9560bdd2fC749E0DA75573B9300C8Cc24F6f",
+    liquidityPool: "0x4aB0137be5cb4b8EB6a755e4c16243724Bf44dC2",
     platformFeePercentage: 1,
     gweiLimit: 400000,
     isGasByLifi: false,
@@ -322,23 +303,5 @@ const ChainJsonData: Networks = {
     explorer: "sepolia.uniscan.xyz",
   },
 };
-const customChainId:CustomChainIdType = {
-  11155111 : 901,
-  84532 :902,
-  30732: 903,
-  80084 : 904,
-  // 11124 : 908,
-  // 1946 : 909,
-  // 1301 : 910,
-  // 421614 :903,
-  // 2810: 904,
-  // 920637907288165: 906,
-}
-const reverseChainId:CustomChainIdType = {
-  901:11155111,
-  902:84532,
-  903:30732,
-  904:80084
-}
 
-export { iconMap, ChainJsonData,SymbolsMap,customChainId,reverseChainId };
+export { iconMap, ChainJsonData };

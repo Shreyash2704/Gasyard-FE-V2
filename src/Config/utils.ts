@@ -6,8 +6,6 @@ import { pool_abi } from "./abi";
 import axios from "axios";
 import FormStore from "./Store/FormStore";
 import { fetchRewards } from "../Config/API/api";
-import { portfolioStore } from "./Store/Portfolio";
-import { SymbolsMap } from "./data";
 
 const convertEthToWeiAndBack = (ethString: string) => {
   try {
@@ -26,17 +24,17 @@ const convertEthToWeiAndBack = (ethString: string) => {
     return null;
   }
 };
-const roundDecimal = (numStr: string,max=4) => {
-    console.log("numstr",numStr,typeof(numStr))
-    const num = parseFloat(numStr);
-    const decimalPlaces = numStr.split('.')[1]?.length || 0;
+const roundDecimal = (numStr: string) => {
+  const num = parseFloat(numStr);
+  const decimalPlaces = numStr.split('.')[1]?.length || 0;
 
-    if (decimalPlaces > max) {
-      return num.toFixed(max);
-    } else {
-      return num.toFixed(decimalPlaces);
-    }
- 
+  if (decimalPlaces > 4) {
+    return num.toFixed(4);
+  } else {
+    return num.toFixed(decimalPlaces);
+  }
+
+
 };
 const CompareValues = (input: string, balance: string) => {
   //console.log("bigint ",parseEther(balance),parseEther(input).valueOf())
@@ -117,20 +115,11 @@ const FetchPortfolioBalance = async (networkConfigList: any, walletAddress: any)
       } catch {
         userFolio = BigInt(0);
       }
-      // const usdRate = FormStore.getTokenRateKey(networkConfig.nativeCurrency.symbol)
-      const val = parseFloat(Web3.utils.fromWei(userFolio, 'ether'))
-      console.log(networkConfig.id)
-      const usdRate = await getUSDAmount(SymbolsMap[networkConfig.id])
-      const usdVal =  usdRate * val
-      console.log("typeof",typeof(Web3.utils.fromWei(userFolio, 'ether')))
-      const res = {
+      portfolioBalances[networkConfig.id] = {
         networkName: networkConfig.name,
         balance: Web3.utils.fromWei(userFolio, 'ether'),
-        decimals: networkConfig.decimals,
-        balanceinusd: usdRate ? usdVal : 0
-      }
-      portfolioBalances[networkConfig.id] = res
-      portfolioStore.setPortfolio(networkConfig.id,res)
+        decimals: networkConfig.decimals
+      };
     })
   )
   console.log("FetchPortfolioBalance value", portfolioBalances)
@@ -163,27 +152,13 @@ const FetchRewards = async (networkConfigList: any, walletAddress: any) => {
 }
 
 const getUSDAmount = async (token: string) => {
-  console.log(token,"token")
-  if(token === undefined) return 0 
-  if (token === "MOVE" || token === "BERA" || token === "MATIC") return 50;
+  if (token === "MOVE" || token === "BERA") return 50;
   const url = `https://api.bybit.com/v5/market/tickers?category=spot&symbol=${token.toUpperCase()}USDT`
   const res = await axios.get(url)
-  return res?.data?.result?.list[0]?.usdIndexPrice
+  return res.data.result.list[0].usdIndexPrice
 }
 
 function convertEthToUsd(ethBalanceWei: bigint, ethToUsdRate: number) {
-  // Convert wei to ETH (using BigInt for precision)
-  console.log("convertEthToUsd", ethBalanceWei, ethToUsdRate)
-  const weiPerEth = BigInt(1e18);
-  const ethBalance = Number(ethBalanceWei) / Number(weiPerEth);
-
-  // Calculate the USD value
-  const usdValue = ethBalance * ethToUsdRate;
-
-  // Return the USD value formatted to two decimal places
-  return usdValue.toFixed(2);
-}
-function convertEthToUsd2(ethBalanceWei: bigint, ethToUsdRate: number) {
   // Convert wei to ETH (using BigInt for precision)
   console.log("convertEthToUsd", ethBalanceWei, ethToUsdRate)
   const weiPerEth = BigInt(1e18);
@@ -211,22 +186,6 @@ const shortenAddress = (
   return "";
 };
 
-const getChainById = (chainConfig:any, chainId:number) => {
-  if (!Array.isArray(chainConfig)) {
-    throw new Error("chainConfig must be an array of chain objects.");
-  }
-
-  return chainConfig.find(chain => chain.id === chainId) || null;
-}
-const copyToClipboard = async(text:string) => {
-  try {
-    await navigator.clipboard.writeText(text);
-    console.log('Text copied to clipboard:', text);
-  } catch (err) {
-    console.error('Failed to copy text to clipboard:', err);
-  }
-}
-
 export {
   convertEthToWeiAndBack,
   CompareValues,
@@ -236,8 +195,5 @@ export {
   FetchRewards,
   convertEthToUsd,
   getUSDAmount,
-  shortenAddress,
-  roundDecimal,
-  getChainById,
-  copyToClipboard
+  shortenAddress
 }

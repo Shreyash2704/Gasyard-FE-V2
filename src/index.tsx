@@ -5,9 +5,6 @@ import App from "./App";
 
 import { createWeb3Modal } from "@web3modal/wagmi/react";
 import { defaultWagmiConfig } from "@web3modal/wagmi/react/config";
-import { AptosWalletProvider } from "@razorlabs/wallet-kit";
-import "@razorlabs/wallet-kit/style.css";
-
 import { movementTestnet } from "./Config/chains";
 import { WagmiProvider } from "wagmi";
 import {
@@ -38,7 +35,7 @@ import scrolllogo from "./assets/chains/scroll.svg";
 import sepolialogo from "./assets/chains/etherum_2.svg";
 import mantlelogo from "./assets/chains/mantle.svg";
 import karakotlogo from "./assets/chains/kakarot.png";
-import berachianlogo from "./assets/chains/bera.png";
+import berachianlogo from "./assets/chains/Berachain.svg";
 import movementtestnetlogo from "./assets/chains/movement-testnet-token.svg";
 import morphlogo from "./assets/chains/Morph.png";
 import abstractlogo from "./assets/chains/abstract.png";
@@ -51,26 +48,21 @@ import {
   AbstractTestnet,
   SoneiumTestnet,
   UnichainTestnet,
-  kakarotSepolia,
+  kakarotSepolia
 } from "./Config/config";
 import Uniswaplogo from "./assets/chains/uniswap.jpg";
-import { PrivyProvider } from "@privy-io/react-auth";
-// import { PetraWallet } from "petra-plugin-wallet-adapter";
-// import { AptosWalletAdapterProvider } from "@aptos-labs/wallet-adapter-react";
 
 // 0. Setup queryClient
 const queryClient = new QueryClient();
 
 // 1. Get projectId at https://cloud.walletconnect.com
-const projectId = "b83bf335646992f89618effa100dd365";
-
-// const wallets = [new PetraWallet()];
+const projectId = "b46e700f99389f8e96d969c863bfd0e8";
 
 const metadata = {
-  name: "Gasyard",
-  description: "AppKit Example",
-  url: "https://v2.gasyard.fi/appkit",
-  icons: ["https://assets.reown.com/reown-profile-pic.png"],
+  name: "Web3Modal",
+  description: "Web3Modal Example",
+  url: "https://web3modal.com", // origin must match your domain & subdomain
+  icons: ["https://avatars.githubusercontent.com/u/37784886"],
 };
 
 let config;
@@ -84,27 +76,27 @@ if (process.env.REACT_APP_SERVER == "testnet") {
       explorer: ChainJsonData["84532"].explorer,
       liquidityPool: ChainJsonData["84532"].liquidityPool,
     },
-    // {
-    //   ...arbitrumSepolia,
-    //   iconUrl: arbitumlogo,
-    //   contractAddress: ChainJsonData["421614"].routerContract,
-    //   explorer: ChainJsonData["421614"].explorer,
-    //   liquidityPool: ChainJsonData["421614"].liquidityPool,
-    // },
-    // {
-    //   ...MorphHolesky,
-    //   iconUrl: morphlogo,
-    //   contractAddress: ChainJsonData["2810"].routerContract,
-    //   explorer: ChainJsonData["2810"].explorer,
-    //   liquidityPool: ChainJsonData["2810"].liquidityPool,
-    // },
-    // {
-    //   ...kakarotSepolia,
-    //   iconUrl: karakotlogo,
-    //   contractAddress: ChainJsonData["920637907288165"].routerContract,
-    //   explorer: ChainJsonData["920637907288165"].explorer,
-    //   liquidityPool: ChainJsonData["920637907288165"].liquidityPool,
-    // },
+    {
+      ...arbitrumSepolia,
+      iconUrl: arbitumlogo,
+      contractAddress: ChainJsonData["421614"].routerContract,
+      explorer: ChainJsonData["421614"].explorer,
+      liquidityPool: ChainJsonData["421614"].liquidityPool,
+    },
+    {
+      ...MorphHolesky,
+      iconUrl: morphlogo,
+      contractAddress: ChainJsonData["2810"].routerContract,
+      explorer: ChainJsonData["2810"].explorer,
+      liquidityPool: ChainJsonData["2810"].liquidityPool,
+    },
+    {
+      ...kakarotSepolia,
+      iconUrl: karakotlogo,
+      contractAddress: ChainJsonData["920637907288165"].routerContract,
+      explorer: ChainJsonData["920637907288165"].explorer,
+      liquidityPool: ChainJsonData["920637907288165"].liquidityPool,
+    },
     // {
     //   ...berachainTestnet,
     //   iconUrl: berachianlogo,
@@ -129,8 +121,8 @@ if (process.env.REACT_APP_SERVER == "testnet") {
       ...sepolia,
       iconUrl: sepolialogo,
       contractAddress: ChainJsonData["11155111"].routerContract,
-      explorer: ChainJsonData["11155111"].explorer,
-      liquidityPool: ChainJsonData["11155111"].liquidityPool,
+      explorer:ChainJsonData["11155111"].explorer,
+      liquidityPool:ChainJsonData["11155111"].liquidityPool
     },
     // {
     //   ...AbstractTestnet,
@@ -139,20 +131,20 @@ if (process.env.REACT_APP_SERVER == "testnet") {
     //   explorer:ChainJsonData["11124"].explorer,
     //   liquidityPool:ChainJsonData["11124"].liquidityPool
     // },
-    // {
-    //   ...SoneiumTestnet,
-    //   iconUrl: sonieumlogo,
-    //   contractAddress: ChainJsonData["1946"].routerContract,
-    //   explorer: ChainJsonData["1946"].explorer,
-    //   liquidityPool: ChainJsonData["1946"].liquidityPool,
-    // },
-    // {
-    //   ...UnichainTestnet,
-    //   iconUrl: Uniswaplogo,
-    //   contractAddress: ChainJsonData["1301"].routerContract,
-    //   explorer: ChainJsonData["1301"].explorer,
-    //   liquidityPool: ChainJsonData["1301"].liquidityPool,
-    // },
+    {
+      ...SoneiumTestnet,
+      iconUrl: sonieumlogo,
+      contractAddress: ChainJsonData["1946"].routerContract,
+      explorer: ChainJsonData["1946"].explorer,
+      liquidityPool: ChainJsonData["1946"].liquidityPool,
+    },
+    {
+      ...UnichainTestnet,
+      iconUrl: Uniswaplogo,
+      contractAddress: ChainJsonData["1301"].routerContract,
+      explorer: ChainJsonData["1301"].explorer,
+      liquidityPool: ChainJsonData["1301"].liquidityPool,
+    },
     {
       ...mainnet,
       iconUrl: ethereumlogo,
@@ -240,39 +232,7 @@ root.render(
   <React.StrictMode>
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        {/* <AptosWalletProvider autoConnect={false}> */}
-        {/* <AptosWalletAdapterProvider plugins={wallets} autoConnect={true}> */}
-
-        <PrivyProvider
-          appId="cm4zvwheh0a1g10ki19y9gjjg"
-          config={{
-            appearance: {
-              accentColor: "#6A6FF5",
-              theme: "#FFFFFF",
-              showWalletLoginFirst: false,
-              logo: "https://auth.privy.io/logos/privy-logo.png",
-              walletChainType: "ethereum-and-solana",
-            },
-            loginMethods: ["wallet"],
-            fundingMethodConfig: {
-              moonpay: {
-                useSandbox: true,
-              },
-            },
-            embeddedWallets: {
-              createOnLogin: "users-without-wallets",
-              requireUserPasswordOnCreate: false,
-            },
-            mfa: {
-              noPromptOnMfaRequired: false,
-            },
-          }}
-        >
-          <App />
-        </PrivyProvider>
-
-        {/* </AptosWalletAdapterProvider> */}
-        {/* </AptosWalletProvider> */}
+        <App />
       </QueryClientProvider>
     </WagmiProvider>
   </React.StrictMode>
