@@ -85,7 +85,7 @@ const QuoteSection = ({
             </div> */}
             <div className="quote_row">
               <div className="quote_column col1">Estimated Time</div>
-              <div className="quote_column col2">~ 30 sec</div>
+              <div className="quote_column col2">~ 10 sec</div>
             </div>
             <div className="quote_row">
               <div className="quote_column col1">Network</div>

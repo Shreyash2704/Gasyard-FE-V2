@@ -74,6 +74,10 @@
   padding: 10px 5px;
   
 }
+.chains.disabled{
+  pointer-events: none;
+  opacity: 0.6;
+}
 
 .chain-img {
   width: 32px;

@@ -5,7 +5,8 @@
   width: 434px;
   min-height: 468px;
   border-radius: 26px;
-  background-color: #fff;
+  background-color: #EEEAE6;
+  ;
   margin: 0px auto;
   margin-top: 50px;
   position: relative;
@@ -52,13 +53,15 @@
 }
 .chain1-btn,
 .chain2-btn {
-  background-color: #f4f5f5;
+  /* background-color: #f4f5f5; */
+  background-color: #000000;
   box-shadow: 0px -1px 1px 0px #0000000a inset;
   box-shadow: 0px 1px 3px 0px #00000033;
   min-width: 153px;
   padding: 10px 7px 10px 16px;
   border-radius: 26px;
-  color: #31353c;
+  /* color: #31353c; */
+  color:#FFFFFF;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -71,6 +74,10 @@
   text-align: left;
   margin-bottom: 20px;
 }
+.chain2-btn{
+  /* background-color: #000000; */
+  background-color: #919191;
+}
 .chain1-btn img,
 .chain2-btn img {
   width: 16px;
@@ -80,6 +87,9 @@
 .chain1-btn img.downArrow,
 .chain2-btn img.downArrow {
   margin-left: auto;
+  width: 7.5px;
+  height: 7px;
+  margin-right: 5px;
 }
 .chain1-btn .logo,
 .chain2-btn .logo{
@@ -107,6 +117,8 @@
   outline: none;
   border: none;
   width: 80%;
+  background-color: #EEEAE6;
+  ;
 }
 .inputToken:focus,
 .inputToken:active,
@@ -132,6 +144,7 @@
 }
 .chain2-btn {
   /* background-color: #1557E2; */
+  /* pointer-events: none; */
 }
 .review {
   display: flex;
@@ -141,8 +154,9 @@
   padding: 20px;
 }
 .review-btn {
-  background-color: #1557E2;
-  color: #ffffff;
+  /* background-color: #1557E2; */
+  background-color: #FFDA35;
+  color: #000000;
   width: 386px;
   padding: 17.75px 0px 18.25px 0px;
   border-radius: 26px;
@@ -174,7 +188,8 @@
   position: absolute;
   left:45%;
   bottom: -10%;
-  cursor: pointer;
+  /* cursor: pointer; */
+  pointer-events: none;
 }
 
 .AddAddress{

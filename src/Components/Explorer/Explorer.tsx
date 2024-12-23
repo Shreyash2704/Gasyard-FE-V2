@@ -258,11 +258,12 @@ const Explorer = (props: Props) => {
                   fontWeight: "400",
                   lineHeight: "20px",
                   textAlign: "left",
-                  color:"#878794"
+                  color:"#878794",
+                  pointerEvents:"none"
                 }}
-                disabled={true}
+                disabled
               >
-                {chain2 ? chain2.name :"All Chains"}
+                {chain2 ? chain2.name :"Move-EVM"}
               </MenuButton>
               <MenuList>
               <MenuItem key={0} onClick={() => setchain2(null)}>All Chains</MenuItem>
@@ -292,7 +293,9 @@ const Explorer = (props: Props) => {
           </thead>
           <tbody>
             {transactions ? (
-              transactions.map((item, index) => (
+              transactions.map((item, index) => {
+                if(item.outputChainID !== 30732) return ""
+                return(
                 <tr>
                   <td>
                     <div className="dflex-row hash">
@@ -312,7 +315,7 @@ const Explorer = (props: Props) => {
                   <td>
                     <div className="statusWrap">
                       <span className={`status ${item.status}`}></span>
-                      {item.status}
+                      {item.status === "pending" ? "in progress" : item.status}
                     </div>
                   </td>
                   <td>
@@ -346,24 +349,17 @@ const Explorer = (props: Props) => {
                     <div className="dflex-row chain">
                       Chain:{" "}
                       <img
-                        src={item.outputChainID === 1802203764 ?  iconMap[920637907288165] : iconMap[item.outputChainID]}
+                        src={iconMap[item.outputChainID]}
                         className="logo"
                       />
-                       {
-                        item.outputChainID === 1802203764 ?
-                        <>
-                        {formatToken(formatEther(item.outputChainAmount))} {ChainJsonData[920637907288165].baseToken}
-                        </>:<>
-                        {formatToken(formatEther(item.outputChainAmount))} {ChainJsonData[item.outputChainID].baseToken}
-                        </>
-                      }
-                      {/* {formatToken(formatEther(item.outputChainAmount))} {ChainJsonData[item.outputChainID].baseToken} */}
+                       
+                      {formatToken(formatEther(item.outputChainAmount))} {ChainJsonData[item.outputChainID].baseToken}
                       <img src={redirect_logo} className="redirect" onClick={() => redirectToTxExplorer(item.outputChainID,item.outputTxHash)}/>
                     </div>
                   </td>
                   <td>{formatDate(item.updatedAt)}</td>
                 </tr>
-              ))
+              )})
             ) : (
               <tr>
                 <td colSpan={6}>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./BridgeNew.css";
-import downArrow from "../../assets/SVG-black.svg";
+import downArrow from "../../assets/down-arrow-white.svg";
 import { Spinner, Stat, StatNumber, useDisclosure, useToast } from "@chakra-ui/react";
 import QuoteSection from "../QuoteSection/QuoteSection";
 import { useAccount, useChains, useSwitchChain, useTransactionReceipt, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
@@ -34,10 +34,10 @@ const BridgeNew = observer((props: Props) => {
   const Chains = useChains();
   const toast = useToast()
   const [chain1, setchain1] = useState<chainType | null>(Chains[0]);
-  const [chain2, setchain2] = useState<chainType | null>(Chains[1]);
+  const [chain2, setchain2] = useState<chainType | null>(Chains[4]);
 
   FormStore.setChain1(Chains[0])
-  FormStore.setChain2(Chains[1])
+  FormStore.setChain2(Chains[4])
 
   const [inputToken, setinputToken] = useState("");
   const [outputToken, setoutputToken] = useState("");
@@ -287,6 +287,7 @@ const BridgeNew = observer((props: Props) => {
     FormHandler()
   };
   const reverseChain = async () => {
+    return;
     const temp = chain1;
     setchain1(chain2);
     // await FormStore.setChain1(chain2)
@@ -363,9 +364,15 @@ const BridgeNew = observer((props: Props) => {
         String(portfolio[chain1.id].balance)
       );
       console.log("max gwei", gweiValue)
+
       if (gweiValue > parseEther("0.0001")) {
-        const max_amout = formatEther(gweiValue - parseEther("0.0001"));
-        setinputToken(roundDecimal(max_amout));
+        if(gweiValue > parseEther("0.051")){
+          setinputToken("0.05");
+        }else{
+          const max_amout = formatEther(gweiValue - parseEther("0.0001"));
+          setinputToken(roundDecimal(max_amout));
+        }
+        
       } else {
         const max_amout = formatEther(gweiValue);
         setinputToken(roundDecimal(max_amout));
@@ -603,9 +610,8 @@ const BridgeNew = observer((props: Props) => {
           ) :
             (
               <>
-                {/* disabled={!allvalueFilled} */}
+               
 
-                {console.log(!allvalueFilled || disableSubmitBtn, allvalueFilled, disableSubmitBtn)}
                 <button
                   className="review-btn"
                   disabled={!allvalueFilled || disableSubmitBtn || isQuoteInProgress}
@@ -619,7 +625,6 @@ const BridgeNew = observer((props: Props) => {
 
         {isQuoteInProgress ?
           (<>
-            {console.log("inProgress")}
             <div className="loader">
               <Lottie
                 animationData={quoteLoader}

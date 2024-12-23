@@ -89,7 +89,7 @@ const AddRecepient = ({ setrecepientAddress, recepientAddress }: Props) => {
         ) : (
           <>
             <img src={addAddress} onClick={onOpen} />
-            Add Recipient Address
+            Add Receipent Address
           </>
         )}
       </div>
@@ -128,7 +128,7 @@ const AddRecepient = ({ setrecepientAddress, recepientAddress }: Props) => {
               marginRight:"10px"
             }}>Cancel</Button>
             <Button onClick={onSave} sx={{
-              backgroundColor:"#1557E2",
+              backgroundColor:"#003d29",
               color:"#fff"
             }}>Save</Button>
           </ModalFooter>

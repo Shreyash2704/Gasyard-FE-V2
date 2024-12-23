@@ -38,8 +38,8 @@ export const MorphHolesky = defineChain({
 
 export const MovementTestnet = defineChain({
   id: 30732,
-  name: 'MovementTestnet',
-  nativeCurrency: { name: 'MovementTestnet', symbol: 'MOVE', decimals: 18 },
+  name: 'Move-EVM',
+  nativeCurrency: { name: 'Move-EVM', symbol: 'MOVE', decimals: 18 },
   rpcUrls: {
     default: { http: ['https://mevm.devnet.imola.movementlabs.xyz'] },
   },
@@ -73,17 +73,6 @@ export const SoneiumTestnet = defineChain({
   },
 })
 
-export const UnichainTestnet = defineChain({
-  id: 1301,
-  name: 'UnichainTestnet',
-  nativeCurrency: { name: 'UnichainTestnet', symbol: 'ETH', decimals: 18 },
-  rpcUrls: {
-    default: { http: ['https://sepolia.unichain.org',] },
-  },
-  blockExplorers: {
-    default: { name: 'UnichainTestnetScan', url: 'https://sepolia.uniscan.xyz/' },
-  },
-})
 export const kakarotSepolia = /*#__PURE__*/ defineChain({
   id: 920637907288165,
   name: 'Kakarot STRK Sepolia',
